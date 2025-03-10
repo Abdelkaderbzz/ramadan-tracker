@@ -24,15 +24,24 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ar" dir="rtl">
+    <html lang='ar' dir='rtl'>
+      <head>
+        {/* Corrected the path to reference the public folder */}
+        <link rel='icon' href='/images/logo.svg' />
+      </head>
       <body className={`${tajawal.variable} font-sans`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='light'
+          enableSystem
+          disableTransitionOnChange
+        >
           {children}
           <Toaster />
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }
 
 
