@@ -13,14 +13,15 @@ const tajawal = Tajawal({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://ramadan-tracker.vercel.app'),
+  metadataBase: new URL('https://ramadhan-tracker.netlify.app'),
   title: {
-    default: 'يومي في رمضان - تتبع عباداتك',
-    template: '%s | يومي في رمضان',
+    default: 'Ramadhan Tracker - تتبع عباداتك في رمضان',
+    template: '%s | Ramadhan Tracker',
   },
   description:
-    'تطبيق متكامل لتتبع العبادات والأعمال الصالحة خلال شهر رمضان المبارك. يتضمن تتبع الصلاة، الصيام، قراءة القرآن، والأدعية اليومية',
+    'تطبيق متكامل لتتبع العبادات والأعمال الصالحة خلال شهر رمضان المبارك. يتضمن تتبع الصلاة، الصيام، قراءة القرآن، والأدعية اليومية مع واجهة سهلة الاستخدام',
   keywords: [
+    'Ramadhan Tracker',
     'رمضان',
     'تتبع العبادات',
     'تطبيق إسلامي',
@@ -31,10 +32,15 @@ export const metadata: Metadata = {
     'التقويم الهجري',
     'مواقيت الصلاة',
     'تطبيق رمضاني',
+    'Islamic App',
+    'Ramadan App',
+    'Prayer Times',
+    'Quran Tracker',
+    'Islamic Calendar',
   ],
-  authors: [{ name: 'Ramadan Tracker Team' }],
-  creator: 'Ramadan Tracker Team',
-  publisher: 'Ramadan Tracker',
+  authors: [{ name: 'Ramadhan Tracker Team' }],
+  creator: 'Ramadhan Tracker Team',
+  publisher: 'Ramadhan Tracker',
   formatDetection: {
     email: false,
     address: false,
@@ -43,9 +49,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ar_SA',
-    url: 'https://ramadan-tracker.vercel.app',
-    siteName: 'يومي في رمضان',
-    title: 'يومي في رمضان - تتبع عباداتك',
+    url: 'https://ramadhan-tracker.netlify.app',
+    siteName: 'Ramadhan Tracker',
+    title: 'Ramadhan Tracker - تتبع عباداتك في رمضان',
     description:
       'تطبيق متكامل لتتبع العبادات والأعمال الصالحة خلال شهر رمضان المبارك',
     images: [
@@ -53,17 +59,17 @@ export const metadata: Metadata = {
         url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'يومي في رمضان - تتبع عباداتك',
+        alt: 'Ramadhan Tracker - تتبع عباداتك في رمضان',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'يومي في رمضان - تتبع عباداتك',
+    title: 'Ramadhan Tracker - تتبع عباداتك في رمضان',
     description:
       'تطبيق متكامل لتتبع العبادات والأعمال الصالحة خلال شهر رمضان المبارك',
     images: ['/images/twitter-image.jpg'],
-    creator: '@ramadantracker',
+    creator: '@ramadhantracker',
   },
   robots: {
     index: true,
@@ -81,13 +87,13 @@ export const metadata: Metadata = {
     yandex: 'your-yandex-verification',
   },
   alternates: {
-    canonical: 'https://ramadan-tracker.vercel.app',
+    canonical: 'https://ramadhan-tracker.netlify.app',
   },
   category: 'religion',
   classification: 'religious',
   referrer: 'origin-when-cross-origin',
   generator: 'Next.js',
-  applicationName: 'يومي في رمضان',
+  applicationName: 'Ramadhan Tracker',
 };
 
 export default function RootLayout({
@@ -104,10 +110,10 @@ export default function RootLayout({
         <meta name='theme-color' content='#ffffff' />
         <meta name='apple-mobile-web-app-capable' content='yes' />
         <meta name='apple-mobile-web-app-status-bar-style' content='default' />
-        <meta name='apple-mobile-web-app-title' content='يومي في رمضان' />
+        <meta name='apple-mobile-web-app-title' content='Ramadhan Tracker' />
         <meta name='format-detection' content='telephone=no' />
         <meta name='mobile-web-app-capable' content='yes' />
-        <meta name='application-name' content='يومي في رمضان' />
+        <meta name='application-name' content='Ramadhan Tracker' />
       </head>
       <body className={`${tajawal.variable} font-sans`}>
         <ThemeProvider
