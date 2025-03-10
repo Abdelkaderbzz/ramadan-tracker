@@ -95,7 +95,7 @@ export default function RamadanTracker() {
           ></div>
         </div>
 
-        <div className='absolute left-4 top-4'>
+        {/* <div className='absolute left-4 top-4'>
           {mounted && (
             <Button
               variant='ghost'
@@ -110,7 +110,7 @@ export default function RamadanTracker() {
               )}
             </Button>
           )}
-        </div>
+        </div> */}
 
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
