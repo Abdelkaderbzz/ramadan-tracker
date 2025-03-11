@@ -4,6 +4,7 @@ import { Tajawal } from 'next/font/google';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { ThemeProvider } from '@/components/theme-provider';
+import Script from 'next/script';
 
 // Load Tajawal font - great for Arabic text
 const tajawal = Tajawal({
@@ -116,6 +117,20 @@ export default function RootLayout({
         <meta name='application-name' content='Ramadhan Tracker' />
       </head>
       <body className={`${tajawal.variable} font-sans`}>
+        {/* Google Analytics */}
+        <Script
+          src='https://www.googletagmanager.com/gtag/js?id=G-WR56K4TNMK'
+          strategy='afterInteractive'
+        />
+        <Script id='google-analytics' strategy='afterInteractive'>
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-WR56K4TNMK');
+          `}
+        </Script>
+
         <ThemeProvider
           attribute='class'
           defaultTheme='light'
