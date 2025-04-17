@@ -103,7 +103,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='ar' dir='rtl'>
+    <html lang='ar' >
       <head>
         <link rel='icon' href='/images/logo.svg' />
         <link rel='apple-touch-icon' href='/images/apple-touch-icon.png' />
