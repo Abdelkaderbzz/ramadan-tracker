@@ -130,6 +130,27 @@ export default function RootLayout({
             gtag('config', 'G-WR56K4TNMK');
           `}
         </Script>
+        <Script id='taki-settings' strategy='beforeInteractive'>
+          {`
+            window.TakiPopupsSettings = {
+              memberId: '817889341',
+              name: 'ahmed',
+              appId: '67ffaeade783d3021f53c288',
+              lang: 'en',
+              meta_data: {
+                age: 18,
+                state: 'Manouba',
+                phoneNumber: '5289452343',
+              }
+            };
+          `}
+        </Script>
+
+        {/* Load the Taki popups script AFTER the DOM is interactive */}
+        <Script
+          src='https://dev-integrations.netlify.app/taki-popups.umd.js'
+          strategy='afterInteractive'
+        />
 
         <ThemeProvider
           attribute='class'
