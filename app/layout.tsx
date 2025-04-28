@@ -103,7 +103,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='ar' >
+    <html lang='ar'>
       <head>
         <link rel='icon' href='/images/logo.svg' />
         <link rel='apple-touch-icon' href='/images/apple-touch-icon.png' />
@@ -148,7 +148,19 @@ export default function RootLayout({
 
         {/* Load the Taki popups script AFTER the DOM is interactive */}
         <Script
-          src='https://dev-integrations.netlify.app/taki-popups.umd.js'
+          id='taki-popups'
+          src='https://popups-dev-integration.lissene.dev/taki-popups.umd.js'
+          strategy='afterInteractive'
+        />
+        <Script id='feeduser-settings' strategy='beforeInteractive'>
+          {`
+            window.Fu = window.Fu || {};
+            Fu.access_token = "c73c052759e3602ca716ff469cde44";
+          `}
+        </Script>
+        <Script
+          id='feeduser-widget'
+          src='https://widget.feeduser.me/widget/v1.js'
           strategy='afterInteractive'
         />
 
