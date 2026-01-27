@@ -1,7 +1,7 @@
 {
   "name": "ramadan-tracker",
   "version": "1.0.0",
-  "description": "A web application to track good deeds during Ramadan",
+  "description": "A Ramadan tracking website that helps users monitor their prayers, duas, and Quran recitation with progress insights",
   "author": "abdelkaderbzz <bouzomitaabdelkader2004@gmail.com>",
   "license": "MIT",
   "repository": {
