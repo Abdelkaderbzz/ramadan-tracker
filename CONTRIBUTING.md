@@ -1,6 +1,6 @@
 # Contributing to Ramadan Tracker
 
-Thank you for your interest in contributing! This document provides guidelines for contributing to the project.
+Thank you for your interest in contributing to Ramadan Tracker! This is a website that helps Muslims monitor their prayers, duas, and Quran recitation during Ramadan. This document provides guidelines for contributing to the project.
 
 ## Getting Started
 

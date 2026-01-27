@@ -4,16 +4,17 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Abdelkaderbzz/ramadan-tracker/pulls)
 
-A beautiful web application to track good deeds during Ramadan, including prayers, duas, and Quran recitation. The app helps users monitor their progress and stay motivated throughout the blessed month.
+A Ramadan tracking website that helps users monitor their prayers, duas, and Quran recitation, providing insights into their progress throughout the blessed month.
 
 ## ✨ Features
 
-- 📿 Track daily prayers
-- 🤲 Log duas and supplications
-- 📖 Record Quran recitation progress
-- 📊 View insights and progress reports
-- 🌍 Islamic calendar integration
-- 🎨 Beautiful, modern UI
+- 🕌 **Prayer Tracking** - Log your daily Fajr, Dhuhr, Asr, Maghrib, and Isha prayers
+- 📖 **Quran Progress** - Track pages read and set daily recitation goals
+- 🤲 **Dua Logging** - Record morning and evening adhkar completion
+- 📊 **Progress Insights** - Visual dashboard showing your Ramadan journey
+- 📅 **Islamic Calendar** - Integrated Hijri calendar with Ramadan countdown
+- 🏆 **Achievements** - Earn badges for consistent worship
+- 🌙 **Beautiful UI** - Dark-themed, mobile-responsive Arabic interface
 
 ## 🚀 Getting Started
 
@@ -58,6 +59,7 @@ A beautiful web application to track good deeds during Ramadan, including prayer
 - **UI Components**: [Radix UI](https://www.radix-ui.com/) + [shadcn/ui](https://ui.shadcn.com/)
 - **State Management**: [Zustand](https://zustand-demo.pmnd.rs/)
 - **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Charts**: [Recharts](https://recharts.org/)
 
 ## 📝 Scripts
 
@@ -66,7 +68,6 @@ pnpm run dev       # Start development server
 pnpm run build     # Build for production
 pnpm run start     # Start production server
 pnpm run lint      # Run linter
-pnpm run type-check # Run TypeScript type checking
 ```
 
 ## 🤝 Contributing
@@ -85,4 +86,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## ⭐ Show Your Support
 
-Give a ⭐ if this project helped you!
+Give a ⭐ if this project helped you during Ramadan!

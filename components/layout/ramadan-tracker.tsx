@@ -1,62 +1,36 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import {
-  Calendar,
-  BookOpen,
-  BarChart3,
-  Award,
-  Compass,
-  Sun,
-  Moon,
-  Bot,
-} from 'lucide-react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import { Calendar, BookOpen, BarChart3, Award } from 'lucide-react';
 import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import WorshipStats from '@/components/worship-stats';
-import PrayerTimes from '@/components/prayer-times';
-import WaterTracker from '@/components/water-tracker';
-import DailyDua from '@/components/daily-dua';
-import DailyTrackingTable from '@/components/daily-tracking-table';
+import {
+  WorshipStats,
+  DailyTrackingTable,
+} from '@/components/features/dashboard';
+import { PrayerTimes, DailyDua } from '@/components/features/prayer';
+import { QuranTracker } from '@/components/features/quran';
+import { IslamicCalendar } from '@/components/features/calendar';
+import { AchievementBadges } from '@/components/features/achievements';
 import { getCurrentHijriDate } from '@/lib/date-utils';
 import { useRamadanStore } from '@/lib/store';
-import { useTheme } from 'next-themes';
 import { motion, AnimatePresence } from 'framer-motion';
-import QiblaFinder from '@/components/qibla-finder';
-import AchievementBadges from '@/components/achievement-badges';
-import QuranTracker from '@/components/quran-tracker';
-import IslamicCalendar from '@/components/islamic-calendar';
-import AISimpleDashboard from '@/components/ai-simple-dashboard';
+import { RAMADAN_DUAS, DUA_ROTATION_INTERVAL } from '@/lib/constants/duas';
 
 export default function RamadanTracker() {
   const [date, setDate] = useState('');
   const [hijriDate, setHijriDate] = useState('');
-  const [currentDua, setCurrentDua] = useState(
-    'رب اغفر وارحم وأنت خير الراحمين'
-  );
-  const [mounted, setMounted] = useState(false);
+  const [currentDuaIndex, setCurrentDuaIndex] = useState(0);
   const [activeTab, setActiveTab] = useState('dashboard');
   const { initializeData } = useRamadanStore();
-  const { theme, setTheme } = useTheme();
 
-  // Array of duas to rotate
-  const duas = [
-    'رب اغفر وارحم وأنت خير الراحمين',
-    'اللهم إني أسألك الجنة وأعوذ بك من النار',
-    'اللهم اغفر لي ذنبي كله دقه وجله وأوله وآخره وعلانيته وسره',
-    'اللهم إني أسألك العفو والعافية في الدنيا والآخرة',
-    'اللهم إني صائم فتقبل مني إنك أنت السميع العليم',
-    'اللهم لك صمت وعلى رزقك أفطرت وبك آمنت وعليك توكلت',
-    'اللهم إنك عفو تحب العفو فاعف عني',
-  ];
+  const currentDua = useMemo(
+    () => RAMADAN_DUAS[currentDuaIndex],
+    [currentDuaIndex],
+  );
 
+  // Initialize on mount
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    // Set current Gregorian date
     const now = new Date();
     const options: Intl.DateTimeFormatOptions = {
       year: 'numeric',
@@ -64,25 +38,21 @@ export default function RamadanTracker() {
       day: 'numeric',
     };
     setDate(now.toLocaleDateString('ar-SA', options));
-
-    // Get Hijri date
     setHijriDate(getCurrentHijriDate());
-
-    // Initialize store with 30 days of Ramadan
     initializeData();
   }, [initializeData]);
 
-  // Rotate duas every 4 seconds
+  // Rotate duas
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentDua((prev) => {
-        const currentIndex = duas.indexOf(prev);
-        const nextIndex = (currentIndex + 1) % duas.length;
-        return duas[nextIndex];
-      });
-    }, 4000);
+      setCurrentDuaIndex((prev) => (prev + 1) % RAMADAN_DUAS.length);
+    }, DUA_ROTATION_INTERVAL);
 
     return () => clearInterval(interval);
+  }, []);
+
+  const handleTabChange = useCallback((value: string) => {
+    setActiveTab(value);
   }, []);
 
   return (
@@ -92,25 +62,8 @@ export default function RamadanTracker() {
           <div
             className='w-full h-72 bg-contain bg-no-repeat bg-right'
             style={{ backgroundImage: "url('/images/islamic-pattern.svg')" }}
-          ></div>
+          />
         </div>
-
-        {/* <div className='absolute left-4 top-4'>
-          {mounted && (
-            <Button
-              variant='ghost'
-              size='icon'
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className='rounded-full'
-            >
-              {theme === 'dark' ? (
-                <Sun className='h-5 w-5' />
-              ) : (
-                <Moon className='h-5 w-5' />
-              )}
-            </Button>
-          )}
-        </div> */}
 
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
@@ -138,7 +91,7 @@ export default function RamadanTracker() {
           </div>
           <AnimatePresence mode='wait'>
             <motion.p
-              key={currentDua}
+              key={currentDuaIndex}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -154,9 +107,9 @@ export default function RamadanTracker() {
       <Tabs
         defaultValue='dashboard'
         className='w-full'
-        onValueChange={setActiveTab}
+        onValueChange={handleTabChange}
       >
-        <TabsList className='grid grid-cols-5 mb-8'>
+        <TabsList className='grid grid-cols-4 mb-8'>
           <TabsTrigger value='dashboard' className='rtl'>
             <BarChart3 className='h-4 w-4 ml-2' />
             لوحة المعلومات
@@ -165,29 +118,22 @@ export default function RamadanTracker() {
             <BookOpen className='h-4 w-4 ml-2' />
             القرآن
           </TabsTrigger>
-          <TabsTrigger value='tools' className='rtl'>
-            <Compass className='h-4 w-4 ml-2' />
-            أدوات
+          <TabsTrigger value='calendar' className='rtl'>
+            <Calendar className='h-4 w-4 ml-2' />
+            التقويم
           </TabsTrigger>
           <TabsTrigger value='achievements' className='rtl'>
             <Award className='h-4 w-4 ml-2' />
             الإنجازات
           </TabsTrigger>
-          <TabsTrigger value='assistant' className='rtl'>
-            <Bot className='h-4 w-4 ml-2' />
-            المساعد
-          </TabsTrigger>
         </TabsList>
 
         <TabsContent value='dashboard' className='space-y-8'>
           <WorshipStats />
-
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
             <DailyDua />
             <PrayerTimes />
-            <WaterTracker />
           </div>
-
           <DailyTrackingTable />
         </TabsContent>
 
@@ -195,19 +141,12 @@ export default function RamadanTracker() {
           <QuranTracker />
         </TabsContent>
 
-        <TabsContent value='tools'>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-            <QiblaFinder />
-            <IslamicCalendar />
-          </div>
+        <TabsContent value='calendar'>
+          <IslamicCalendar />
         </TabsContent>
 
         <TabsContent value='achievements'>
           <AchievementBadges />
-        </TabsContent>
-
-        <TabsContent value='assistant'>
-          <AISimpleDashboard />
         </TabsContent>
       </Tabs>
     </div>
