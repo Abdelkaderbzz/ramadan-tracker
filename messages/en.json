@@ -1,0 +1,17 @@
+{
+  "Index": {
+    "title": "Ramadan Tracker",
+    "description": "Track your Ramadan progress",
+    "tracker": "Tracker",
+    "days": "Days",
+    "prayer": "Prayer",
+    "quran": "Quran",
+    "dhikr": "Dhikr",
+    "start_tracking": "Start Tracking",
+    "my_day": "My Day in Ramadan",
+    "track_worship": "Track your worship and good deeds",
+    "dashboard": "Dashboard",
+    "calendar": "Calendar",
+    "achievements": "Achievements"
+  }
+}

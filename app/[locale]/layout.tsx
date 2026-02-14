@@ -1,10 +1,12 @@
 import type React from 'react';
 import type { Metadata } from 'next';
 import { Tajawal } from 'next/font/google';
-import './globals.css';
+import '@/app/globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { ThemeProvider } from '@/components/theme-provider';
 import Script from 'next/script';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
 
 // Load Tajawal font - great for Arabic text
 const tajawal = Tajawal({
@@ -12,6 +14,13 @@ const tajawal = Tajawal({
   weight: ['400', '500', '700'],
   variable: '--font-tajawal',
 });
+
+export const viewport = {
+  themeColor: '#ffffff',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://ramadhan-tracker.netlify.app'),
@@ -97,13 +106,17 @@ export const metadata: Metadata = {
   applicationName: 'Ramadhan Tracker',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params: { locale },
 }: Readonly<{
   children: React.ReactNode;
+  params: { locale: string };
 }>) {
+  const messages = await getMessages();
+
   return (
-    <html lang='ar'>
+    <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <head>
         <link rel='icon' href='/images/logo.svg' />
         <link rel='apple-touch-icon' href='/images/apple-touch-icon.png' />
@@ -164,18 +177,18 @@ export default function RootLayout({
           strategy='afterInteractive'
         />
 
-        <ThemeProvider
-          attribute='class'
-          defaultTheme='light'
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-          <Toaster />
-        </ThemeProvider>
+        <NextIntlClientProvider messages={messages}>
+          <ThemeProvider
+            attribute='class'
+            defaultTheme='light'
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+            <Toaster />
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
 }
-
-import './globals.css';
