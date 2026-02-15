@@ -1128,7 +1128,9 @@ export default function QuranTracker() {
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
             >
-              <ChevronLeft className='h-4 w-4' />
+              <ChevronLeft
+                className={`h-4 w-4 ${locale === 'ar' ? 'rotate-180' : ''}`}
+              />
             </Button>
             <div className='flex items-center gap-2'>
               {Array.from({ length: totalPages }, (_, i) => i + 1)
@@ -1167,7 +1169,9 @@ export default function QuranTracker() {
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
             >
-              <ChevronRight className='h-4 w-4' />
+              <ChevronRight
+                className={`h-4 w-4 ${locale === 'ar' ? 'rotate-180' : ''}`}
+              />
             </Button>
           </div>
         )}

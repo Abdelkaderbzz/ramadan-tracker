@@ -11,7 +11,25 @@ export function PwaInstallPrompt() {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isVisible, setIsVisible] = useState(false);
 
+  const [isIOS, setIsIOS] = useState(false);
+
   useEffect(() => {
+    // Check if it's iOS
+    const ios =
+      /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
+    // Check if it's already installed (standalone mode)
+    const isStandalone =
+      window.matchMedia('(display-mode: standalone)').matches ||
+      (window.navigator as any).standalone;
+
+    setIsIOS(ios && !isStandalone);
+
+    if (ios && !isStandalone) {
+      // Show prompt for iOS after a small delay
+      const timer = setTimeout(() => setIsVisible(true), 1000);
+      return () => clearTimeout(timer);
+    }
+
     const handler = (e: any) => {
       // Prevent the mini-infobar from appearing on mobile
       e.preventDefault();
@@ -61,14 +79,21 @@ export function PwaInstallPrompt() {
             </div>
           </div>
           <div className='flex items-center gap-2'>
-            <Button
-              size='sm'
-              variant='secondary'
-              onClick={handleInstallClick}
-              className='whitespace-nowrap bg-white text-purple-600 hover:bg-purple-50'
-            >
-              {t('install_btn')}
-            </Button>
+            {isIOS ? (
+              <p className='text-xs bg-white text-purple-600 px-3 py-1.5 rounded-md font-medium'>
+                Tap <span className='text-lg'>share</span> then &quot;Add to
+                Home Screen&quot;
+              </p>
+            ) : (
+              <Button
+                size='sm'
+                variant='secondary'
+                onClick={handleInstallClick}
+                className='whitespace-nowrap bg-white text-purple-600 hover:bg-purple-50'
+              >
+                {t('install_btn')}
+              </Button>
+            )}
             <button
               onClick={() => setIsVisible(false)}
               className='p-1 hover:bg-white/20 rounded-full transition-colors'

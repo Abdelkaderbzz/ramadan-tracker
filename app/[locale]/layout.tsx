@@ -118,11 +118,14 @@ export default async function RootLayout({
   const messages = await getMessages({ locale: currentLocale });
 
   return (
-    <html lang={currentLocale} dir={currentLocale === 'ar' ? 'rtl' : 'ltr'}>
+    <html
+      lang={currentLocale}
+      dir={currentLocale === 'ar' ? 'rtl' : 'ltr'}
+      suppressHydrationWarning
+    >
       <head>
         <link rel='icon' href='/images/logo.svg' />
         <link rel='apple-touch-icon' href='/images/apple-touch-icon.png' />
-        <link rel='manifest' href='/manifest.json' />
         <link rel='manifest' href='/manifest.json' />
         <meta name='apple-mobile-web-app-capable' content='yes' />
         <meta name='apple-mobile-web-app-status-bar-style' content='default' />
