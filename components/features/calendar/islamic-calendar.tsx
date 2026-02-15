@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 type IslamicDate = {
   day: number;
@@ -54,6 +54,8 @@ const daysInIslamicMonth = (month: number) => {
 
 export default function IslamicCalendar() {
   const t = useTranslations('Calendar');
+  const locale = useLocale();
+  const isRtl = locale === 'ar';
   // Get current date once on component mount
   const today = useMemo(() => new Date(), []);
 
@@ -197,15 +199,23 @@ export default function IslamicCalendar() {
   const currentMonthName = t(`months.${currentMonth}`);
 
   return (
-    <Card className='rtl w-full max-w-md mx-auto'>
+    <Card className={`${isRtl ? 'rtl' : 'ltr'} w-full max-w-md mx-auto`}>
       <CardHeader className='flex flex-row items-center justify-between pb-2 px-4'>
         <CardTitle className='text-md font-medium'>{t('title')}</CardTitle>
         <CalendarIcon className='h-5 w-5 text-purple-500' />
       </CardHeader>
       <CardContent className='px-4 pb-4'>
         <div className='flex items-center justify-between mb-4'>
-          <Button variant='outline' size='icon' onClick={prevMonth}>
-            <ChevronRight className='h-4 w-4' />
+          <Button
+            variant='outline'
+            size='icon'
+            onClick={isRtl ? nextMonth : prevMonth}
+          >
+            {isRtl ? (
+              <ChevronLeft className='h-4 w-4' />
+            ) : (
+              <ChevronLeft className='h-4 w-4' />
+            )}
           </Button>
 
           <h3 className='text-lg font-bold'>
@@ -213,8 +223,16 @@ export default function IslamicCalendar() {
             {t('hijri_suffix')}
           </h3>
 
-          <Button variant='outline' size='icon' onClick={nextMonth}>
-            <ChevronLeft className='h-4 w-4' />
+          <Button
+            variant='outline'
+            size='icon'
+            onClick={isRtl ? prevMonth : nextMonth}
+          >
+            {isRtl ? (
+              <ChevronRight className='h-4 w-4' />
+            ) : (
+              <ChevronRight className='h-4 w-4' />
+            )}
           </Button>
         </div>
 

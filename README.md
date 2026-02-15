@@ -9,19 +9,19 @@ A Ramadan tracking website that helps users monitor their prayers, duas, and Qur
 ## ✨ Features
 
 - 🕌 **Prayer Tracking** - Log your daily Fajr, Dhuhr, Asr, Maghrib, and Isha prayers
-- 📖 **Quran Progress** - Track pages read and set daily recitation goals
+- 📖 **Quran Progress** - Track surahs read with a localized progress bar
 - 🤲 **Dua Logging** - Record morning and evening adhkar completion
 - 📊 **Progress Insights** - Visual dashboard showing your Ramadan journey
-- 📅 **Islamic Calendar** - Integrated Hijri calendar with Ramadan countdown
+- 📅 **Islamic Calendar** - Integrated Hijri calendar with RTL support
 - 🏆 **Achievements** - Earn badges for consistent worship
-- 🌙 **Beautiful UI** - Dark-themed, mobile-responsive Arabic interface
+- � **Multilingual** - Full support for Arabic, English, and French
+- 🌙 **Modern UI** - Theme-aware, mobile-optimized interface with sticky navigation
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js 20+
-- pnpm 8+
+- [Bun](https://bun.sh/) runtime installed
 
 ### Installation
 
@@ -40,34 +40,36 @@ A Ramadan tracking website that helps users monitor their prayers, duas, and Qur
 3. Install dependencies:
 
    ```bash
-   pnpm install
+   bun install
    ```
 
 4. Start the development server:
 
    ```bash
-   pnpm run dev
+   bun run dev
    ```
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ## 🛠 Tech Stack
 
-- **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+- **Runtime**: [Bun](https://bun.sh/)
+- **i18n**: [next-intl](https://next-intl-docs.vercel.app/)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **UI Components**: [Radix UI](https://www.radix-ui.com/) + [shadcn/ui](https://ui.shadcn.com/)
 - **State Management**: [Zustand](https://zustand-demo.pmnd.rs/)
 - **Animations**: [Framer Motion](https://www.framer.com/motion/)
-- **Charts**: [Recharts](https://recharts.org/)
+- **PWA**: [next-pwa](https://github.com/shadowwalker/next-pwa)
 
 ## 📝 Scripts
 
 ```bash
-pnpm run dev       # Start development server
-pnpm run build     # Build for production
-pnpm run start     # Start production server
-pnpm run lint      # Run linter
+bun run dev       # Start development server
+bun run build     # Build for production
+bun run start     # Start production server
+bun run lint      # Run linter
 ```
 
 ## 🤝 Contributing

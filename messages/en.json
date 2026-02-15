@@ -352,5 +352,12 @@
       "4": "O Allah, forgive the believing men and believing women, and the Muslim men and Muslim women, the living among them and the dead",
       "5": "O Allah, heal our sick and the sick of the Muslims"
     }
+  },
+  "Footer": {
+    "author": "Author",
+    "contribution": "Contribution",
+    "buy_me_coffee": "Buy me a coffee",
+    "developed_by": "Developed with",
+    "portfolio": "Portfolio"
   }
 }

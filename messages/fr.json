@@ -352,5 +352,12 @@
       "4": "Ô Allah, pardonne aux croyants et aux croyantes, aux musulmans et aux musulmanes, les vivants parmi eux et les morts",
       "5": "Ô Allah, guéris nos malades et les malades des musulmans"
     }
+  },
+  "Footer": {
+    "author": "Auteur",
+    "contribution": "Contribution",
+    "buy_me_coffee": "Offrez-moi un café",
+    "developed_by": "Développé avec",
+    "portfolio": "Portfolio"
   }
 }

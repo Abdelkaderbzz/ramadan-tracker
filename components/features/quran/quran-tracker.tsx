@@ -1011,10 +1011,14 @@ export default function QuranTracker() {
   );
 
   return (
-    <Card className='mt-6 border-purple-100 dark:border-purple-800 dark:bg-gray-800 rtl'>
+    <Card
+      className={`mt-6 border-purple-100 dark:border-purple-800 dark:bg-gray-800 ${locale === 'ar' ? 'rtl' : 'ltr'}`}
+    >
       <CardContent className='p-6'>
         <div className='flex items-center justify-between mb-6'>
-          <h2 className='text-2xl font-bold text-purple-800 dark:text-purple-300 rtl'>
+          <h2
+            className={`text-2xl font-bold text-purple-800 dark:text-purple-300 ${locale === 'ar' ? 'rtl' : ''}`}
+          >
             {t('quran_tracker')}
           </h2>
           <div className='flex items-center gap-2'>
@@ -1044,12 +1048,14 @@ export default function QuranTracker() {
 
         <div className='flex flex-col md:flex-row gap-4 mb-6'>
           <div className='relative flex-1'>
-            <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400' />
+            <Search
+              className={`absolute ${locale === 'ar' ? 'right-3' : 'left-3'} top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400`}
+            />
             <Input
               placeholder={t('search_placeholder')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className='pl-9'
+              className={locale === 'ar' ? 'pr-9' : 'pl-9'}
             />
           </div>
           <Select

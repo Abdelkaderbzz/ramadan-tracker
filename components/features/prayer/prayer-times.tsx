@@ -5,7 +5,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { AlarmClock } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { motion } from 'framer-motion';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 type PrayerTime = {
   name: string;
@@ -16,6 +16,8 @@ type PrayerTime = {
 
 export default function PrayerTimes() {
   const t = useTranslations('PrayerTimes');
+  const locale = useLocale();
+  const isRtl = locale === 'ar';
   const [prayerTimes, setPrayerTimes] = useState<PrayerTime[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -177,7 +179,7 @@ export default function PrayerTimes() {
   };
 
   return (
-    <Card className='rtl'>
+    <Card className={isRtl ? 'rtl' : 'ltr'}>
       <CardHeader className='flex flex-row items-center justify-between pb-2'>
         <CardTitle className='text-md font-medium'>{t('title')}</CardTitle>
         <motion.div

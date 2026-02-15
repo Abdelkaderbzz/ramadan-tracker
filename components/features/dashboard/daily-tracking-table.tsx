@@ -10,11 +10,13 @@ import { useRamadanStore } from '@/lib/store';
 import type { DailyActivity } from '@/lib/store';
 import { motion } from 'framer-motion';
 import { useToast } from '@/components/ui/use-toast';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 export default function DailyTrackingTable() {
   const t = useTranslations('Dashboard');
   const tIndex = useTranslations('Index'); // For 'days' label if needed, or use Dashboard.table.day
+  const locale = useLocale();
+  const isRtl = locale === 'ar';
   const {
     activities,
     updateActivity,
@@ -117,7 +119,9 @@ export default function DailyTrackingTable() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.5 }}
     >
-      <Card className='mt-10 overflow-x-auto rtl shadow-lg border-purple-100 dark:border-purple-900'>
+      <Card
+        className={`mt-10 overflow-x-auto ${isRtl ? 'rtl' : 'ltr'} shadow-lg border-purple-100 dark:border-purple-900`}
+      >
         <CardHeader className='bg-purple-700 text-white flex flex-row items-center justify-between py-4'>
           <CardTitle className='text-lg'>{t('title')}</CardTitle>
           <Button
@@ -135,7 +139,9 @@ export default function DailyTrackingTable() {
             <table className='w-full border-collapse'>
               <thead>
                 <tr className='bg-purple-50 dark:bg-purple-900/50 text-purple-800 dark:text-purple-300'>
-                  <th className='p-3 text-right sticky right-0 bg-purple-50 dark:bg-purple-900 z-10 min-w-[100px]'>
+                  <th
+                    className={`p-3 ${isRtl ? 'text-right right-0' : 'text-left left-0'} sticky bg-purple-50 dark:bg-purple-900 z-10 min-w-[100px]`}
+                  >
                     {t('table.day')}
                   </th>
                   <th className='p-2 text-center text-xs md:text-sm min-w-[60px]'>
@@ -190,7 +196,9 @@ export default function DailyTrackingTable() {
                     className='border-b border-gray-100 dark:border-gray-800 hover:bg-purple-50/50 dark:hover:bg-purple-900/20'
                     whileHover={{ backgroundColor: 'rgba(124, 58, 237, 0.1)' }}
                   >
-                    <td className='p-3 text-right font-medium sticky right-0 bg-white/95 dark:bg-gray-950/95 z-10 shadow-sm'>
+                    <td
+                      className={`p-3 ${isRtl ? 'text-right right-0' : 'text-left left-0'} font-medium sticky bg-white/95 dark:bg-gray-950/95 z-10 shadow-sm`}
+                    >
                       {t('table.day')} {activity.day}
                     </td>
                     <td className='p-3 text-center'>
