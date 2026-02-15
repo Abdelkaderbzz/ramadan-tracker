@@ -8,6 +8,7 @@ import Script from 'next/script';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { PwaInstallPrompt } from '@/components/pwa-install-prompt';
+import { Footer } from '@/components/layout/footer';
 
 // Load Tajawal font - great for Arabic text
 const tajawal = Tajawal({
@@ -162,6 +163,7 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <Footer />
             <PwaInstallPrompt />
             <Toaster />
           </ThemeProvider>
