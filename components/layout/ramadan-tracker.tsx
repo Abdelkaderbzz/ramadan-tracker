@@ -2,15 +2,7 @@
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useTranslations } from 'next-intl';
-import {
-  Calendar,
-  BookOpen,
-  BarChart3,
-  Award,
-  Heart,
-  MousePointer2,
-  Calculator,
-} from 'lucide-react';
+import { Calendar, BookOpen, BarChart3, Award } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
@@ -21,9 +13,6 @@ import { PrayerTimes, DailyDua } from '@/components/features/prayer';
 import { QuranTracker } from '@/components/features/quran';
 import { IslamicCalendar } from '@/components/features/calendar';
 import { AchievementBadges } from '@/components/features/achievements';
-import { TasbeehCounter } from '@/components/features/tasbeeh/tasbeeh-counter';
-import { ZakatCalculator } from '@/components/features/zakat/zakat-calculator';
-import DuaCollection from '@/components/dua-collection';
 import { getCurrentHijriDate } from '@/lib/date-utils';
 import { useRamadanStore } from '@/lib/store';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -91,11 +80,10 @@ export default function RamadanTracker() {
       <Tabs
         defaultValue='dashboard'
         className='w-full'
-        value={activeTab}
         onValueChange={handleTabChange}
       >
         <div className='sticky top-0 z-20 bg-background/80 backdrop-blur-md mb-6 py-2 -mx-4 px-4 border-b md:relative md:top-auto md:bg-transparent md:backdrop-blur-none md:border-none md:p-0 md:m-0'>
-          <TabsList className='grid grid-cols-3 md:grid-cols-6 h-auto bg-transparent md:bg-muted p-0 md:p-1 gap-1 md:gap-2'>
+          <TabsList className='grid grid-cols-4 md:grid-cols-4 h-auto bg-transparent md:bg-muted p-0 md:p-1 gap-1 md:gap-2'>
             <TabsTrigger
               value='dashboard'
               className='flex-col md:flex-row gap-1 py-3 md:py-1.5 data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 md:data-[state=active]:bg-background md:data-[state=active]:text-foreground'
@@ -132,33 +120,6 @@ export default function RamadanTracker() {
                 {t('achievements')}
               </span>
             </TabsTrigger>
-            <TabsTrigger
-              value='duas'
-              className='flex-col md:flex-row gap-1 py-3 md:py-1.5 data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 md:data-[state=active]:bg-background md:data-[state=active]:text-foreground'
-            >
-              <Heart className='h-5 w-5 md:h-4 md:w-4' />
-              <span className='text-[10px] sm:text-xs md:text-sm'>
-                {t('duas')}
-              </span>
-            </TabsTrigger>
-            <TabsTrigger
-              value='tasbeeh'
-              className='flex-col md:flex-row gap-1 py-3 md:py-1.5 data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 md:data-[state=active]:bg-background md:data-[state=active]:text-foreground'
-            >
-              <MousePointer2 className='h-5 w-5 md:h-4 md:w-4' />
-              <span className='text-[10px] sm:text-xs md:text-sm'>
-                {t('tasbeeh')}
-              </span>
-            </TabsTrigger>
-            <TabsTrigger
-              value='zakat'
-              className='flex-col md:flex-row gap-1 py-3 md:py-1.5 data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 md:data-[state=active]:bg-background md:data-[state=active]:text-foreground'
-            >
-              <Calculator className='h-5 w-5 md:h-4 md:w-4' />
-              <span className='text-[10px] sm:text-xs md:text-sm'>
-                {t('zakat')}
-              </span>
-            </TabsTrigger>
           </TabsList>
         </div>
 
@@ -181,18 +142,6 @@ export default function RamadanTracker() {
 
         <TabsContent value='achievements'>
           <AchievementBadges />
-        </TabsContent>
-
-        <TabsContent value='duas'>
-          <DuaCollection />
-        </TabsContent>
-
-        <TabsContent value='tasbeeh'>
-          <TasbeehCounter />
-        </TabsContent>
-
-        <TabsContent value='zakat'>
-          <ZakatCalculator />
         </TabsContent>
       </Tabs>
     </div>
