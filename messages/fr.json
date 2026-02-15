@@ -14,6 +14,9 @@
     "dashboard": "Tableau de bord",
     "calendar": "Calendrier",
     "achievements": "Réalisations",
+    "duas": "Douas",
+    "tasbeeh": "Tasbih",
+    "zakat": "Zakat",
     "install_app": "Installer l'application",
     "install_desc": "Ajouter à l'écran d'accueil pour une meilleure expérience",
     "ios_install_desc": "Appuyez sur partager puis 'Ajouter à l'écran d'accueil'",
@@ -352,6 +355,24 @@
       "4": "Ô Allah, pardonne aux croyants et aux croyantes, aux musulmans et aux musulmanes, les vivants parmi eux et les morts",
       "5": "Ô Allah, guéris nos malades et les malades des musulmans"
     }
+  },
+  "Zakat": {
+    "title": "Calculateur de Zakat",
+    "cash": "Espèces et Soldes Bancaires",
+    "gold": "Valeur de l'Or et de l'Argent",
+    "investments": "Investissements et Actions",
+    "business": "Actifs Commerciaux",
+    "debts": "Dettes à Payer",
+    "net_wealth": "Patrimoine Net Total",
+    "zakat_due": "Zakat Totale Due",
+    "nisab_info": "La Zakat est obligatoire si votre patrimoine net dépasse le Nisab (valeur de 85g d'or) depuis une année lunaire complète."
+  },
+  "Tasbeeh": {
+    "title": "Tasbih Digital",
+    "tap_to_count": "Appuyez pour compter",
+    "space_to_count": "Utilisez Espace ou appuyez pour compter",
+    "reset": "Réinitialiser",
+    "target": "Objectif"
   },
   "Footer": {
     "author": "Auteur",

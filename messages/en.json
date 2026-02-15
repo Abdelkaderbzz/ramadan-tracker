@@ -14,6 +14,9 @@
     "dashboard": "Dashboard",
     "calendar": "Calendar",
     "achievements": "Achievements",
+    "duas": "Duas",
+    "tasbeeh": "Tasbeeh",
+    "zakat": "Zakat",
     "install_app": "Install App",
     "install_desc": "Add to home screen for better experience",
     "ios_install_desc": "Tap share then 'Add to Home Screen'",
@@ -352,6 +355,24 @@
       "4": "O Allah, forgive the believing men and believing women, and the Muslim men and Muslim women, the living among them and the dead",
       "5": "O Allah, heal our sick and the sick of the Muslims"
     }
+  },
+  "Zakat": {
+    "title": "Zakat Calculator",
+    "cash": "Cash & Bank Balances",
+    "gold": "Gold & Silver Value",
+    "investments": "Investments & Stocks",
+    "business": "Business Assets",
+    "debts": "Debts to Pay",
+    "net_wealth": "Total Net Wealth",
+    "zakat_due": "Total Zakat Due",
+    "nisab_info": "Zakat is obligatory if your net wealth exceeds the Nisab (value of 85g gold) for one lunar year."
+  },
+  "Tasbeeh": {
+    "title": "Digital Tasbeeh",
+    "tap_to_count": "Tap to Count",
+    "space_to_count": "Use Space or tap to count",
+    "reset": "Reset",
+    "target": "Target"
   },
   "Footer": {
     "author": "Author",
