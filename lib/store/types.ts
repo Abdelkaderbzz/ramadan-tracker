@@ -27,7 +27,9 @@ export interface RamadanState {
   stats: StatsType;
   currentDua: string;
   savedDuas: string[];
+  readSurahs: number[];
   initializeData: () => void;
+  toggleSurahRead: (surahNumber: number) => void;
   updateActivity: (
     day: number,
     field: keyof DailyActivity,

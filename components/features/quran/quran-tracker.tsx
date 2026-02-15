@@ -1,10 +1,25 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { BookOpen, CheckCircle, ChevronLeft, ChevronRight } from 'lucide-react';
+import {
+  BookOpen,
+  CheckCircle,
+  ChevronLeft,
+  ChevronRight,
+  Search,
+  ArrowUpDown,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { useRamadanStore } from '@/lib/store';
 import type { DailyActivity } from '@/lib/store';
 import { motion } from 'framer-motion';
@@ -24,11 +39,23 @@ export default function QuranTracker() {
   const t = useTranslations('Quran');
   const tSurahs = useTranslations('Surahs');
   const locale = useLocale();
-  const { activities, updateQuranCount } = useRamadanStore();
+  const { activities, updateQuranCount, readSurahs, toggleSurahRead } =
+    useRamadanStore();
   const [surahs, setSurahs] = useState<Surah[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalVerses, setTotalVerses] = useState(0);
-  const [readVerses, setReadVerses] = useState(0);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+
+  // Calculate total read verses based on marked surahs
+  const totalVerses = 6236; // Total verses in Quran
+  const readVersesCount = useMemo(() => {
+    return surahs
+      .filter((s) => readSurahs.includes(s.number))
+      .reduce((acc, s) => acc + s.verses, 0);
+  }, [surahs, readSurahs]);
+
+  const progressPercentage = Math.round((readVersesCount / totalVerses) * 100);
+
   const itemsPerPage = 10;
 
   // Quran surahs data
@@ -798,6 +825,7 @@ export default function QuranTracker() {
         number: 96,
         name: 'Al-Alaq',
         arabicName: 'العلق',
+
         verses: 19,
         isRead: false,
         progress: 0,
@@ -947,200 +975,203 @@ export default function QuranTracker() {
         progress: 0,
       },
     ];
+    setSurahs(quranSurahs);
+  }, []);
 
-    // Calculate total verses in Quran
-    const total = quranSurahs.reduce((sum, surah) => sum + surah.verses, 0);
-    setTotalVerses(total);
+  const toggleRead = (surahNumber: number) => {
+    toggleSurahRead(surahNumber);
+  };
 
-    // Calculate read verses from user's activities
-    const read = activities.reduce(
-      (sum: number, day: DailyActivity) =>
-        sum + (Number.parseInt(day.quran) || 0),
-      0,
-    );
-    setReadVerses(read);
+  const filteredAndSortedSurahs = useMemo(() => {
+    let result = [...surahs];
 
-    // Update progress for each surah (simplified approach)
-    let versesLeft = read;
-    const updatedSurahs = quranSurahs.map((surah) => {
-      if (versesLeft >= surah.verses) {
-        // This surah is completely read
-        versesLeft -= surah.verses;
-        return { ...surah, isRead: true, progress: 100 };
-      } else if (versesLeft > 0) {
-        // This surah is partially read
-        const progress = Math.round((versesLeft / surah.verses) * 100);
-        versesLeft = 0;
-        return { ...surah, isRead: false, progress };
-      }
-      // This surah is not read yet
-      return surah;
-    });
+    // Filter by search query
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      result = result.filter(
+        (s) =>
+          s.name.toLowerCase().includes(query) ||
+          s.arabicName.includes(query) ||
+          tSurahs(s.number.toString()).toLowerCase().includes(query),
+      );
+    }
 
-    setSurahs(updatedSurahs);
-  }, [activities]);
+    // Sort order
+    if (sortOrder === 'desc') {
+      result.reverse();
+    }
 
-  // Calculate total pages
-  const totalPages = Math.ceil(surahs.length / itemsPerPage);
+    return result;
+  }, [surahs, searchQuery, sortOrder, tSurahs]);
 
-  // Get current page items
-  const currentSurahs = surahs.slice(
+  const totalPages = Math.ceil(filteredAndSortedSurahs.length / itemsPerPage);
+  const currentSurahs = filteredAndSortedSurahs.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage,
   );
 
-  const markSurahAsRead = (surahNumber: number) => {
-    const surah = surahs.find((s) => s.number === surahNumber);
-    if (surah) {
-      // Calculate the verses to add (only the remaining unread verses)
-      const remainingVerses =
-        surah.verses - Math.floor((surah.progress / 100) * surah.verses);
-
-      // Get the current day (or default to day 1)
-      const today = new Date().getDate();
-      const dayIndex = Math.min(today - 1, activities.length - 1);
-      const day = activities[dayIndex >= 0 ? dayIndex : 0].day;
-
-      // Get current Quran count for the day
-      const currentCount =
-        Number.parseInt(activities[dayIndex >= 0 ? dayIndex : 0].quran) || 0;
-
-      // Update the day's record with the new total
-      updateQuranCount(day, (currentCount + remainingVerses).toString());
-    }
-  };
-
   return (
-    <div className='rtl'>
-      <Card className='mb-6'>
-        <CardContent className='pt-6'>
-          <div className='flex flex-col md:flex-row items-center justify-between gap-4'>
-            <div className='flex items-center gap-3'>
-              <div className='w-16 h-16 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center'>
-                <BookOpen className='h-8 w-8 text-purple-600 dark:text-purple-400' />
-              </div>
-              <div>
-                <h2 className='text-xl font-bold'>{t('title')}</h2>
-                <p className='text-sm text-muted-foreground'>
-                  {t('description')}
-                </p>
-              </div>
-            </div>
-
-            <div className='w-full md:w-1/2'>
-              <div className='flex justify-between text-sm mb-1'>
-                <span>
-                  {t('read_verses')} {formatNumber(readVerses, locale)}
-                </span>
-                <span>
-                  {t('total_verses')} {formatNumber(totalVerses, locale)}
-                </span>
-              </div>
-              <Progress
-                value={(readVerses / totalVerses) * 100}
-                color='purple-500'
-                className='h-3'
-              />
-              <p className='text-xs text-center mt-1 text-muted-foreground'>
-                {formatNumber(
-                  Math.round((readVerses / totalVerses) * 100),
-                  locale,
-                )}
-                %{t('of_quran')}
-              </p>
-            </div>
+    <Card className='mt-6 border-purple-100 dark:border-purple-800 dark:bg-gray-800 rtl'>
+      <CardContent className='p-6'>
+        <div className='flex items-center justify-between mb-6'>
+          <h2 className='text-2xl font-bold text-purple-800 dark:text-purple-300 rtl'>
+            {t('quran_tracker')}
+          </h2>
+          <div className='flex items-center gap-2'>
+            <BookOpen className='h-6 w-6 text-purple-600' />
           </div>
-        </CardContent>
-      </Card>
+        </div>
 
-      <div className='grid grid-cols-1 gap-3'>
-        {currentSurahs.map((surah) => (
-          <motion.div
-            key={surah.number}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: surah.number * 0.03 }}
+        <div className='mb-8'>
+          <div className='flex justify-between items-center mb-2'>
+            <span className='text-sm text-gray-600 dark:text-gray-300'>
+              {t('progress')}
+            </span>
+            <span className='text-sm font-medium text-purple-600'>
+              {formatNumber(progressPercentage, locale)}%
+            </span>
+          </div>
+          <Progress value={progressPercentage} className='h-3' />
+          <p className='text-xs text-center mt-2 text-gray-500'>
+            {formatNumber(readVersesCount, locale)} /{' '}
+            {formatNumber(totalVerses, locale)} {t('verses_read')}
+          </p>
+        </div>
+
+        <div className='flex flex-col md:flex-row gap-4 mb-6'>
+          <div className='relative flex-1'>
+            <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400' />
+            <Input
+              placeholder={t('search_placeholder')}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className='pl-9'
+            />
+          </div>
+          <Select
+            value={sortOrder}
+            onValueChange={(value: 'asc' | 'desc') => setSortOrder(value)}
           >
-            <Card className={`${surah.isRead ? 'border-green-300' : ''}`}>
-              <CardContent className='p-4'>
-                <div className='flex items-center justify-between'>
-                  <div className='flex items-center gap-3'>
-                    <div className='w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-sm font-bold'>
-                      {formatNumber(surah.number, locale)}
-                    </div>
-                    <div>
-                      <h3 className='font-bold'>
-                        {tSurahs(`${surah.number}`)}
-                      </h3>
-                      <p className='text-xs text-muted-foreground'>
-                        {formatNumber(surah.verses, locale)} {t('verse')}
-                      </p>
-                    </div>
+            <SelectTrigger className='w-full md:w-[180px]'>
+              <ArrowUpDown className='w-4 h-4 mr-2' />
+              <SelectValue placeholder={t('sort_order')} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value='asc'>{t('sort_asc')}</SelectItem>
+              <SelectItem value='desc'>{t('sort_desc')}</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className='space-y-4'>
+          {currentSurahs.map((surah) => {
+            const isRead = readSurahs.includes(surah.number);
+            return (
+              <motion.div
+                key={surah.number}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: surah.number * 0.01 }}
+                className={`flex items-center justify-between p-4 rounded-lg border transition-colors ${
+                  isRead
+                    ? 'bg-purple-50 border-purple-200 dark:bg-purple-900/20 dark:border-purple-800'
+                    : 'bg-white border-gray-100 hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-750'
+                }`}
+              >
+                <div className='flex items-center gap-4'>
+                  <div
+                    className={`flex items-center justify-center w-10 h-10 rounded-full text-sm font-bold ${
+                      isRead
+                        ? 'bg-purple-600 text-white'
+                        : 'bg-purple-100 text-purple-600 dark:bg-purple-900/40 dark:text-purple-300'
+                    }`}
+                  >
+                    {formatNumber(surah.number, locale)}
                   </div>
-
-                  <div className='flex items-center gap-3'>
-                    <div className='w-24'>
-                      <Progress
-                        value={surah.progress}
-                        color='purple-500'
-                        className='h-2'
-                      />
-                      <p className='text-xs text-center mt-1'>
-                        {formatNumber(surah.progress, locale)}%
-                      </p>
-                    </div>
-
-                    {surah.isRead ? (
-                      <CheckCircle className='h-6 w-6 text-green-500' />
-                    ) : (
-                      <Button
-                        variant='outline'
-                        size='sm'
-                        className='text-xs'
-                        onClick={() => markSurahAsRead(surah.number)}
-                      >
-                        {t('mark_read')}
-                      </Button>
-                    )}
+                  <div>
+                    <h3 className='font-semibold text-gray-900 dark:text-gray-100'>
+                      {tSurahs(surah.number.toString())}
+                    </h3>
+                    <p className='text-sm text-gray-500 dark:text-gray-400'>
+                      {surah.arabicName} • {formatNumber(surah.verses, locale)}{' '}
+                      {t('verses')}
+                    </p>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
-      </div>
 
-      {/* Pagination */}
-      {totalPages > 1 && (
-        <div className='flex justify-center items-center gap-2 p-4 mt-4'>
-          <Button
-            variant='outline'
-            size='sm'
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-          >
-            <ChevronRight className='h-4 w-4' />
-          </Button>
-
-          <span className='mx-2'>
-            {t('page_info', {
-              current: formatNumber(currentPage, locale),
-              total: formatNumber(totalPages, locale),
-            })}
-          </span>
-
-          <Button
-            variant='outline'
-            size='sm'
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
-            disabled={currentPage === totalPages}
-          >
-            <ChevronLeft className='h-4 w-4' />
-          </Button>
+                <Button
+                  variant={isRead ? 'default' : 'outline'}
+                  size='sm'
+                  onClick={() => toggleRead(surah.number)}
+                  className={isRead ? 'bg-purple-600 hover:bg-purple-700' : ''}
+                >
+                  {isRead ? (
+                    <>
+                      <CheckCircle className='w-4 h-4 mr-2' />
+                      {t('completed')}
+                    </>
+                  ) : (
+                    t('mark_read')
+                  )}
+                </Button>
+              </motion.div>
+            );
+          })}
         </div>
-      )}
-    </div>
+
+        {/* Pagination controls */}
+        {totalPages > 1 && (
+          <div className='flex justify-center mt-8 gap-2'>
+            <Button
+              variant='outline'
+              size='icon'
+              onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+            >
+              <ChevronLeft className='h-4 w-4' />
+            </Button>
+            <div className='flex items-center gap-2'>
+              {Array.from({ length: totalPages }, (_, i) => i + 1)
+                .filter(
+                  (p) =>
+                    p === 1 ||
+                    p === totalPages ||
+                    Math.abs(p - currentPage) <= 1,
+                )
+                .map((p, i, arr) => (
+                  <>
+                    {i > 0 && arr[i - 1] !== p - 1 && (
+                      <span key={`dots-${p}`} className='text-gray-400'>
+                        ...
+                      </span>
+                    )}
+                    <Button
+                      key={p}
+                      variant={currentPage === p ? 'default' : 'outline'}
+                      size='sm'
+                      onClick={() => setCurrentPage(p)}
+                      className={
+                        currentPage === p
+                          ? 'bg-purple-600 hover:bg-purple-700'
+                          : ''
+                      }
+                    >
+                      {formatNumber(p, locale)}
+                    </Button>
+                  </>
+                ))}
+            </div>
+            <Button
+              variant='outline'
+              size='icon'
+              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages}
+            >
+              <ChevronRight className='h-4 w-4' />
+            </Button>
+          </div>
+        )}
+      </CardContent>
+    </Card>
   );
 }

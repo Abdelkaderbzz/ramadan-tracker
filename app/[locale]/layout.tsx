@@ -1,5 +1,5 @@
 import type React from 'react';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Tajawal } from 'next/font/google';
 import '@/app/globals.css';
 import { Toaster } from '@/components/ui/toaster';
@@ -7,6 +7,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import Script from 'next/script';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
+import { PwaInstallPrompt } from '@/components/pwa-install-prompt';
 
 // Load Tajawal font - great for Arabic text
 const tajawal = Tajawal({
@@ -15,7 +16,7 @@ const tajawal = Tajawal({
   variable: '--font-tajawal',
 });
 
-export const viewport = {
+export const viewport: Viewport = {
   themeColor: '#ffffff',
   width: 'device-width',
   initialScale: 1,
@@ -122,7 +123,7 @@ export default async function RootLayout({
         <link rel='icon' href='/images/logo.svg' />
         <link rel='apple-touch-icon' href='/images/apple-touch-icon.png' />
         <link rel='manifest' href='/manifest.json' />
-        <meta name='theme-color' content='#ffffff' />
+        <link rel='manifest' href='/manifest.json' />
         <meta name='apple-mobile-web-app-capable' content='yes' />
         <meta name='apple-mobile-web-app-status-bar-style' content='default' />
         <meta name='apple-mobile-web-app-title' content='Ramadhan Tracker' />
@@ -144,12 +145,19 @@ export default async function RootLayout({
             gtag('config', 'G-WR56K4TNMK');
           `}
         </Script>
-    
+
         <Script
           id='feeduser-widget'
           src='https://widget.feeduser.me/widget/v1.js'
           strategy='afterInteractive'
         />
+
+        <Script id='feeduser-config' strategy='afterInteractive'>
+          {`
+            window.Fu = window.Fu || {};
+            window.Fu.account_id = "679fce8444a7f340866087b2";
+          `}
+        </Script>
 
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
@@ -159,6 +167,7 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <PwaInstallPrompt />
             <Toaster />
           </ThemeProvider>
         </NextIntlClientProvider>

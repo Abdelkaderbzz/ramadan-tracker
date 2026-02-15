@@ -13,7 +13,10 @@
     "track_worship": "Track your worship and good deeds",
     "dashboard": "Dashboard",
     "calendar": "Calendar",
-    "achievements": "Achievements"
+    "achievements": "Achievements",
+    "install_app": "Install App",
+    "install_desc": "Add to home screen for better experience",
+    "install_btn": "Install"
   },
   "Dashboard": {
     "title": "Daily Tracking Log",
@@ -182,7 +185,16 @@
     "mark_read": "Mark as Read",
     "page_info": "Page {current} of {total}",
     "prev": "Previous",
-    "next": "Next"
+    "next": "Next",
+    "completed": "Completed",
+    "search_placeholder": "Search surah...",
+    "sort_order": "Sort Order",
+    "sort_asc": "Ascending",
+    "sort_desc": "Descending",
+    "progress": "Progress",
+    "verses_read": "verses read",
+    "quran_tracker": "Quran Tracker",
+    "verses": "Verses"
   },
   "Surahs": {
     "1": "Al-Fatihah",
