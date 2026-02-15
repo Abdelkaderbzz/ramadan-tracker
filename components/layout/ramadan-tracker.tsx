@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useTranslations } from 'next-intl';
 import { Calendar, BookOpen, BarChart3, Award } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -17,7 +18,14 @@ import { useRamadanStore } from '@/lib/store';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RAMADAN_DUAS, DUA_ROTATION_INTERVAL } from '@/lib/constants/duas';
 
+import LanguageSwitcher from '@/components/language-switcher';
+
+import { useLocale } from 'next-intl';
+
 export default function RamadanTracker() {
+  const t = useTranslations('Index');
+  const tDuas = useTranslations('HeaderDuas');
+  const locale = useLocale();
   const [date, setDate] = useState('');
   const [hijriDate, setHijriDate] = useState('');
   const [currentDuaIndex, setCurrentDuaIndex] = useState(0);
@@ -25,8 +33,8 @@ export default function RamadanTracker() {
   const { initializeData } = useRamadanStore();
 
   const currentDua = useMemo(
-    () => RAMADAN_DUAS[currentDuaIndex],
-    [currentDuaIndex],
+    () => tDuas(`${currentDuaIndex}`),
+    [currentDuaIndex, tDuas],
   );
 
   // Initialize on mount
@@ -37,10 +45,12 @@ export default function RamadanTracker() {
       month: 'long',
       day: 'numeric',
     };
-    setDate(now.toLocaleDateString('ar-SA', options));
-    setHijriDate(getCurrentHijriDate());
+    setDate(
+      now.toLocaleDateString(locale === 'ar' ? 'ar-SA' : locale, options),
+    );
+    setHijriDate(getCurrentHijriDate(locale));
     initializeData();
-  }, [initializeData]);
+  }, [initializeData, locale]);
 
   // Rotate duas
   useEffect(() => {
@@ -57,6 +67,9 @@ export default function RamadanTracker() {
 
   return (
     <div className='container mx-auto px-4 py-8 max-w-6xl'>
+      <div className='flex justify-end mb-4'>
+        <LanguageSwitcher />
+      </div>
       <div className='text-center mb-8 relative'>
         <div className='absolute right-0 top-0 opacity-10'>
           <div
@@ -70,7 +83,7 @@ export default function RamadanTracker() {
           animate={{ opacity: 1, y: 0 }}
           className='text-center text-3xl md:text-4xl font-bold text-purple-800 mb-2 rtl'
         >
-          يومي في رمضان
+          {t('my_day')}
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: -10 }}
@@ -78,7 +91,7 @@ export default function RamadanTracker() {
           transition={{ delay: 0.2 }}
           className='text-purple-600 text-center rtl'
         >
-          تتبع عباداتك وأعمالك الصالحة
+          {t('track_worship')}
         </motion.p>
 
         <Card className='mt-6 max-w-2xl mx-auto p-4 rtl shadow-md border-purple-100'>
@@ -109,22 +122,22 @@ export default function RamadanTracker() {
         className='w-full'
         onValueChange={handleTabChange}
       >
-        <TabsList className='grid grid-cols-4 mb-8'>
+        <TabsList className='grid grid-cols-2 md:grid-cols-4 mb-8 h-auto'>
           <TabsTrigger value='dashboard' className='rtl'>
             <BarChart3 className='h-4 w-4 ml-2' />
-            لوحة المعلومات
+            {t('dashboard')}
           </TabsTrigger>
           <TabsTrigger value='quran' className='rtl'>
             <BookOpen className='h-4 w-4 ml-2' />
-            القرآن
+            {t('quran')}
           </TabsTrigger>
           <TabsTrigger value='calendar' className='rtl'>
             <Calendar className='h-4 w-4 ml-2' />
-            التقويم
+            {t('calendar')}
           </TabsTrigger>
           <TabsTrigger value='achievements' className='rtl'>
             <Award className='h-4 w-4 ml-2' />
-            الإنجازات
+            {t('achievements')}
           </TabsTrigger>
         </TabsList>
 

@@ -1,10 +1,12 @@
 import type React from 'react';
 import type { Metadata } from 'next';
 import { Tajawal } from 'next/font/google';
-import './globals.css';
+import '@/app/globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { ThemeProvider } from '@/components/theme-provider';
 import Script from 'next/script';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
 
 // Load Tajawal font - great for Arabic text
 const tajawal = Tajawal({
@@ -12,6 +14,13 @@ const tajawal = Tajawal({
   weight: ['400', '500', '700'],
   variable: '--font-tajawal',
 });
+
+export const viewport = {
+  themeColor: '#ffffff',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://ramadhan-tracker.netlify.app'),
@@ -97,13 +106,18 @@ export const metadata: Metadata = {
   applicationName: 'Ramadhan Tracker',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params: { locale },
 }: Readonly<{
   children: React.ReactNode;
+  params: { locale: string };
 }>) {
+  const currentLocale = locale || 'en';
+  const messages = await getMessages({ locale: currentLocale });
+
   return (
-    <html lang='ar'>
+    <html lang={currentLocale} dir={currentLocale === 'ar' ? 'rtl' : 'ltr'}>
       <head>
         <link rel='icon' href='/images/logo.svg' />
         <link rel='apple-touch-icon' href='/images/apple-touch-icon.png' />
@@ -130,52 +144,25 @@ export default function RootLayout({
             gtag('config', 'G-WR56K4TNMK');
           `}
         </Script>
-        <Script id='taki-settings' strategy='beforeInteractive'>
-          {`
-            window.TakiPopupsSettings = {
-              memberId: '817889341',
-              name: 'ahmed',
-              appId: '67ffaeade783d3021f53c288',
-              lang: 'en',
-              meta_data: {
-                age: 18,
-                state: 'Manouba',
-                phoneNumber: '5289452343',
-              }
-            };
-          `}
-        </Script>
-
-        {/* Load the Taki popups script AFTER the DOM is interactive */}
-        <Script
-          id='taki-popups'
-          src='https://popups-dev-integration.lissene.dev/taki-popups.umd.js'
-          strategy='afterInteractive'
-        />
-        <Script id='feeduser-settings' strategy='beforeInteractive'>
-          {`
-            window.Fu = window.Fu || {};
-            Fu.access_token = "c73c052759e3602ca716ff469cde44";
-          `}
-        </Script>
+    
         <Script
           id='feeduser-widget'
           src='https://widget.feeduser.me/widget/v1.js'
           strategy='afterInteractive'
         />
 
-        <ThemeProvider
-          attribute='class'
-          defaultTheme='light'
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-          <Toaster />
-        </ThemeProvider>
+        <NextIntlClientProvider messages={messages}>
+          <ThemeProvider
+            attribute='class'
+            defaultTheme='light'
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+            <Toaster />
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
 }
-
-import './globals.css';

@@ -1,18 +1,25 @@
 // Function to get current Hijri date
-export function getCurrentHijriDate(): string {
+export function getCurrentHijriDate(locale: string = 'ar'): string {
   try {
     // Use Intl for Hijri calendar if supported
     const options: Intl.DateTimeFormatOptions = {
-      calendar: "islamic",
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    }
+      calendar: 'islamic-umalqura',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    };
 
-    return new Intl.DateTimeFormat("ar-SA-u-ca-islamic", options).format(new Date())
+    // Construct the locale string for Intl
+    // For English/French, we want latin numerals and English/French month names if possible (though Hijri often defaults)
+    // For Arabic, we use 'ar-SA'
+    const intlLocale =
+      locale === 'ar'
+        ? 'ar-SA-u-ca-islamic-umalqura'
+        : `${locale}-u-ca-islamic-umalqura`;
+
+    return new Intl.DateTimeFormat(intlLocale, options).format(new Date());
   } catch (error) {
     // Fallback for browsers without Islamic calendar support
-    return "رمضان 1446"
+    return 'Ramadan 1447';
   }
 }
-
