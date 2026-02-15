@@ -144,34 +144,7 @@ export default async function RootLayout({
             gtag('config', 'G-WR56K4TNMK');
           `}
         </Script>
-        <Script id='taki-settings' strategy='beforeInteractive'>
-          {`
-            window.TakiPopupsSettings = {
-              memberId: '817889341',
-              name: 'ahmed',
-              appId: '67ffaeade783d3021f53c288',
-              lang: 'en',
-              meta_data: {
-                age: 18,
-                state: 'Manouba',
-                phoneNumber: '5289452343',
-              }
-            };
-          `}
-        </Script>
-
-        {/* Load the Taki popups script AFTER the DOM is interactive */}
-        <Script
-          id='taki-popups'
-          src='https://popups-dev-integration.lissene.dev/taki-popups.umd.js'
-          strategy='afterInteractive'
-        />
-        <Script id='feeduser-settings' strategy='beforeInteractive'>
-          {`
-            window.Fu = window.Fu || {};
-            Fu.access_token = "c73c052759e3602ca716ff469cde44";
-          `}
-        </Script>
+    
         <Script
           id='feeduser-widget'
           src='https://widget.feeduser.me/widget/v1.js'
