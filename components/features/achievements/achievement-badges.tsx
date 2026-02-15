@@ -15,7 +15,8 @@ import { useRamadanStore } from '@/lib/store';
 import type { DailyActivity } from '@/lib/store';
 import { motion } from 'framer-motion';
 import { Progress } from '@/components/ui/progress';
-import { frenchNumerals } from '@/lib/arabic-numerals';
+import { formatNumber } from '@/lib/arabic-numerals';
+import { useTranslations, useLocale } from 'next-intl';
 
 interface Achievement {
   id: string;
@@ -29,6 +30,8 @@ interface Achievement {
 }
 
 export default function AchievementBadges() {
+  const t = useTranslations('Achievements');
+  const locale = useLocale();
   const { activities, stats } = useRamadanStore();
   const [achievements, setAchievements] = useState<Achievement[]>([]);
 
@@ -53,8 +56,8 @@ export default function AchievementBadges() {
     const updatedAchievements: Achievement[] = [
       {
         id: 'quran-starter',
-        title: 'قارئ مبتدئ',
-        description: 'قراءة 100 آية من القرآن الكريم',
+        title: t('badges.quran_starter.title'),
+        description: t('badges.quran_starter.description'),
         icon: <BookOpen className='h-6 w-6' />,
         color: 'emerald-500',
         unlocked: quranPages >= 100,
@@ -63,8 +66,8 @@ export default function AchievementBadges() {
       },
       {
         id: 'quran-advanced',
-        title: 'قارئ متقدم',
-        description: 'قراءة 1000 آية من القرآن الكريم',
+        title: t('badges.quran_advanced.title'),
+        description: t('badges.quran_advanced.description'),
         icon: <BookOpen className='h-6 w-6' />,
         color: 'emerald-500',
         unlocked: quranPages >= 1000,
@@ -73,8 +76,8 @@ export default function AchievementBadges() {
       },
       {
         id: 'prayer-streak',
-        title: 'مواظب على الصلاة',
-        description: 'الصلاة لمدة 7 أيام متتالية',
+        title: t('badges.prayer_streak.title'),
+        description: t('badges.prayer_streak.description'),
         icon: <Clock className='h-6 w-6' />,
         color: 'blue-500',
         unlocked: prayerDays >= 7,
@@ -83,8 +86,8 @@ export default function AchievementBadges() {
       },
       {
         id: 'dhikr-master',
-        title: 'ذاكر لله',
-        description: 'قراءة الأذكار لمدة 10 أيام',
+        title: t('badges.dhikr_master.title'),
+        description: t('badges.dhikr_master.description'),
         icon: <AlignJustify className='h-6 w-6' />,
         color: 'orange-500',
         unlocked: dhikrDays >= 10,
@@ -93,8 +96,8 @@ export default function AchievementBadges() {
       },
       {
         id: 'good-deeds',
-        title: 'محسن',
-        description: 'القيام بـ 15 عمل صالح',
+        title: t('badges.good_deeds.title'),
+        description: t('badges.good_deeds.description'),
         icon: <Heart className='h-6 w-6' />,
         color: 'rose-500',
         unlocked: goodDeedsDays >= 15,
@@ -103,8 +106,8 @@ export default function AchievementBadges() {
       },
       {
         id: 'ramadan-half',
-        title: 'منتصف الطريق',
-        description: 'إكمال 15 يوم من رمضان بنجاح',
+        title: t('badges.ramadan_half.title'),
+        description: t('badges.ramadan_half.description'),
         icon: <Star className='h-6 w-6' />,
         color: 'amber-500',
         unlocked: stats.overall >= 50,
@@ -113,8 +116,8 @@ export default function AchievementBadges() {
       },
       {
         id: 'ramadan-champion',
-        title: 'بطل رمضان',
-        description: 'إكمال شهر رمضان بنسبة إنجاز 80%',
+        title: t('badges.ramadan_champion.title'),
+        description: t('badges.ramadan_champion.description'),
         icon: <Trophy className='h-6 w-6' />,
         color: 'purple-500',
         unlocked: stats.overall >= 80,
@@ -124,13 +127,11 @@ export default function AchievementBadges() {
     ];
 
     setAchievements(updatedAchievements);
-  }, [activities, stats]);
+  }, [activities, stats, t]);
 
   return (
     <div className='rtl'>
-      <h2 className='text-2xl font-bold mb-6 text-center'>
-        الإنجازات والشارات
-      </h2>
+      <h2 className='text-2xl font-bold mb-6 text-center'>{t('title')}</h2>
 
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4'>
         {achievements.map((achievement, index) => (
@@ -167,10 +168,12 @@ export default function AchievementBadges() {
                   />
 
                   <p className='text-xs text-muted-foreground'>
-                    {frenchNumerals(achievement.progress)} /{' '}
-                    {frenchNumerals(achievement.target)}
+                    {formatNumber(achievement.progress, locale)} /{' '}
+                    {formatNumber(achievement.target, locale)}
                     {achievement.unlocked && (
-                      <span className='text-green-500 mr-2'>✓ مكتمل</span>
+                      <span className='text-green-500 mr-2'>
+                        ✓ {t('completed')}
+                      </span>
                     )}
                   </p>
                 </div>

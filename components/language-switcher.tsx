@@ -36,7 +36,7 @@ export default function LanguageSwitcher() {
   return (
     <Select value={locale} onValueChange={onSelectChange} disabled={isPending}>
       <SelectTrigger className='w-[140px]'>
-        <SelectValue placeholder='Select Language' />
+        <SelectValue placeholder={t('select_language')} />
       </SelectTrigger>
       <SelectContent>
         <SelectItem value='ar'>العربية</SelectItem>

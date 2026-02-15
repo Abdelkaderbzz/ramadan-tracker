@@ -10,8 +10,11 @@ import { useRamadanStore } from '@/lib/store';
 import type { DailyActivity } from '@/lib/store';
 import { motion } from 'framer-motion';
 import { useToast } from '@/components/ui/use-toast';
+import { useTranslations } from 'next-intl';
 
 export default function DailyTrackingTable() {
+  const t = useTranslations('Dashboard');
+  const tIndex = useTranslations('Index'); // For 'days' label if needed, or use Dashboard.table.day
   const {
     activities,
     updateActivity,
@@ -41,8 +44,11 @@ export default function DailyTrackingTable() {
       // Show toast notification
       if (newValue) {
         toast({
-          title: 'تم تحديث النشاط',
-          description: `تم تسجيل ${getFieldName(field)} ليوم ${day} من رمضان`,
+          title: t('activity_updated'),
+          description: t('activity_desc', {
+            activity: getFieldName(field),
+            day,
+          }),
         });
       }
     }
@@ -50,14 +56,14 @@ export default function DailyTrackingTable() {
 
   const getFieldName = (field: keyof DailyActivity): string => {
     const fieldNames: Record<string, string> = {
-      fasting: 'الصيام',
-      qiyam: 'قيام الليل',
-      duha: 'صلاة الضحى',
-      rawatib: 'السنن الرواتب',
-      charity: 'الصدقة',
-      familyVisit: 'صلة الرحم',
-      happiness: 'إدخال السرور',
-      feeding: 'الإطعام',
+      fasting: t('activities.fasting'),
+      qiyam: t('activities.qiyam'),
+      duha: t('activities.duha'),
+      rawatib: t('activities.rawatib'),
+      charity: t('activities.charity'),
+      familyVisit: t('activities.familyVisit'),
+      happiness: t('activities.happiness'),
+      feeding: t('activities.feeding'),
     };
 
     return fieldNames[field] || field;
@@ -99,8 +105,8 @@ export default function DailyTrackingTable() {
       calculateStats();
 
       toast({
-        title: 'تم إعادة تعيين اليوم',
-        description: `تم إعادة تعيين جميع الأنشطة ليوم ${day} من رمضان`,
+        title: t('reset_success'),
+        description: t('reset_desc', { day }),
       });
     }
   };
@@ -113,7 +119,7 @@ export default function DailyTrackingTable() {
     >
       <Card className='mt-10 overflow-x-auto rtl shadow-lg border-purple-100 dark:border-purple-900'>
         <CardHeader className='bg-purple-700 text-white flex flex-row items-center justify-between py-4'>
-          <CardTitle className='text-lg'>سجل المتابعة اليومي</CardTitle>
+          <CardTitle className='text-lg'>{t('title')}</CardTitle>
           <Button
             variant='outline'
             size='sm'
@@ -121,7 +127,7 @@ export default function DailyTrackingTable() {
             onClick={resetDay}
           >
             <RefreshCw className='mr-2 h-4 w-4' />
-            إعادة تعيين
+            {t('reset')}
           </Button>
         </CardHeader>
         <CardContent className='p-0'>
@@ -129,18 +135,22 @@ export default function DailyTrackingTable() {
             <table className='w-full border-collapse'>
               <thead>
                 <tr className='bg-purple-50 dark:bg-purple-900/50 text-purple-800 dark:text-purple-300'>
-                  <th className='p-3 text-right'>اليوم</th>
-                  <th className='p-3 text-center'>الفروض</th>
-                  <th className='p-3 text-center'>قيام الليل</th>
-                  <th className='p-3 text-center'>الضحى</th>
-                  <th className='p-3 text-center'>السنن الرواتب</th>
-                  <th className='p-3 text-center'>القرآن</th>
-                  <th className='p-3 text-center'>أذكار الصباح</th>
-                  <th className='p-3 text-center'>أذكار المساء</th>
-                  <th className='p-3 text-center'>صدقة</th>
-                  <th className='p-3 text-center'>صلة رحم</th>
-                  <th className='p-3 text-center'>إدخال سرور</th>
-                  <th className='p-3 text-center'>إطعام</th>
+                  <th className='p-3 text-right'>{t('table.day')}</th>
+                  <th className='p-3 text-center'>{t('table.fard')}</th>
+                  <th className='p-3 text-center'>{t('table.qiyam')}</th>
+                  <th className='p-3 text-center'>{t('table.duha')}</th>
+                  <th className='p-3 text-center'>{t('table.rawatib')}</th>
+                  <th className='p-3 text-center'>{t('table.quran')}</th>
+                  <th className='p-3 text-center'>
+                    {t('table.dhikr_morning')}
+                  </th>
+                  <th className='p-3 text-center'>
+                    {t('table.dhikr_evening')}
+                  </th>
+                  <th className='p-3 text-center'>{t('table.charity')}</th>
+                  <th className='p-3 text-center'>{t('table.family')}</th>
+                  <th className='p-3 text-center'>{t('table.happiness')}</th>
+                  <th className='p-3 text-center'>{t('table.feeding')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -151,7 +161,7 @@ export default function DailyTrackingTable() {
                     whileHover={{ backgroundColor: 'rgba(124, 58, 237, 0.1)' }}
                   >
                     <td className='p-3 text-right font-medium'>
-                      {activity.day} رمضان
+                      {activity.day} {tIndex('days')}
                     </td>
                     <td className='p-3 text-center'>
                       <Checkbox
@@ -287,11 +297,11 @@ export default function DailyTrackingTable() {
                 disabled={currentPage === 1}
                 className='border-purple-200 hover:bg-purple-50 hover:text-purple-700'
               >
-                السابق
+                {t('previous')}
               </Button>
 
               <span className='mx-2'>
-                صفحة {currentPage} من {totalPages}
+                {t('page_info', { current: currentPage, total: totalPages })}
               </span>
 
               <Button
@@ -303,7 +313,7 @@ export default function DailyTrackingTable() {
                 disabled={currentPage === totalPages}
                 className='border-purple-200 hover:bg-purple-50 hover:text-purple-700'
               >
-                التالي
+                {t('next')}
               </Button>
             </div>
           )}

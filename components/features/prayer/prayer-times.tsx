@@ -5,6 +5,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { AlarmClock } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 
 type PrayerTime = {
   name: string;
@@ -14,6 +15,7 @@ type PrayerTime = {
 };
 
 export default function PrayerTimes() {
+  const t = useTranslations('PrayerTimes');
   const [prayerTimes, setPrayerTimes] = useState<PrayerTime[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -85,31 +87,31 @@ export default function PrayerTimes() {
         const formattedTimes: PrayerTime[] = [
           {
             name: 'Fajr',
-            nameAr: 'الفجر',
+            nameAr: t('fajr'),
             time: timings.Fajr,
             colorClass: 'bg-orange-50 text-orange-600 border-orange-200',
           },
           {
             name: 'Dhuhr',
-            nameAr: 'الظهر',
+            nameAr: t('dhuhr'),
             time: timings.Dhuhr,
             colorClass: 'bg-blue-50 text-blue-600 border-blue-200',
           },
           {
             name: 'Asr',
-            nameAr: 'العصر',
+            nameAr: t('asr'),
             time: timings.Asr,
             colorClass: 'bg-teal-50 text-teal-600 border-teal-200',
           },
           {
             name: 'Maghrib',
-            nameAr: 'المغرب',
+            nameAr: t('maghrib'),
             time: timings.Maghrib,
             colorClass: 'bg-amber-50 text-amber-600 border-amber-200',
           },
           {
             name: 'Isha',
-            nameAr: 'العشاء',
+            nameAr: t('isha'),
             time: timings.Isha,
             colorClass: 'bg-indigo-50 text-indigo-600 border-indigo-200',
           },
@@ -119,38 +121,38 @@ export default function PrayerTimes() {
         setLoading(false);
       } catch (err) {
         console.error('Error fetching prayer times:', err);
-        setError('تعذر تحميل مواقيت الصلاة');
+        setError(t('error'));
         setLoading(false);
 
         // Fallback to default times
         setPrayerTimes([
           {
             name: 'Fajr',
-            nameAr: 'الفجر',
+            nameAr: t('fajr'),
             time: '04:30',
             colorClass: 'bg-orange-50 text-orange-600 border-orange-200',
           },
           {
             name: 'Dhuhr',
-            nameAr: 'الظهر',
+            nameAr: t('dhuhr'),
             time: '12:15',
             colorClass: 'bg-blue-50 text-blue-600 border-blue-200',
           },
           {
             name: 'Asr',
-            nameAr: 'العصر',
+            nameAr: t('asr'),
             time: '15:45',
             colorClass: 'bg-teal-50 text-teal-600 border-teal-200',
           },
           {
             name: 'Maghrib',
-            nameAr: 'المغرب',
+            nameAr: t('maghrib'),
             time: '18:45',
             colorClass: 'bg-amber-50 text-amber-600 border-amber-200',
           },
           {
             name: 'Isha',
-            nameAr: 'العشاء',
+            nameAr: t('isha'),
             time: '20:15',
             colorClass: 'bg-indigo-50 text-indigo-600 border-indigo-200',
           },
@@ -159,7 +161,7 @@ export default function PrayerTimes() {
     };
 
     fetchPrayerTimes();
-  }, []);
+  }, [t]);
 
   // Check if a prayer time is the next upcoming prayer
   const isNextPrayer = (prayerTime: string): boolean => {
@@ -177,7 +179,7 @@ export default function PrayerTimes() {
   return (
     <Card className='rtl'>
       <CardHeader className='flex flex-row items-center justify-between pb-2'>
-        <CardTitle className='text-md font-medium'>مواقيت الصلاة</CardTitle>
+        <CardTitle className='text-md font-medium'>{t('title')}</CardTitle>
         <motion.div
           animate={{ rotate: [0, 10, 0] }}
           transition={{
@@ -190,7 +192,7 @@ export default function PrayerTimes() {
         </motion.div>
       </CardHeader>
       <CardContent>
-        <p className='text-sm text-muted-foreground'>مواعيد الصلوات اليوم</p>
+        <p className='text-sm text-muted-foreground'>{t('description')}</p>
 
         {loading ? (
           <div className='grid grid-cols-2 md:grid-cols-3 gap-3 mt-4'>
@@ -219,7 +221,7 @@ export default function PrayerTimes() {
                 <div className='text-lg font-bold'>{prayer.time}</div>
                 {isNextPrayer(prayer.time) && (
                   <div className='text-xs mt-1 text-purple-600 font-medium'>
-                    الصلاة القادمة
+                    {t('next_prayer')}
                   </div>
                 )}
               </motion.div>
