@@ -47,7 +47,10 @@ export default function RamadanTracker() {
       day: 'numeric',
     };
     setDate(
-      now.toLocaleDateString(locale === 'ar' ? 'ar-SA' : locale, options),
+      now.toLocaleDateString(
+        locale === 'ar' ? 'ar-u-nu-latn' : locale,
+        options,
+      ),
     );
     setHijriDate(getCurrentHijriDate(locale));
     initializeData();

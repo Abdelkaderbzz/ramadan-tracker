@@ -15,8 +15,6 @@ export function formatNumber(
   num: number | string,
   locale: string = 'en',
 ): string {
-  if (locale === 'ar') {
-    return arabicNumerals(num);
-  }
+  // Always return as string (Western/Latin numerals) as requested by user
   return String(num);
 }

@@ -161,7 +161,7 @@ export default function DailyTrackingTable() {
                     whileHover={{ backgroundColor: 'rgba(124, 58, 237, 0.1)' }}
                   >
                     <td className='p-3 text-right font-medium'>
-                      {activity.day} {tIndex('days')}
+                      {t('table.day')} {activity.day}
                     </td>
                     <td className='p-3 text-center'>
                       <Checkbox
