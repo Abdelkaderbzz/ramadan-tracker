@@ -8,7 +8,8 @@ import { Progress } from '@/components/ui/progress';
 import { useRamadanStore } from '@/lib/store';
 import type { DailyActivity } from '@/lib/store';
 import { motion } from 'framer-motion';
-import { arabicNumerals } from '@/lib/arabic-numerals';
+import { formatNumber } from '@/lib/arabic-numerals';
+import { useTranslations, useLocale } from 'next-intl';
 
 type Surah = {
   number: number;
@@ -20,6 +21,9 @@ type Surah = {
 };
 
 export default function QuranTracker() {
+  const t = useTranslations('Quran');
+  const tSurahs = useTranslations('Surahs');
+  const locale = useLocale();
   const { activities, updateQuranCount } = useRamadanStore();
   const [surahs, setSurahs] = useState<Surah[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -1016,17 +1020,21 @@ export default function QuranTracker() {
                 <BookOpen className='h-8 w-8 text-purple-600 dark:text-purple-400' />
               </div>
               <div>
-                <h2 className='text-xl font-bold'>متابعة قراءة القرآن</h2>
+                <h2 className='text-xl font-bold'>{t('title')}</h2>
                 <p className='text-sm text-muted-foreground'>
-                  تتبع تقدمك في قراءة القرآن الكريم
+                  {t('description')}
                 </p>
               </div>
             </div>
 
             <div className='w-full md:w-1/2'>
               <div className='flex justify-between text-sm mb-1'>
-                <span>الآيات المقروءة: {arabicNumerals(readVerses)}</span>
-                <span>إجمالي الآيات: {arabicNumerals(totalVerses)}</span>
+                <span>
+                  {t('read_verses')} {formatNumber(readVerses, locale)}
+                </span>
+                <span>
+                  {t('total_verses')} {formatNumber(totalVerses, locale)}
+                </span>
               </div>
               <Progress
                 value={(readVerses / totalVerses) * 100}
@@ -1034,8 +1042,11 @@ export default function QuranTracker() {
                 className='h-3'
               />
               <p className='text-xs text-center mt-1 text-muted-foreground'>
-                {arabicNumerals(Math.round((readVerses / totalVerses) * 100))}%
-                من القرآن الكريم
+                {formatNumber(
+                  Math.round((readVerses / totalVerses) * 100),
+                  locale,
+                )}
+                %{t('of_quran')}
               </p>
             </div>
           </div>
@@ -1055,12 +1066,14 @@ export default function QuranTracker() {
                 <div className='flex items-center justify-between'>
                   <div className='flex items-center gap-3'>
                     <div className='w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-sm font-bold'>
-                      {arabicNumerals(surah.number)}
+                      {formatNumber(surah.number, locale)}
                     </div>
                     <div>
-                      <h3 className='font-bold'>{surah.arabicName}</h3>
+                      <h3 className='font-bold'>
+                        {tSurahs(`${surah.number}`)}
+                      </h3>
                       <p className='text-xs text-muted-foreground'>
-                        {arabicNumerals(surah.verses)} آية
+                        {formatNumber(surah.verses, locale)} {t('verse')}
                       </p>
                     </div>
                   </div>
@@ -1073,7 +1086,7 @@ export default function QuranTracker() {
                         className='h-2'
                       />
                       <p className='text-xs text-center mt-1'>
-                        {arabicNumerals(surah.progress)}%
+                        {formatNumber(surah.progress, locale)}%
                       </p>
                     </div>
 
@@ -1086,7 +1099,7 @@ export default function QuranTracker() {
                         className='text-xs'
                         onClick={() => markSurahAsRead(surah.number)}
                       >
-                        تم القراءة
+                        {t('mark_read')}
                       </Button>
                     )}
                   </div>
@@ -1110,7 +1123,10 @@ export default function QuranTracker() {
           </Button>
 
           <span className='mx-2'>
-            صفحة {arabicNumerals(currentPage)} من {arabicNumerals(totalPages)}
+            {t('page_info', {
+              current: formatNumber(currentPage, locale),
+              total: formatNumber(totalPages, locale),
+            })}
           </span>
 
           <Button
