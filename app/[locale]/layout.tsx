@@ -113,10 +113,11 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }>) {
-  const messages = await getMessages();
+  const currentLocale = locale || 'en';
+  const messages = await getMessages({ locale: currentLocale });
 
   return (
-    <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+    <html lang={currentLocale} dir={currentLocale === 'ar' ? 'rtl' : 'ltr'}>
       <head>
         <link rel='icon' href='/images/logo.svg' />
         <link rel='apple-touch-icon' href='/images/apple-touch-icon.png' />
