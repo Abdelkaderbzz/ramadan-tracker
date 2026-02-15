@@ -3,6 +3,7 @@
 [![CI](https://github.com/Abdelkaderbzz/ramadan-tracker/actions/workflows/ci.yml/badge.svg)](https://github.com/Abdelkaderbzz/ramadan-tracker/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Abdelkaderbzz/ramadan-tracker/pulls)
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Donate-orange.svg)](https://buymeacoffee.com/jhe1ep04xt)
 
 A Ramadan tracking website that helps users monitor their prayers, duas, and Quran recitation, providing insights into their progress throughout the blessed month.
 
@@ -85,6 +86,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **abdelkaderbzz**
 
 - GitHub: [@Abdelkaderbzz](https://github.com/Abdelkaderbzz)
+
+## ☕ Support
+
+If you find this project useful and want to support its development, you can buy me a coffee!
+
+<a href="https://buymeacoffee.com/jhe1ep04xt" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 ## ⭐ Show Your Support
 
