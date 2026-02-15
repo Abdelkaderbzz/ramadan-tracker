@@ -17,10 +17,7 @@ import { getCurrentHijriDate } from '@/lib/date-utils';
 import { useRamadanStore } from '@/lib/store';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RAMADAN_DUAS, DUA_ROTATION_INTERVAL } from '@/lib/constants/duas';
-
-import LanguageSwitcher from '@/components/language-switcher';
-import { InstallAppButton } from '@/components/install-app-button';
-
+import { Header } from '@/components/layout/header';
 import { useLocale } from 'next-intl';
 
 export default function RamadanTracker() {
@@ -71,82 +68,60 @@ export default function RamadanTracker() {
 
   return (
     <div className='container mx-auto px-4 py-8 max-w-6xl'>
-      <div className='flex justify-between items-center mb-6'>
-        <div className='flex items-center gap-2'>
-          <InstallAppButton />
-        </div>
-        <LanguageSwitcher />
-      </div>
-      <div className='text-center mb-8 relative'>
-        <div className='absolute right-0 top-0 opacity-10'>
-          <div
-            className='w-full h-72 bg-contain bg-no-repeat bg-right'
-            style={{ backgroundImage: "url('/images/islamic-pattern.svg')" }}
-          />
-        </div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className='text-center text-3xl md:text-4xl font-bold text-purple-800 mb-2 rtl'
-        >
-          {t('my_day')}
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className='text-purple-600 text-center rtl'
-        >
-          {t('track_worship')}
-        </motion.p>
-
-        <Card className='mt-6 max-w-2xl mx-auto p-4 rtl shadow-md border-purple-100'>
-          <div className='flex justify-between items-center'>
-            <div className='flex items-center gap-2'>
-              <Calendar className='h-5 w-5 text-purple-600' />
-              <span>{date}</span>
-            </div>
-            <span>{hijriDate}</span>
-          </div>
-          <AnimatePresence mode='wait'>
-            <motion.p
-              key={currentDuaIndex}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              className='text-sm mt-4 text-purple-900 transition-opacity duration-500'
-            >
-              {currentDua}
-            </motion.p>
-          </AnimatePresence>
-        </Card>
-      </div>
+      <Header
+        title={t('my_day')}
+        subtitle={t('track_worship')}
+        date={date}
+        hijriDate={hijriDate}
+        currentDua={currentDua}
+        currentDuaIndex={currentDuaIndex}
+      />
 
       <Tabs
         defaultValue='dashboard'
         className='w-full'
         onValueChange={handleTabChange}
       >
-        <TabsList className='grid grid-cols-2 md:grid-cols-4 mb-8 h-auto'>
-          <TabsTrigger value='dashboard' className='rtl'>
-            <BarChart3 className='h-4 w-4 ml-2' />
-            {t('dashboard')}
-          </TabsTrigger>
-          <TabsTrigger value='quran' className='rtl'>
-            <BookOpen className='h-4 w-4 ml-2' />
-            {t('quran')}
-          </TabsTrigger>
-          <TabsTrigger value='calendar' className='rtl'>
-            <Calendar className='h-4 w-4 ml-2' />
-            {t('calendar')}
-          </TabsTrigger>
-          <TabsTrigger value='achievements' className='rtl'>
-            <Award className='h-4 w-4 ml-2' />
-            {t('achievements')}
-          </TabsTrigger>
-        </TabsList>
+        <div className='sticky top-0 z-20 bg-background/80 backdrop-blur-md mb-6 py-2 -mx-4 px-4 border-b md:relative md:top-auto md:bg-transparent md:backdrop-blur-none md:border-none md:p-0 md:m-0'>
+          <TabsList className='grid grid-cols-4 md:grid-cols-4 h-auto bg-transparent md:bg-muted p-0 md:p-1 gap-1 md:gap-2'>
+            <TabsTrigger
+              value='dashboard'
+              className='flex-col md:flex-row gap-1 py-3 md:py-1.5 data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 md:data-[state=active]:bg-background md:data-[state=active]:text-foreground'
+            >
+              <BarChart3 className='h-5 w-5 md:h-4 md:w-4' />
+              <span className='text-[10px] sm:text-xs md:text-sm'>
+                {t('dashboard')}
+              </span>
+            </TabsTrigger>
+            <TabsTrigger
+              value='quran'
+              className='flex-col md:flex-row gap-1 py-3 md:py-1.5 data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 md:data-[state=active]:bg-background md:data-[state=active]:text-foreground'
+            >
+              <BookOpen className='h-5 w-5 md:h-4 md:w-4' />
+              <span className='text-[10px] sm:text-xs md:text-sm'>
+                {t('quran')}
+              </span>
+            </TabsTrigger>
+            <TabsTrigger
+              value='calendar'
+              className='flex-col md:flex-row gap-1 py-3 md:py-1.5 data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 md:data-[state=active]:bg-background md:data-[state=active]:text-foreground'
+            >
+              <Calendar className='h-5 w-5 md:h-4 md:w-4' />
+              <span className='text-[10px] sm:text-xs md:text-sm'>
+                {t('calendar')}
+              </span>
+            </TabsTrigger>
+            <TabsTrigger
+              value='achievements'
+              className='flex-col md:flex-row gap-1 py-3 md:py-1.5 data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 md:data-[state=active]:bg-background md:data-[state=active]:text-foreground'
+            >
+              <Award className='h-5 w-5 md:h-4 md:w-4' />
+              <span className='text-[10px] sm:text-xs md:text-sm'>
+                {t('achievements')}
+              </span>
+            </TabsTrigger>
+          </TabsList>
+        </div>
 
         <TabsContent value='dashboard' className='space-y-8'>
           <WorshipStats />

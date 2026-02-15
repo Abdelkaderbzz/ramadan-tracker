@@ -135,22 +135,52 @@ export default function DailyTrackingTable() {
             <table className='w-full border-collapse'>
               <thead>
                 <tr className='bg-purple-50 dark:bg-purple-900/50 text-purple-800 dark:text-purple-300'>
-                  <th className='p-3 text-right'>{t('table.day')}</th>
-                  <th className='p-3 text-center'>{t('table.fard')}</th>
-                  <th className='p-3 text-center'>{t('table.qiyam')}</th>
-                  <th className='p-3 text-center'>{t('table.duha')}</th>
-                  <th className='p-3 text-center'>{t('table.rawatib')}</th>
-                  <th className='p-3 text-center'>{t('table.quran')}</th>
-                  <th className='p-3 text-center'>
-                    {t('table.dhikr_morning')}
+                  <th className='p-3 text-right sticky right-0 bg-purple-50 dark:bg-purple-900 z-10 min-w-[100px]'>
+                    {t('table.day')}
                   </th>
-                  <th className='p-3 text-center'>
-                    {t('table.dhikr_evening')}
+                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px]'>
+                    {t('table.fard')}
                   </th>
-                  <th className='p-3 text-center'>{t('table.charity')}</th>
-                  <th className='p-3 text-center'>{t('table.family')}</th>
-                  <th className='p-3 text-center'>{t('table.happiness')}</th>
-                  <th className='p-3 text-center'>{t('table.feeding')}</th>
+                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px]'>
+                    {t('table.qiyam')}
+                  </th>
+                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px]'>
+                    {t('table.duha')}
+                  </th>
+                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px]'>
+                    {t('table.rawatib')}
+                  </th>
+                  <th className='p-2 text-center text-xs md:text-sm min-w-[80px]'>
+                    {t('table.quran')}
+                  </th>
+                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px]'>
+                    <span className='md:hidden'>
+                      {t('table.dhikr_morning').slice(0, 4)}..
+                    </span>
+                    <span className='hidden md:inline'>
+                      {t('table.dhikr_morning')}
+                    </span>
+                  </th>
+                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px]'>
+                    <span className='md:hidden'>
+                      {t('table.dhikr_evening').slice(0, 4)}..
+                    </span>
+                    <span className='hidden md:inline'>
+                      {t('table.dhikr_evening')}
+                    </span>
+                  </th>
+                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px]'>
+                    {t('table.charity')}
+                  </th>
+                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px]'>
+                    {t('table.family')}
+                  </th>
+                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px]'>
+                    {t('table.happiness')}
+                  </th>
+                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px]'>
+                    {t('table.feeding')}
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -160,7 +190,7 @@ export default function DailyTrackingTable() {
                     className='border-b border-gray-100 dark:border-gray-800 hover:bg-purple-50/50 dark:hover:bg-purple-900/20'
                     whileHover={{ backgroundColor: 'rgba(124, 58, 237, 0.1)' }}
                   >
-                    <td className='p-3 text-right font-medium'>
+                    <td className='p-3 text-right font-medium sticky right-0 bg-white/95 dark:bg-gray-950/95 z-10 shadow-sm'>
                       {t('table.day')} {activity.day}
                     </td>
                     <td className='p-3 text-center'>

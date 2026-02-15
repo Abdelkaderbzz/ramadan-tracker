@@ -1031,7 +1031,11 @@ export default function QuranTracker() {
               {formatNumber(progressPercentage, locale)}%
             </span>
           </div>
-          <Progress value={progressPercentage} className='h-3' />
+          <Progress
+            value={progressPercentage}
+            className='h-3'
+            color='purple-500'
+          />
           <p className='text-xs text-center mt-2 text-gray-500'>
             {formatNumber(readVersesCount, locale)} /{' '}
             {formatNumber(totalVerses, locale)} {t('verses_read')}
