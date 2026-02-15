@@ -307,5 +307,36 @@
     "4": "Ô Allah, je jeûne, accepte-le donc de moi. En effet, Tu es l'Audient, l'Omniscient",
     "5": "Ô Allah, pour Toi j'ai jeûné, et avec Ta subsistance j'ai rompu mon jeûne, en Toi j'ai cru et en Toi j'ai placé ma confiance",
     "6": "Ô Allah, Tu es Pardonneur et Tu aimes le pardon, alors pardonne-moi"
+  },
+  "SuggestedDuas": {
+    "ramadan": {
+      "0": "Ô Allah, je jeûne, accepte-le donc de moi. En effet, Tu es l'Audient, l'Omniscient",
+      "1": "Ô Allah, pour Toi j'ai jeûné, et avec Ta subsistance j'ai rompu mon jeûne, en Toi j'ai cru et en Toi j'ai placé ma confiance",
+      "2": "Ô Allah, Tu es Pardonneur et Tu aimes le pardon, alors pardonne-moi",
+      "3": "Ô Allah, fais que mon jeûne soit le jeûne de ceux qui jeûnent vraiment, et ma prière la prière de ceux qui prient vraiment",
+      "4": "Ô Allah, compte-moi parmi ceux que Tu affranchis du Feu en ce mois sacré",
+      "5": "Ô Allah, bénis-nous pendant le Ramadan et fais-nous atteindre La Nuit du Destin",
+      "6": "La soif est partie, les veines sont humidifiées et la récompense est assurée, si Allah le veut"
+    },
+    "morning_evening": {
+      "0": "Nous voici au matin et la royauté appartient à Allah. Louange à Allah. Il n'y a pas de divinité sauf Allah, l'Unique sans associé",
+      "1": "Ô Allah, ce qui m'est parvenu comme bienfait ou à l'une de Tes créatures, vient de Toi seul, sans associé. À Toi la louange et le remerciement",
+      "2": "Ô Allah, je Te demande le bien de ce jour : sa victoire, son soutien, sa lumière, sa bénédiction et sa guidée",
+      "3": "Ô Allah, par Toi nous entrons au matin et par Toi nous entrons au soir, par Toi nous vivons et par Toi nous mourons, et vers Toi est la résurrection"
+    },
+    "forgiveness": {
+      "0": "Je demande pardon à Allah, l'Immense, en dehors de qui il n'y a pas de divinité, le Vivant, le Subsistant, et je me repens à Lui",
+      "1": "Ô Allah, Tu es mon Seigneur, il n'y a de divinité que Toi. Tu m'as créé et je suis Ton serviteur, je tiens mon engagement et ma promesse envers Toi autant que je le peux. Je cherche refuge auprès de Toi contre le mal de ce que j'ai fait. Je reconnais Tes bienfaits envers moi et je reconnais mon péché, alors pardonne-moi, car nul ne pardonne les péchés sauf Toi",
+      "2": "Ô Allah, pardonne-moi tous mes péchés, les petits comme les grands, les premiers comme les derniers, les apparents comme les cachés",
+      "3": "Seigneur, pardonne-moi et accepte mon repentir, Tu es certes Celui qui accepte le repentir, le Miséricordieux"
+    },
+    "various": {
+      "0": "Ô Allah, je Te demande le Paradis et je cherche refuge auprès de Toi contre le Feu",
+      "1": "Ô Allah, je Te demande le pardon et le bien-être dans ce monde et dans l'au-delà",
+      "2": "Ô Allah, aide-moi à me souvenir de Toi, à Te remercier et à T'adorer de la meilleure façon",
+      "3": "Ô Allah, accorde-nous une bonne fin",
+      "4": "Ô Allah, pardonne aux croyants et aux croyantes, aux musulmans et aux musulmanes, les vivants parmi eux et les morts",
+      "5": "Ô Allah, guéris nos malades et les malades des musulmans"
+    }
   }
 }

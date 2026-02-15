@@ -308,5 +308,36 @@
     "4": "O Allah, I am fasting, so accept it from me. Indeed, You are the Hearing, the Knowing",
     "5": "O Allah, for You I have fasted, and with Your provision I have broken my fast, in You I have believed, and upon You I have relied",
     "6": "O Allah, You are Forgiving and love forgiveness, so forgive me"
+  },
+  "SuggestedDuas": {
+    "ramadan": {
+      "0": "O Allah, I am fasting, so accept it from me. Indeed, You are the Hearing, the Knowing",
+      "1": "O Allah, for You I have fasted, and with Your provision I have broken my fast, in You I have believed, and upon You I have relied",
+      "2": "O Allah, You are Forgiving and love forgiveness, so forgive me",
+      "3": "O Allah, make my fasting the fasting of those who truly fast, and my standing (in prayer) the standing of those who truly stand",
+      "4": "O Allah, make me among those You free from the Fire in this holy month",
+      "5": "O Allah, bless us in Ramadan and let us reach Laylat al-Qadr",
+      "6": "The thirst is gone, the veins are moistened, and the reward is confirmed, if Allah wills"
+    },
+    "morning_evening": {
+      "0": "We have reached the morning and at this very time unto Allah belongs all sovereignty, and all praise is for Allah. None has the right to be worshipped except Allah, alone, without partner",
+      "1": "O Allah, whatever blessing has been received by me or any one of Your creation is from You alone, You have no partner. You are the One we praise and You are the One we are grateful to",
+      "2": "O Allah, I ask You for the good of this day: its victory, its help, its light, its blessings, and its guidance",
+      "3": "O Allah, by Your leave we have reached the morning and by Your leave we have reached the evening, by Your leave we live and die and onto You is our resurrection"
+    },
+    "forgiveness": {
+      "0": "I seek forgiveness from Allah, the Magnificent, whom there is none worthy of worship but Him, the Living, the Sustainer, and I repent to Him",
+      "1": "O Allah, You are my Lord, there is no god but You. You created me and I am Your servant, and I am faithful to my covenant and my promise to You as much as I can. I seek refuge in You from the evil of what I have done. I acknowledge Your favor upon me and I acknowledge my sin, so forgive me, for none forgives sins except You",
+      "2": "O Allah, forgive me all my sins, whether small or great, first or last, open or secret",
+      "3": "My Lord, forgive me and accept my repentance, indeed You are the Accepting of Repentance, the Merciful"
+    },
+    "various": {
+      "0": "O Allah, I ask You for Paradise and seek refuge in You from the Fire",
+      "1": "O Allah, I ask You for forgiveness and well-being in this world and in the Hereafter",
+      "2": "O Allah, help me to remember You, to thank You, and to worship You in the best manner",
+      "3": "O Allah, grant us a good ending",
+      "4": "O Allah, forgive the believing men and believing women, and the Muslim men and Muslim women, the living among them and the dead",
+      "5": "O Allah, heal our sick and the sick of the Muslims"
+    }
   }
 }
