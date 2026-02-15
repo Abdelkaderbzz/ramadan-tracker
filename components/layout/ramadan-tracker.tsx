@@ -20,8 +20,12 @@ import { RAMADAN_DUAS, DUA_ROTATION_INTERVAL } from '@/lib/constants/duas';
 
 import LanguageSwitcher from '@/components/language-switcher';
 
+import { useLocale } from 'next-intl';
+
 export default function RamadanTracker() {
   const t = useTranslations('Index');
+  const tDuas = useTranslations('HeaderDuas');
+  const locale = useLocale();
   const [date, setDate] = useState('');
   const [hijriDate, setHijriDate] = useState('');
   const [currentDuaIndex, setCurrentDuaIndex] = useState(0);
@@ -29,8 +33,8 @@ export default function RamadanTracker() {
   const { initializeData } = useRamadanStore();
 
   const currentDua = useMemo(
-    () => RAMADAN_DUAS[currentDuaIndex],
-    [currentDuaIndex],
+    () => tDuas(`${currentDuaIndex}`),
+    [currentDuaIndex, tDuas],
   );
 
   // Initialize on mount
@@ -41,10 +45,12 @@ export default function RamadanTracker() {
       month: 'long',
       day: 'numeric',
     };
-    setDate(now.toLocaleDateString('ar-SA', options));
-    setHijriDate(getCurrentHijriDate());
+    setDate(
+      now.toLocaleDateString(locale === 'ar' ? 'ar-SA' : locale, options),
+    );
+    setHijriDate(getCurrentHijriDate(locale));
     initializeData();
-  }, [initializeData]);
+  }, [initializeData, locale]);
 
   // Rotate duas
   useEffect(() => {
