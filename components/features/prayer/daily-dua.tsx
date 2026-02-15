@@ -16,13 +16,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 import { SavedDuaList } from './saved-dua-list';
 import { DuaSuggestions } from './dua-suggestions';
 
 export default function DailyDua() {
   const t = useTranslations('Duas');
+  const locale = useLocale();
+  const isRtl = locale === 'ar';
   const { savedDuas, addDua, removeDua, currentDua, updateCurrentDua } =
     useRamadanStore();
   const { toast } = useToast();
@@ -53,7 +55,7 @@ export default function DailyDua() {
   };
 
   return (
-    <Card className='rtl'>
+    <Card className={isRtl ? 'rtl' : 'ltr'}>
       <CardHeader className='flex flex-row items-center justify-between pb-2'>
         <CardTitle className='text-md font-medium'>
           {t('daily.title_today')}
@@ -73,19 +75,21 @@ export default function DailyDua() {
               value={currentDua}
               onChange={(e) => updateCurrentDua(e.target.value)}
               placeholder={t('daily.placeholder')}
-              className='rtl text-right pr-10'
+              className={`${isRtl ? 'rtl text-right pr-10' : 'ltr text-left pl-10'}`}
             />
             <Dialog>
               <DialogTrigger asChild>
                 <Button
                   variant='ghost'
                   size='icon'
-                  className='absolute left-2 top-1/2 transform -translate-y-1/2 h-8 w-8 text-muted-foreground hover:text-primary'
+                  className={`absolute ${isRtl ? 'left-2' : 'right-2'} top-1/2 transform -translate-y-1/2 h-8 w-8 text-muted-foreground hover:text-primary`}
                 >
                   <BookOpen className='h-4 w-4' />
                 </Button>
               </DialogTrigger>
-              <DialogContent className='rtl sm:max-w-[425px]'>
+              <DialogContent
+                className={`${isRtl ? 'rtl' : 'ltr'} sm:max-w-[425px]`}
+              >
                 <DuaSuggestions
                   onSelect={(dua) => {
                     handleSelectSuggestion(dua);
@@ -99,7 +103,7 @@ export default function DailyDua() {
 
           <div className='flex justify-end'>
             <Button onClick={handleSaveDua} size='sm' className='gap-1'>
-              <Save className='h-4 w-4 ml-1' />
+              <Save className={`h-4 w-4 ${isRtl ? 'ml-1' : 'mr-1'}`} />
               {t('daily.save')}
             </Button>
           </div>

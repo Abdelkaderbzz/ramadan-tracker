@@ -26,32 +26,28 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://ramadhan-tracker.netlify.app'),
   title: {
-    default: 'Ramadhan Tracker - تتبع عباداتك في رمضان',
-    template: '%s | Ramadhan Tracker',
+    default: 'Ramadan Tracker - Track Your Worship in Ramadan',
+    template: '%s | Ramadan Tracker',
   },
   description:
-    'تطبيق متكامل لتتبع العبادات والأعمال الصالحة خلال شهر رمضان المبارك. يتضمن تتبع الصلاة، الصيام، قراءة القرآن، والأدعية اليومية مع واجهة سهلة الاستخدام',
+    'The ultimate Ramadan Tracker app for 2026. Track your prayers, fasts, Quran recitation, and daily adhkar with our intuitive, multilingual interface. Available in Arabic, English, and French.',
   keywords: [
-    'Ramadhan Tracker',
+    'Ramadan Tracker',
+    'Ramadan 2026 tracker',
     'رمضان',
     'تتبع العبادات',
+    'رمضان 2026',
     'تطبيق إسلامي',
-    'الصلاة',
-    'الصيام',
-    'القرآن',
-    'الأدعية',
-    'التقويم الهجري',
-    'مواقيت الصلاة',
-    'تطبيق رمضاني',
-    'Islamic App',
-    'Ramadan App',
-    'Prayer Times',
-    'Quran Tracker',
-    'Islamic Calendar',
+    'Prayer tracking app',
+    'Quran progress tracker',
+    'Islamic daily planner',
+    'Ramadan goals app',
+    'Hijri calendar 1447',
+    'Muslim worship app',
   ],
-  authors: [{ name: 'Ramadhan Tracker Team' }],
-  creator: 'Ramadhan Tracker Team',
-  publisher: 'Ramadhan Tracker',
+  authors: [{ name: 'Ramadan Tracker' }],
+  creator: 'Ramadan Tracker',
+  publisher: 'Ramadan Tracker',
   formatDetection: {
     email: false,
     address: false,
@@ -61,26 +57,26 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'ar_SA',
     url: 'https://ramadhan-tracker.netlify.app',
-    siteName: 'Ramadhan Tracker',
-    title: 'Ramadhan Tracker - تتبع عباداتك في رمضان',
+    siteName: 'Ramadan Tracker',
+    title: 'Ramadan Tracker - The Best Way to Track Your Worship in Ramadan',
     description:
-      'تطبيق متكامل لتتبع العبادات والأعمال الصالحة خلال شهر رمضان المبارك',
+      'Monitor your spiritual progress this Ramadan with our comprehensive tracking app. Prayers, Quran, Duas, and more!',
     images: [
       {
         url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Ramadhan Tracker - تتبع عباداتك في رمضان',
+        alt: 'Ramadan Tracker - Track your spiritual journey',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ramadhan Tracker - تتبع عباداتك في رمضان',
+    title: 'Ramadan Tracker - Stay Consistent This Ramadan',
     description:
-      'تطبيق متكامل لتتبع العبادات والأعمال الصالحة خلال شهر رمضان المبارك',
+      'A beautiful and intuitive app to help you reach your worship goals during the holy month.',
     images: ['/images/twitter-image.jpg'],
-    creator: '@ramadhantracker',
+    creator: '@ramadantracker',
   },
   robots: {
     index: true,
@@ -101,10 +97,6 @@ export const metadata: Metadata = {
     canonical: 'https://ramadhan-tracker.netlify.app',
   },
   category: 'religion',
-  classification: 'religious',
-  referrer: 'origin-when-cross-origin',
-  generator: 'Next.js',
-  applicationName: 'Ramadhan Tracker',
 };
 
 export default async function RootLayout({
@@ -129,10 +121,10 @@ export default async function RootLayout({
         <link rel='manifest' href='/manifest.json' />
         <meta name='apple-mobile-web-app-capable' content='yes' />
         <meta name='apple-mobile-web-app-status-bar-style' content='default' />
-        <meta name='apple-mobile-web-app-title' content='Ramadhan Tracker' />
+        <meta name='apple-mobile-web-app-title' content='Ramadan Tracker' />
         <meta name='format-detection' content='telephone=no' />
         <meta name='mobile-web-app-capable' content='yes' />
-        <meta name='application-name' content='Ramadhan Tracker' />
+        <meta name='application-name' content='Ramadan Tracker' />
       </head>
       <body className={`${tajawal.variable} font-sans`}>
         {/* Google Analytics */}

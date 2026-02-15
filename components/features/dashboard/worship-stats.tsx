@@ -8,8 +8,11 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 
+import { useLocale } from 'next-intl';
+
 export default function WorshipStats() {
   const t = useTranslations('Dashboard.stats');
+  const locale = useLocale();
   const { stats } = useRamadanStore();
   const [animatedStats, setAnimatedStats] = useState({
     quran: 0,
@@ -80,9 +83,15 @@ export default function WorshipStats() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: index * 0.1 }}
         >
-          <Card className='p-4 flex flex-col items-center rtl hover:shadow-md transition-all duration-300 border-2 hover:border-purple-200'>
+          <Card
+            className={`p-4 flex flex-col items-center ${locale === 'ar' ? 'rtl' : 'ltr'} hover:shadow-md transition-all duration-300 border-2 hover:border-purple-200`}
+          >
             <div className='flex justify-between w-full mb-2'>
-              <span className='text-sm font-medium rtl'>{stat.name}</span>
+              <span
+                className={`text-sm font-medium ${locale === 'ar' ? 'rtl' : ''}`}
+              >
+                {stat.name}
+              </span>
               <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
                 {stat.icon}
               </motion.div>
