@@ -142,16 +142,17 @@ export default async function RootLayout({
           `}
         </Script>
 
-        <Script
-          id='feeduser-widget'
-          src='https://widget.feeduser.me/widget/v1.js'
-          strategy='afterInteractive'
-        />
 
-        <Script id='feeduser-config' strategy='afterInteractive'>
+        <Script id='feeduser-setup' strategy='afterInteractive'>
           {`
             window.Fu = window.Fu || {};
-            window.Fu.account_id = "679fce8444a7f340866087b2";
+            window.Fu.access_token = "c73c052759e3602ca716ff469cde44";
+            (function (d) {
+              let s = d.createElement("script");
+              s.async = true;
+              s.src = "https://widget.feeduser.me/widget/v1.js";
+              (d.head || d.body).appendChild(s);
+            })(document);
           `}
         </Script>
 
