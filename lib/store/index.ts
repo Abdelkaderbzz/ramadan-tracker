@@ -32,6 +32,7 @@ export const useRamadanStore = create<RamadanState>()(
       stats: DEFAULT_STATS,
       currentDua: '',
       savedDuas: [],
+      readSurahs: [],
 
       initializeData: () => {
         const { activities } = get();
@@ -87,6 +88,17 @@ export const useRamadanStore = create<RamadanState>()(
         set((state) => ({
           savedDuas: state.savedDuas.filter((_, i) => i !== index),
         }));
+      },
+
+      toggleSurahRead: (surahNumber) => {
+        set((state) => {
+          const isRead = state.readSurahs.includes(surahNumber);
+          return {
+            readSurahs: isRead
+              ? state.readSurahs.filter((id) => id !== surahNumber)
+              : [...state.readSurahs, surahNumber],
+          };
+        });
       },
 
       calculateStats: () => {

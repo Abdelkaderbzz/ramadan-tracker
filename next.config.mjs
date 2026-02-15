@@ -13,6 +13,14 @@ const withNextIntl = createNextIntlPlugin();
 const withPWA = withPWAInit({
   dest: 'public',
   disable: process.env.NODE_ENV === 'development',
+  workboxOptions: {
+    exclude: [
+      /middleware-manifest\.json$/,
+      /_next\/static\/webpack\/.*/,
+      /hot-update\.js$/,
+      /hot-update\.json$/,
+    ],
+  },
 });
 
 /** @type {import('next').NextConfig} */

@@ -9,10 +9,15 @@
     "dhikr": "ذكر",
     "start_tracking": "ابدأ التتبع",
     "my_day": "يومي في رمضان",
+    "select_language": "اختر اللغة",
     "track_worship": "تتبع عباداتك وأعمالك الصالحة",
     "dashboard": "لوحة المعلومات",
     "calendar": "التقويم",
-    "achievements": "الإنجازات"
+    "achievements": "الإنجازات",
+    "install_app": "تثبيت التطبيق",
+    "install_desc": "أضف للشاشة الرئيسية لتجربة أفضل",
+    "ios_install_desc": "اضغط على مشاركة ثم 'إضافة إلى الشاشة الرئيسية'",
+    "install_btn": "تثبيت"
   },
   "Dashboard": {
     "title": "سجل المتابعة اليومي",
@@ -178,7 +183,16 @@
     "mark_read": "وضع علامة كمقروء",
     "page_info": "صفحة {current} من {total}",
     "prev": "السابق",
-    "next": "التالي"
+    "next": "التالي",
+    "completed": "مكتمل",
+    "search_placeholder": "بحث عن سورة...",
+    "sort_order": "ترتيب",
+    "sort_asc": "تصاعدي",
+    "sort_desc": "تنازلي",
+    "progress": "التقدم",
+    "verses_read": "آية مقروءة",
+    "quran_tracker": "متابع القرآن",
+    "verses": "آيات"
   },
   "Surahs": {
     "1": "الفاتحة",

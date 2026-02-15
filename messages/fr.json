@@ -9,10 +9,15 @@
     "dhikr": "Dhikr",
     "start_tracking": "Commencer le suivi",
     "my_day": "Ma journée pendant le Ramadan",
+    "select_language": "Choisir la langue",
     "track_worship": "Suivez vos cultes et vos bonnes actions",
     "dashboard": "Tableau de bord",
     "calendar": "Calendrier",
-    "achievements": "Réalisations"
+    "achievements": "Réalisations",
+    "install_app": "Installer l'application",
+    "install_desc": "Ajouter à l'écran d'accueil pour une meilleure expérience",
+    "ios_install_desc": "Appuyez sur partager puis 'Ajouter à l'écran d'accueil'",
+    "install_btn": "Installer"
   },
   "Dashboard": {
     "title": "Journal de suivi quotidien",
@@ -181,7 +186,16 @@
     "mark_read": "Marquer comme lu",
     "page_info": "Page {current} sur {total}",
     "prev": "Précédent",
-    "next": "Suivant"
+    "next": "Suivant",
+    "completed": "Terminé",
+    "search_placeholder": "Rechercher une sourate...",
+    "sort_order": "Ordre",
+    "sort_asc": "Croissant",
+    "sort_desc": "Décroissant",
+    "progress": "Progression",
+    "verses_read": "versets lus",
+    "quran_tracker": "Suivi du Coran",
+    "verses": "Versets"
   },
   "Surahs": {
     "1": "Al-Fatihah",
