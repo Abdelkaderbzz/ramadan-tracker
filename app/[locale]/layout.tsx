@@ -142,20 +142,22 @@ export default async function RootLayout({
           `}
         </Script>
 
-
-        <Script id='feeduser-setup' strategy='afterInteractive'>
+        <Script id='feeduser-config' strategy='afterInteractive'>
           {`
             window.Fu = window.Fu || {};
             window.Fu.access_token = "c73c052759e3602ca716ff469cde44";
-            (function (d) {
-              let s = d.createElement("script");
-              s.async = true;
-              s.src = "https://widget.feeduser.me/widget/v1.js";
-              (d.head || d.body).appendChild(s);
-            })(document);
           `}
         </Script>
+        <Script
+          src='https://widget.feeduser.me/widget/v1.js'
+          strategy='afterInteractive'
+        />
 
+        <Script
+          src='https://cloud.umami.is/script.js'
+          data-website-id='5fd5c364-684d-40fd-90c4-67dc0a718f49'
+          strategy='afterInteractive'
+        />
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
             attribute='class'
