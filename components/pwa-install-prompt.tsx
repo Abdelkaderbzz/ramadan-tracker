@@ -5,58 +5,22 @@ import { Button } from '@/components/ui/button';
 import { Download, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations } from 'next-intl';
+import { usePwaInstall } from '@/hooks/use-pwa-install';
 
 export function PwaInstallPrompt() {
-  const t = useTranslations('Index'); // Assuming we can reuse Index or add PWA keys
-  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const t = useTranslations('Index');
+  const { isInstallable, isIOS, installApp } = usePwaInstall();
   const [isVisible, setIsVisible] = useState(false);
 
-  const [isIOS, setIsIOS] = useState(false);
-
   useEffect(() => {
-    // Check if it's iOS
-    const ios =
-      /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
-    // Check if it's already installed (standalone mode)
-    const isStandalone =
-      window.matchMedia('(display-mode: standalone)').matches ||
-      (window.navigator as any).standalone;
-
-    setIsIOS(ios && !isStandalone);
-
-    if (ios && !isStandalone) {
-      // Show prompt for iOS after a small delay
-      const timer = setTimeout(() => setIsVisible(true), 1000);
+    if (isInstallable) {
+      const timer = setTimeout(() => setIsVisible(true), 2000);
       return () => clearTimeout(timer);
     }
-
-    const handler = (e: any) => {
-      // Prevent the mini-infobar from appearing on mobile
-      e.preventDefault();
-      // Stash the event so it can be triggered later.
-      setDeferredPrompt(e);
-      // Update UI notify the user they can install the PWA
-      setIsVisible(true);
-    };
-
-    window.addEventListener('beforeinstallprompt', handler);
-
-    return () => {
-      window.removeEventListener('beforeinstallprompt', handler);
-    };
-  }, []);
+  }, [isInstallable]);
 
   const handleInstallClick = async () => {
-    if (!deferredPrompt) return;
-
-    // Show the install prompt
-    deferredPrompt.prompt();
-
-    // Wait for the user to respond to the prompt
-    const { outcome } = await deferredPrompt.userChoice;
-
-    // We've used the prompt, and can't use it again, throw it away
-    setDeferredPrompt(null);
+    await installApp();
     setIsVisible(false);
   };
 
@@ -81,8 +45,7 @@ export function PwaInstallPrompt() {
           <div className='flex items-center gap-2'>
             {isIOS ? (
               <p className='text-xs bg-white text-purple-600 px-3 py-1.5 rounded-md font-medium'>
-                Tap <span className='text-lg'>share</span> then &quot;Add to
-                Home Screen&quot;
+                {t('ios_install_desc')}
               </p>
             ) : (
               <Button

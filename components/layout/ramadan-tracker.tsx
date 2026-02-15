@@ -19,6 +19,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { RAMADAN_DUAS, DUA_ROTATION_INTERVAL } from '@/lib/constants/duas';
 
 import LanguageSwitcher from '@/components/language-switcher';
+import { InstallAppButton } from '@/components/install-app-button';
 
 import { useLocale } from 'next-intl';
 
@@ -67,7 +68,10 @@ export default function RamadanTracker() {
 
   return (
     <div className='container mx-auto px-4 py-8 max-w-6xl'>
-      <div className='flex justify-end mb-4'>
+      <div className='flex justify-between items-center mb-6'>
+        <div className='flex items-center gap-2'>
+          <InstallAppButton />
+        </div>
         <LanguageSwitcher />
       </div>
       <div className='text-center mb-8 relative'>

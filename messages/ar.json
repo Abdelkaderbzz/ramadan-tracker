@@ -16,6 +16,7 @@
     "achievements": "الإنجازات",
     "install_app": "تثبيت التطبيق",
     "install_desc": "أضف للشاشة الرئيسية لتجربة أفضل",
+    "ios_install_desc": "اضغط على مشاركة ثم 'إضافة إلى الشاشة الرئيسية'",
     "install_btn": "تثبيت"
   },
   "Dashboard": {

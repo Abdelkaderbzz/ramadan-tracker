@@ -15,7 +15,8 @@
     "calendar": "Calendrier",
     "achievements": "Réalisations",
     "install_app": "Installer l'application",
-    "install_desc": "Ajouter à l'écran d'accueil",
+    "install_desc": "Ajouter à l'écran d'accueil pour une meilleure expérience",
+    "ios_install_desc": "Appuyez sur partager puis 'Ajouter à l'écran d'accueil'",
     "install_btn": "Installer"
   },
   "Dashboard": {

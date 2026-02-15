@@ -16,6 +16,7 @@
     "achievements": "Achievements",
     "install_app": "Install App",
     "install_desc": "Add to home screen for better experience",
+    "ios_install_desc": "Tap share then 'Add to Home Screen'",
     "install_btn": "Install"
   },
   "Dashboard": {

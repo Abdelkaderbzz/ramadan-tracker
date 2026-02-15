@@ -18,35 +18,14 @@ import {
 } from '@/components/ui/dialog';
 import { useTranslations } from 'next-intl';
 
+import { SavedDuaList } from './saved-dua-list';
+import { DuaSuggestions } from './dua-suggestions';
+
 export default function DailyDua() {
   const t = useTranslations('Duas');
-  const tSuggested = useTranslations('SuggestedDuas');
   const { savedDuas, addDua, removeDua, currentDua, updateCurrentDua } =
     useRamadanStore();
-  const [showSuggestions, setShowSuggestions] = useState(false);
   const { toast } = useToast();
-  // Using English key for state
-  const [selectedCategory, setSelectedCategory] = useState<string>('ramadan');
-
-  // Categorized duas - using keys instead of text
-  const duaCategories = {
-    ramadan: Array.from({ length: 7 }, (_, i) => `${i}`),
-    morning_evening: Array.from({ length: 4 }, (_, i) => `${i}`),
-    forgiveness: Array.from({ length: 4 }, (_, i) => `${i}`),
-    various: Array.from({ length: 6 }, (_, i) => `${i}`),
-  };
-
-  const categoryMapping: Record<string, string> = {
-    ramadan: 'ramadan',
-    morning_evening: 'morning_evening',
-    forgiveness: 'forgiveness',
-    // 'paradise' key was missing in daily-dua keys but present in en.json messages.
-    // Checking previous code: 'أدعية طلب الجنة': 'paradise' was mapped.
-    // However, I merged it into 'various' or didn't extract it separately in the JSON step above?
-    // Wait, in my JSON 'various' I included "Asking for Paradise" duas.
-    // Let's stick to the 4 categories I defined in JSON.
-    various: 'various',
-  };
 
   const handleSaveDua = () => {
     if (!currentDua.trim()) {
@@ -69,7 +48,8 @@ export default function DailyDua() {
 
   const handleSelectSuggestion = (dua: string) => {
     updateCurrentDua(dua);
-    // No need to manually set showSuggestions as the dialog will handle its own state
+    // Use a custom event or a more React-way to close dialog if needed,
+    // but for now the click on trigger handles it.
   };
 
   return (
@@ -105,63 +85,14 @@ export default function DailyDua() {
                   <BookOpen className='h-4 w-4' />
                 </Button>
               </DialogTrigger>
-              <DialogContent className='rtl'>
-                <DialogHeader>
-                  <DialogTitle>{t('daily.choose_suggested')}</DialogTitle>
-                  <DialogDescription>
-                    {t('daily.choose_desc')}
-                  </DialogDescription>
-                </DialogHeader>
-
-                <div className='flex flex-col gap-4 py-4'>
-                  <div className='flex flex-wrap gap-2 mb-4'>
-                    {Object.keys(duaCategories).map((category) => (
-                      <Button
-                        key={category}
-                        variant={
-                          selectedCategory === category ? 'default' : 'outline'
-                        }
-                        onClick={() => setSelectedCategory(category)}
-                        className='text-sm'
-                      >
-                        {t(`categories.${categoryMapping[category]}`)}
-                      </Button>
-                    ))}
-                  </div>
-
-                  <div className='grid gap-2 max-h-[300px] overflow-y-auto'>
-                    {duaCategories[
-                      selectedCategory as keyof typeof duaCategories
-                    ].map((duaKey, index) => {
-                      const duaText = tSuggested(
-                        `${selectedCategory}.${duaKey}`,
-                      );
-                      return (
-                        <div
-                          key={index}
-                          className='p-3 border rounded-md cursor-pointer hover:bg-muted'
-                          dir={
-                            tSuggested('ramadan.0').match(/[\u0600-\u06FF]/)
-                              ? 'rtl'
-                              : 'ltr'
-                          }
-                          onClick={() => {
-                            updateCurrentDua(duaText);
-                            // Close the dialog after selection
-                            const closeButton = document.querySelector(
-                              '[data-state="open"] button[aria-label="Close"]',
-                            );
-                            if (closeButton instanceof HTMLElement) {
-                              closeButton.click();
-                            }
-                          }}
-                        >
-                          {duaText}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
+              <DialogContent className='rtl sm:max-w-[425px]'>
+                <DuaSuggestions
+                  onSelect={(dua) => {
+                    handleSelectSuggestion(dua);
+                    // Close the dialog by clicking the overlay or trigger logic if available,
+                    // but most Dialog components close on selection if implemented correctly.
+                  }}
+                />
               </DialogContent>
             </Dialog>
           </div>
@@ -174,36 +105,11 @@ export default function DailyDua() {
           </div>
         </div>
 
-        {savedDuas.length > 0 && (
-          <div className='mt-4'>
-            <h4 className='text-sm font-medium mb-2'>
-              {t('daily.saved_list')}
-            </h4>
-            <div className='space-y-2 max-h-[150px] overflow-y-auto pr-1'>
-              <AnimatePresence>
-                {savedDuas.map((dua, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className='flex items-center justify-between p-2 bg-muted/50 rounded-md'
-                  >
-                    <p className='text-sm flex-1'>{dua}</p>
-                    <Button
-                      variant='ghost'
-                      size='icon'
-                      className='h-7 w-7 text-muted-foreground hover:text-destructive'
-                      onClick={() => removeDua(index)}
-                    >
-                      <Trash2 className='h-4 w-4' />
-                    </Button>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </div>
-          </div>
-        )}
+        <SavedDuaList
+          savedDuas={savedDuas}
+          removeDua={removeDua}
+          title={t('daily.saved_list')}
+        />
       </CardContent>
     </Card>
   );
