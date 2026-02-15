@@ -14,8 +14,8 @@ export function getCurrentHijriDate(locale: string = 'ar'): string {
     // For Arabic, we use 'ar-SA'
     const intlLocale =
       locale === 'ar'
-        ? 'ar-SA-u-ca-islamic-umalqura'
-        : `${locale}-u-ca-islamic-umalqura`;
+        ? 'ar-SA-u-ca-islamic-umalqura-nu-latn'
+        : `${locale}-u-ca-islamic-umalqura-nu-latn`;
 
     return new Intl.DateTimeFormat(intlLocale, options).format(new Date());
   } catch (error) {
