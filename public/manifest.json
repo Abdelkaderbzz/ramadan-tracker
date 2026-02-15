@@ -1,6 +1,6 @@
 {
-  "name": "Ramadhan Tracker",
-  "short_name": "Ramadhan",
+  "name": "Ramadan Tracker",
+  "short_name": "Ramadan Tracker",
   "description": "Track your worship and good deeds during the holy month of Ramadan.",
   "start_url": "/",
   "display": "standalone",
