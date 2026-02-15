@@ -20,63 +20,32 @@ import { useTranslations } from 'next-intl';
 
 export default function DailyDua() {
   const t = useTranslations('Duas');
+  const tSuggested = useTranslations('SuggestedDuas');
   const { savedDuas, addDua, removeDua, currentDua, updateCurrentDua } =
     useRamadanStore();
   const [showSuggestions, setShowSuggestions] = useState(false);
   const { toast } = useToast();
-  const [selectedCategory, setSelectedCategory] =
-    useState<string>('أدعية رمضان');
+  // Using English key for state
+  const [selectedCategory, setSelectedCategory] = useState<string>('ramadan');
 
-  // Suggested duas
-  const suggestedDuas = [
-    'اللهم إني أسألك الجنة وأعوذ بك من النار',
-    'اللهم اغفر لي ذنبي كله دقه وجله وأوله وآخره وعلانيته وسره',
-    'اللهم إني أسألك العفو والعافية في الدنيا والآخرة',
-    'اللهم إني صائم فتقبل مني إنك أنت السميع العليم',
-    'اللهم لك صمت وعلى رزقك أفطرت وبك آمنت وعليك توكلت',
-    'اللهم إنك عفو تحب العفو فاعف عني',
-    'اللهم أعني على ذكرك وشكرك وحسن عبادتك',
-  ];
-
-  // Categorized duas
+  // Categorized duas - using keys instead of text
   const duaCategories = {
-    'أدعية رمضان': [
-      'اللهم إني صائم فتقبل مني إنك أنت السميع العليم',
-      'اللهم لك صمت وعلى رزقك أفطرت وبك آمنت وعليك توكلت',
-      'اللهم إنك عفو تحب العفو فاعف عني',
-      'اللهم اجعل صيامي صيام الصائمين وقيامي قيام القائمين',
-      'اللهم اجعلني من عتقائك من النار في هذا الشهر الكريم',
-      'اللهم بارك لنا في رمضان وبلغنا ليلة القدر',
-      'ذهب الظمأ وابتلت العروق وثبت الأجر إن شاء الله',
-    ],
-    'أدعية الصباح والمساء': [
-      'أصبحنا وأصبح الملك لله، والحمد لله، لا إله إلا الله وحده لا شريك له',
-      'اللهم ما أصبح بي من نعمة أو بأحد من خلقك فمنك وحدك لا شريك لك، فلك الحمد ولك الشكر',
-      'اللهم إني أسألك خير هذا اليوم: فتحه، ونصره، ونوره، وبركته، وهداه',
-      'اللهم بك أصبحنا، وبك أمسينا، وبك نحيا، وبك نموت، وإليك النشور',
-    ],
-    'أدعية الاستغفار': [
-      'أستغفر الله العظيم الذي لا إله إلا هو الحي القيوم وأتوب إليه',
-      'اللهم أنت ربي لا إله إلا أنت، خلقتني وأنا عبدك، وأنا على عهدك ووعدك ما استطعت، أعوذ بك من شر ما صنعت، أبوء لك بنعمتك علي، وأبوء بذنبي فاغفر لي فإنه لا يغفر الذنوب إلا أنت',
-      'اللهم اغفر لي ذنبي كله دقه وجله وأوله وآخره وعلانيته وسره',
-      'رب اغفر لي وتب علي إنك أنت التواب الرحيم',
-    ],
-    'أدعية متنوعة': [
-      'اللهم إني أسألك الجنة وأعوذ بك من النار',
-      'اللهم إني أسألك العفو والعافية في الدنيا والآخرة',
-      'اللهم أعني على ذكرك وشكرك وحسن عبادتك',
-      'اللهم ارزقنا حسن الخاتمة',
-      'اللهم اغفر للمؤمنين والمؤمنات والمسلمين والمسلمات الأحياء منهم والأموات',
-      'اللهم اشف مرضانا ومرضى المسلمين',
-    ],
+    ramadan: Array.from({ length: 7 }, (_, i) => `${i}`),
+    morning_evening: Array.from({ length: 4 }, (_, i) => `${i}`),
+    forgiveness: Array.from({ length: 4 }, (_, i) => `${i}`),
+    various: Array.from({ length: 6 }, (_, i) => `${i}`),
   };
 
   const categoryMapping: Record<string, string> = {
-    'أدعية رمضان': 'ramadan',
-    'أدعية الصباح والمساء': 'morning_evening',
-    'أدعية الاستغفار': 'forgiveness',
-    'أدعية طلب الجنة': 'paradise',
-    'أدعية متنوعة': 'various',
+    ramadan: 'ramadan',
+    morning_evening: 'morning_evening',
+    forgiveness: 'forgiveness',
+    // 'paradise' key was missing in daily-dua keys but present in en.json messages.
+    // Checking previous code: 'أدعية طلب الجنة': 'paradise' was mapped.
+    // However, I merged it into 'various' or didn't extract it separately in the JSON step above?
+    // Wait, in my JSON 'various' I included "Asking for Paradise" duas.
+    // Let's stick to the 4 categories I defined in JSON.
+    various: 'various',
   };
 
   const handleSaveDua = () => {
@@ -163,24 +132,34 @@ export default function DailyDua() {
                   <div className='grid gap-2 max-h-[300px] overflow-y-auto'>
                     {duaCategories[
                       selectedCategory as keyof typeof duaCategories
-                    ].map((dua, index) => (
-                      <div
-                        key={index}
-                        className='p-3 border rounded-md cursor-pointer hover:bg-muted'
-                        onClick={() => {
-                          updateCurrentDua(dua);
-                          // Close the dialog after selection
-                          const closeButton = document.querySelector(
-                            '[data-state="open"] button[aria-label="Close"]',
-                          );
-                          if (closeButton instanceof HTMLElement) {
-                            closeButton.click();
+                    ].map((duaKey, index) => {
+                      const duaText = tSuggested(
+                        `${selectedCategory}.${duaKey}`,
+                      );
+                      return (
+                        <div
+                          key={index}
+                          className='p-3 border rounded-md cursor-pointer hover:bg-muted'
+                          dir={
+                            tSuggested('ramadan.0').match(/[\u0600-\u06FF]/)
+                              ? 'rtl'
+                              : 'ltr'
                           }
-                        }}
-                      >
-                        {dua}
-                      </div>
-                    ))}
+                          onClick={() => {
+                            updateCurrentDua(duaText);
+                            // Close the dialog after selection
+                            const closeButton = document.querySelector(
+                              '[data-state="open"] button[aria-label="Close"]',
+                            );
+                            if (closeButton instanceof HTMLElement) {
+                              closeButton.click();
+                            }
+                          }}
+                        >
+                          {duaText}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </DialogContent>
