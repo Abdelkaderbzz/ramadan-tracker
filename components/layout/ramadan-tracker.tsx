@@ -11,7 +11,7 @@ import {
 } from '@/components/features/dashboard';
 import { PrayerTimes, DailyDua } from '@/components/features/prayer';
 import { QuranTracker } from '@/components/features/quran';
-import { IslamicCalendar } from '@/components/features/calendar';
+import { RamadanJourney } from '@/components/features/journey/ramadan-journey';
 import { AchievementBadges } from '@/components/features/achievements';
 import { getCurrentHijriDate } from '@/lib/date-utils';
 import { useRamadanStore } from '@/lib/store';
@@ -67,7 +67,10 @@ export default function RamadanTracker() {
   }, []);
 
   return (
-    <div className='container mx-auto px-4 py-8 max-w-6xl'>
+    <div
+      className='container mx-auto px-4 py-8 max-w-6xl'
+      dir={locale === 'ar' ? 'rtl' : 'ltr'}
+    >
       <Header
         title={t('my_day')}
         subtitle={t('track_worship')}
@@ -103,12 +106,12 @@ export default function RamadanTracker() {
               </span>
             </TabsTrigger>
             <TabsTrigger
-              value='calendar'
+              value='journey'
               className='flex-col md:flex-row gap-1 py-3 md:py-1.5 data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 md:data-[state=active]:bg-background md:data-[state=active]:text-foreground'
             >
               <Calendar className='h-5 w-5 md:h-4 md:w-4' />
               <span className='text-[10px] sm:text-xs md:text-sm'>
-                {t('calendar')}
+                {t('journey')}
               </span>
             </TabsTrigger>
             <TabsTrigger
@@ -136,8 +139,8 @@ export default function RamadanTracker() {
           <QuranTracker />
         </TabsContent>
 
-        <TabsContent value='calendar'>
-          <IslamicCalendar />
+        <TabsContent value='journey'>
+          <RamadanJourney />
         </TabsContent>
 
         <TabsContent value='achievements'>

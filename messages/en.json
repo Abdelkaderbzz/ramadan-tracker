@@ -12,12 +12,57 @@
     "select_language": "Select Language",
     "track_worship": "Track your worship and good deeds",
     "dashboard": "Dashboard",
+    "journey": "Journey",
     "calendar": "Calendar",
     "achievements": "Achievements",
     "install_app": "Install App",
     "install_desc": "Add to home screen for better experience",
     "ios_install_desc": "Tap share then 'Add to Home Screen'",
     "install_btn": "Install"
+  },
+  "Journey": {
+    "title": "Ramadan Journey",
+    "tabs": {
+      "journal": "Daily Journal",
+      "calendar": "Islamic Calendar"
+    },
+    "Goals": {
+      "title": "Ramadan Goals",
+      "placeholder": "What do you want to achieve?",
+      "no_goals": "No goals added yet. Start by adding one above!",
+      "categories": {
+        "quran": "Quran",
+        "prayer": "Prayer",
+        "charity": "Charity",
+        "personal": "Personal",
+        "other": "Other"
+      }
+    },
+    "Journal": {
+      "title": "Day {day} Reflections",
+      "achievements_label": "What did you achieve today?",
+      "achievements_placeholder": "List your accomplishments, big or small...",
+      "memories_label": "Special Memories",
+      "memories_placeholder": "Record a special moment or feeling from today...",
+      "save_button": "Save Entry",
+      "saved_success": "Journey updated!",
+      "preview_mode": "History Preview",
+      "moods": {
+        "happy": "Happy",
+        "spiritual": "Spiritual",
+        "peaceful": "Peaceful",
+        "determined": "Determined",
+        "tired": "Tired"
+      }
+    },
+    "Motivation": {
+      "types": {
+        "hadith": "Daily Hadith",
+        "dua": "Daily Dua",
+        "quote": "Inspiration"
+      },
+      "keep_going": "Keep striving!"
+    }
   },
   "Dashboard": {
     "title": "Daily Tracking Log",

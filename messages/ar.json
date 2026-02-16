@@ -12,12 +12,57 @@
     "select_language": "اختر اللغة",
     "track_worship": "تتبع عباداتك وأعمالك الصالحة",
     "dashboard": "لوحة المعلومات",
+    "journey": "رحلتي",
     "calendar": "التقويم",
     "achievements": "الإنجازات",
     "install_app": "تثبيت التطبيق",
     "install_desc": "أضف للشاشة الرئيسية لتجربة أفضل",
     "ios_install_desc": "اضغط على مشاركة ثم 'إضافة إلى الشاشة الرئيسية'",
     "install_btn": "تثبيت"
+  },
+  "Journey": {
+    "title": "رحلة رمضان",
+    "tabs": {
+      "journal": "اليوميات",
+      "calendar": "التقويم الهجري"
+    },
+    "Goals": {
+      "title": "أهداف رمضان",
+      "placeholder": "ماذا تريد أن تحقق؟",
+      "no_goals": "لم يتم إضافة أهداف بعد. ابدأ بإضافة هدف أعلاه!",
+      "categories": {
+        "quran": "القرآن",
+        "prayer": "الصلاة",
+        "charity": "الصدقة",
+        "personal": "شخصي",
+        "other": "أخرى"
+      }
+    },
+    "Journal": {
+      "title": "تأملات اليوم {day}",
+      "achievements_label": "ماذا حققت اليوم؟",
+      "achievements_placeholder": "اكتب إنجازاتك، كبيرة كانت أو صغيرة...",
+      "memories_label": "ذكريات خاصة",
+      "memories_placeholder": "سجل لحظة أو شعوراً خاصاً من يومك...",
+      "save_button": "حفظ اليومية",
+      "saved_success": "تم تحديث الرحلة!",
+      "preview_mode": "معاينة السجل",
+      "moods": {
+        "happy": "سعيد",
+        "spiritual": "روحاني",
+        "peaceful": "مطمئن",
+        "determined": "عازم",
+        "tired": "متعب"
+      }
+    },
+    "Motivation": {
+      "types": {
+        "hadith": "حديث اليوم",
+        "dua": "دعاء اليوم",
+        "quote": "إلهام"
+      },
+      "keep_going": "استمر في السعي!"
+    }
   },
   "Dashboard": {
     "title": "سجل المتابعة اليومي",

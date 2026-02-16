@@ -33,6 +33,8 @@ export const useRamadanStore = create<RamadanState>()(
       currentDua: '',
       savedDuas: [],
       readSurahs: [],
+      goals: [],
+      journalEntries: {},
 
       initializeData: () => {
         const { activities } = get();
@@ -99,6 +101,49 @@ export const useRamadanStore = create<RamadanState>()(
               : [...state.readSurahs, surahNumber],
           };
         });
+      },
+
+      addGoal: (text, category) => {
+        const newGoal = {
+          id: Math.random().toString(36).substring(2, 9),
+          text,
+          category,
+          completed: false,
+        };
+        set((state) => ({
+          goals: [...state.goals, newGoal],
+        }));
+      },
+
+      toggleGoal: (id) => {
+        set((state) => ({
+          goals: state.goals.map((goal) =>
+            goal.id === id ? { ...goal, completed: !goal.completed } : goal,
+          ),
+        }));
+      },
+
+      removeGoal: (id) => {
+        set((state) => ({
+          goals: state.goals.filter((goal) => goal.id !== id),
+        }));
+      },
+
+      updateJournalEntry: (day, entry) => {
+        set((state) => ({
+          journalEntries: {
+            ...state.journalEntries,
+            [day]: {
+              ...(state.journalEntries[day] || {
+                day,
+                achievements: '',
+                memories: '',
+                mood: '',
+              }),
+              ...entry,
+            },
+          },
+        }));
       },
 
       calculateStats: () => {
