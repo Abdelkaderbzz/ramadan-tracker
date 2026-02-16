@@ -12,12 +12,56 @@
     "select_language": "Choisir la langue",
     "track_worship": "Suivez vos cultes et vos bonnes actions",
     "dashboard": "Tableau de bord",
-    "calendar": "Calendrier",
+    "journey": "Voyage",
     "achievements": "Réalisations",
     "install_app": "Installer l'application",
     "install_desc": "Ajouter à l'écran d'accueil pour une meilleure expérience",
     "ios_install_desc": "Appuyez sur partager puis 'Ajouter à l'écran d'accueil'",
     "install_btn": "Installer"
+  },
+  "Journey": {
+    "title": "Voyage du Ramadan",
+    "tabs": {
+      "journal": "Journal quotidien",
+      "calendar": "Calendrier Islamique"
+    },
+    "Goals": {
+      "title": "Objectifs du Ramadan",
+      "placeholder": "Que souhaitez-vous accomplir ?",
+      "no_goals": "Aucun objectif ajouté. Commencez par en ajouter un ci-dessus !",
+      "categories": {
+        "quran": "Coran",
+        "prayer": "Prière",
+        "charity": "Charité",
+        "personal": "Personnel",
+        "other": "Autre"
+      }
+    },
+    "Journal": {
+      "title": "Réflexions du Jour {day}",
+      "achievements_label": "Qu'avez-vous accompli aujourd'hui ?",
+      "achievements_placeholder": "Listez vos accomplissements...",
+      "memories_label": "Souvenirs Spéciaux",
+      "memories_placeholder": "Enregistrez un moment spécial...",
+      "save_button": "Enregistrer",
+      "saved_success": "Voyage mis à jour !",
+      "preview_mode": "Aperçu de l'historique",
+      "moods": {
+        "happy": "Heureux",
+        "spiritual": "Spirituel",
+        "peaceful": "Paisible",
+        "determined": "Déterminé",
+        "tired": "Fatigué"
+      }
+    },
+    "Motivation": {
+      "types": {
+        "hadith": "Hadith du Jour",
+        "dua": "Doua du Jour",
+        "quote": "Inspiration"
+      },
+      "keep_going": "Continuez vos efforts !"
+    }
   },
   "Dashboard": {
     "title": "Journal de suivi quotidien",

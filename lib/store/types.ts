@@ -22,12 +22,28 @@ export interface StatsType {
   overall: number;
 }
 
+export interface RamadanGoal {
+  id: string;
+  text: string;
+  completed: boolean;
+  category: 'quran' | 'prayer' | 'charity' | 'personal' | 'other';
+}
+
+export interface JournalEntry {
+  day: number;
+  achievements: string;
+  memories: string;
+  mood: string;
+}
+
 export interface RamadanState {
   activities: DailyActivity[];
   stats: StatsType;
   currentDua: string;
   savedDuas: string[];
   readSurahs: number[];
+  goals: RamadanGoal[];
+  journalEntries: Record<number, JournalEntry>;
   initializeData: () => void;
   toggleSurahRead: (surahNumber: number) => void;
   updateActivity: (
@@ -45,4 +61,10 @@ export interface RamadanState {
   addDua: (dua: string) => void;
   removeDua: (index: number) => void;
   calculateStats: () => void;
+  // Goals actions
+  addGoal: (text: string, category: RamadanGoal['category']) => void;
+  toggleGoal: (id: string) => void;
+  removeGoal: (id: string) => void;
+  // Journal actions
+  updateJournalEntry: (day: number, entry: Partial<JournalEntry>) => void;
 }
