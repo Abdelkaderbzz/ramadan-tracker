@@ -239,7 +239,14 @@
     "progress": "Progression",
     "verses_read": "versets lus",
     "quran_tracker": "Suivi du Coran",
-    "verses": "Versets"
+    "verses": "Versets",
+    "juz": "Juz",
+    "juzs": "Juzs",
+    "read_juzs": "Juzs lus :",
+    "total_juzs": "Total des Juzs :",
+    "view_mode": "Mode d'affichage",
+    "surah_view": "Sourate",
+    "juz_view": "Juz"
   },
   "Surahs": {
     "1": "Al-Fatihah",
