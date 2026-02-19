@@ -240,7 +240,14 @@
     "progress": "Progress",
     "verses_read": "verses read",
     "quran_tracker": "Quran Tracker",
-    "verses": "Verses"
+    "verses": "Verses",
+    "juz": "Juz",
+    "juzs": "Juzs",
+    "read_juzs": "Read Juzs:",
+    "total_juzs": "Total Juzs:",
+    "view_mode": "View Mode",
+    "surah_view": "Surah",
+    "juz_view": "Juz"
   },
   "Surahs": {
     "1": "Al-Fatihah",

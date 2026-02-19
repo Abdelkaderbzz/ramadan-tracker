@@ -42,10 +42,12 @@ export interface RamadanState {
   currentDua: string;
   savedDuas: string[];
   readSurahs: number[];
+  readJuzs: number[];
   goals: RamadanGoal[];
   journalEntries: Record<number, JournalEntry>;
   initializeData: () => void;
   toggleSurahRead: (surahNumber: number) => void;
+  toggleJuzRead: (juzNumber: number) => void;
   updateActivity: (
     day: number,
     field: keyof DailyActivity,

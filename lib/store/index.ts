@@ -33,6 +33,7 @@ export const useRamadanStore = create<RamadanState>()(
       currentDua: '',
       savedDuas: [],
       readSurahs: [],
+      readJuzs: [],
       goals: [],
       journalEntries: {},
 
@@ -99,6 +100,17 @@ export const useRamadanStore = create<RamadanState>()(
             readSurahs: isRead
               ? state.readSurahs.filter((id) => id !== surahNumber)
               : [...state.readSurahs, surahNumber],
+          };
+        });
+      },
+
+      toggleJuzRead: (juzNumber) => {
+        set((state) => {
+          const isRead = state.readJuzs.includes(juzNumber);
+          return {
+            readJuzs: isRead
+              ? state.readJuzs.filter((id) => id !== juzNumber)
+              : [...state.readJuzs, juzNumber],
           };
         });
       },
