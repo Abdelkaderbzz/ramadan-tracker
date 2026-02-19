@@ -237,7 +237,14 @@
     "progress": "التقدم",
     "verses_read": "آية مقروءة",
     "quran_tracker": "متابع القرآن",
-    "verses": "آيات"
+    "verses": "آيات",
+    "juz": "جزء",
+    "juzs": "أجزاء",
+    "read_juzs": "الأجزاء المقروءة:",
+    "total_juzs": "إجمالي الأجزاء:",
+    "view_mode": "طريقة العرض",
+    "surah_view": "سورة",
+    "juz_view": "جزء"
   },
   "Surahs": {
     "1": "الفاتحة",
