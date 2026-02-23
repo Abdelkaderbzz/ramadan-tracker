@@ -50,8 +50,8 @@ export default function DailyDua() {
 
   const handleSelectSuggestion = (dua: string) => {
     updateCurrentDua(dua);
-    // Use a custom event or a more React-way to close dialog if needed,
-    // but for now the click on trigger handles it.
+    
+    
   };
 
   return (
@@ -93,8 +93,8 @@ export default function DailyDua() {
                 <DuaSuggestions
                   onSelect={(dua) => {
                     handleSelectSuggestion(dua);
-                    // Close the dialog by clicking the overlay or trigger logic if available,
-                    // but most Dialog components close on selection if implemented correctly.
+                    
+                    
                   }}
                 />
               </DialogContent>

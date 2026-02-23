@@ -10,7 +10,7 @@ import { motion } from 'framer-motion';
 import { useToast } from '@/components/ui/use-toast';
 import { useTranslations } from 'next-intl';
 
-// Comprehensive dua collection
+
 const duaCollection = {
   'أدعية رمضان': [
     {
@@ -175,7 +175,7 @@ export default function DuaCollection() {
     'أدعية متنوعة': 'various',
   };
 
-  // Filter duas based on search query
+  
   const filteredDuas = searchQuery
     ? Object.entries(duaCollection).flatMap(([category, duas]) =>
         duas
@@ -368,7 +368,7 @@ export default function DuaCollection() {
                 <h3 className='text-lg font-medium mb-4'>{t('favorites')}</h3>
                 <div className='space-y-4'>
                   {favorites.map((favDua, index) => {
-                    // Find the dua object that matches this favorite
+                    
                     const duaObj = Object.values(duaCollection)
                       .flat()
                       .find((dua) => dua.arabic === favDua);

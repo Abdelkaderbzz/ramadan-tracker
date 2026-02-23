@@ -16,7 +16,7 @@ type IslamicDate = {
   specialDayName?: string;
 };
 
-// Simple mapping for Islamic months (keys for translation)
+
 const islamicMonthKeys = [
   'Muharram',
   'Safar',
@@ -32,23 +32,23 @@ const islamicMonthKeys = [
   'Dhu al-Hijjah',
 ];
 
-// Special Islamic days (keys for translation)
+
 const specialDaysMap = [
-  { month: 8, day: 1, key: 'ramadan_start' }, // Ramadan 1
-  { month: 8, day: 27, key: 'laylat_al_qadr' }, // Laylat al-Qadr (estimated)
-  { month: 9, day: 1, key: 'eid_fitr' }, // Eid al-Fitr
-  { month: 11, day: 10, key: 'eid_adha' }, // Eid al-Adha
-  { month: 0, day: 10, key: 'ashura' }, // Ashura
-  { month: 2, day: 12, key: 'mawlid' }, // Mawlid al-Nabi
-  { month: 6, day: 27, key: 'isra_miraj' }, // Isra and Mi'raj
-  { month: 7, day: 15, key: 'mid_shaban' }, // Mid-Sha'ban
+  { month: 8, day: 1, key: 'ramadan_start' }, 
+  { month: 8, day: 27, key: 'laylat_al_qadr' }, 
+  { month: 9, day: 1, key: 'eid_fitr' }, 
+  { month: 11, day: 10, key: 'eid_adha' }, 
+  { month: 0, day: 10, key: 'ashura' }, 
+  { month: 2, day: 12, key: 'mawlid' }, 
+  { month: 6, day: 27, key: 'isra_miraj' }, 
+  { month: 7, day: 15, key: 'mid_shaban' }, 
 ];
 
-// Simplified Islamic calendar calculation
-// This uses a fixed pattern for month lengths which is a reasonable approximation
+
+
 const daysInIslamicMonth = (month: number) => {
-  // Even-numbered months have 30 days, odd-numbered months have 29 days
-  // (with occasional adjustments for leap years, simplified here)
+  
+  
   return month % 2 === 0 ? 30 : 29;
 };
 
@@ -56,12 +56,12 @@ export default function IslamicCalendar() {
   const t = useTranslations('Calendar');
   const locale = useLocale();
   const isRtl = locale === 'ar';
-  // Get current date once on component mount
+  
   const today = useMemo(() => new Date(), []);
 
-  // Initialize with estimated current Hijri date
-  // For a real app, you might want to use a proper Hijri calendar library
-  const [currentMonth, setCurrentMonth] = useState<number>(8); // Default to Ramadan
+  
+  
+  const [currentMonth, setCurrentMonth] = useState<number>(8); 
   const [currentYear, setCurrentYear] = useState<number>(1445);
   const [todayHijri, setTodayHijri] = useState<{
     day: number;
@@ -73,10 +73,10 @@ export default function IslamicCalendar() {
     year: 1445,
   });
 
-  // Get current Hijri date on component mount
+  
   useEffect(() => {
     try {
-      // Try to get current Hijri date using Intl API
+      
       const formatter = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura', {
         day: 'numeric',
         month: 'numeric',
@@ -90,7 +90,7 @@ export default function IslamicCalendar() {
       const month =
         Number.parseInt(
           parts.find((part) => part.type === 'month')?.value || '9',
-        ) - 1; // 0-based
+        ) - 1; 
       const year = Number.parseInt(
         parts.find((part) => part.type === 'year')?.value || '1445',
       );
@@ -100,23 +100,23 @@ export default function IslamicCalendar() {
       setCurrentYear(year);
     } catch (error) {
       console.error('Error getting Hijri date:', error);
-      // Keep default values if there's an error
+      
     }
   }, [today]);
 
-  // Calculate calendar grid data
+  
   const calendarData = useMemo(() => {
-    // Number of days in the current month
+    
     const daysCount = daysInIslamicMonth(currentMonth);
 
-    // Approximate first day of month (0 = Sunday, 6 = Saturday)
-    // This is simplified - in a real app, use a proper Hijri calendar library
+    
+    
     const firstDayOfMonth = (currentMonth * 2 + currentYear) % 7;
 
-    // Generate calendar days
+    
     const days: IslamicDate[] = [];
 
-    // Get translated months array
+    
     const translatedMonths = [
       t('months.0'),
       t('months.1'),
@@ -133,7 +133,7 @@ export default function IslamicCalendar() {
     ];
 
     for (let i = 1; i <= daysCount; i++) {
-      // Check if this is a special day
+      
       const specialDayConfig = specialDaysMap.find(
         (d) => d.month === currentMonth && d.day === i,
       );
@@ -142,8 +142,8 @@ export default function IslamicCalendar() {
         ? t(`special_days.${specialDayConfig.key}`)
         : undefined;
 
-      // Simple Gregorian date approximation
-      // In a real app, use a proper conversion library
+      
+      
       const gregorianMonth = ((currentMonth + 3) % 12) + 1;
       const gregorianDay = ((i + 15) % 30) + 1;
       const gregorianDate = `${gregorianMonth}/${gregorianDay}`;
@@ -248,7 +248,7 @@ export default function IslamicCalendar() {
         </div>
 
         <div className='grid grid-cols-7 gap-1'>
-          {/* Add empty cells for proper day alignment based on first day of month */}
+          {}
           {Array.from({ length: calendarData.firstDayOfMonth }).map((_, i) => (
             <div key={`empty-${i}`} className='h-12'></div>
           ))}

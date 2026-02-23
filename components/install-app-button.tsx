@@ -49,7 +49,7 @@ export function InstallAppButton() {
         </TooltipContent>
       </Tooltip>
 
-      {/* Mobile icon version */}
+      {}
       <Button
         variant='ghost'
         size='icon'

@@ -1,4 +1,4 @@
-// Rotating duas for the header
+
 export const RAMADAN_DUAS = [
   'رب اغفر وارحم وأنت خير الراحمين',
   'اللهم إني أسألك الجنة وأعوذ بك من النار',
@@ -9,4 +9,4 @@ export const RAMADAN_DUAS = [
   'اللهم إنك عفو تحب العفو فاعف عني',
 ] as const;
 
-export const DUA_ROTATION_INTERVAL = 4000; // 4 seconds
+export const DUA_ROTATION_INTERVAL = 4000; 

@@ -3,13 +3,13 @@ export interface Surah {
   name: string;
   arabicName: string;
   verses: number;
-  juz: number; // Approximate start Juz
+  juz: number; 
 }
 
 export interface Juz {
   number: number;
-  name: string; // e.g., "Juz 1"
-  arabicName: string; // e.g., "الجزء الأول"
+  name: string; 
+  arabicName: string; 
   startSurah: number;
   startVerse: number;
   endSurah: number;

@@ -161,7 +161,7 @@ export const useRamadanStore = create<RamadanState>()(
       calculateStats: () => {
         const { activities } = get();
 
-        // Quran progress (target: 6236 verses = full Quran)
+        
         const totalQuranVerses = activities.reduce(
           (sum, day) => sum + (Number.parseInt(day.quran) || 0),
           0,
@@ -171,7 +171,7 @@ export const useRamadanStore = create<RamadanState>()(
           100,
         );
 
-        // Prayer progress (4 types × 30 days = 120 checks)
+        
         const prayerFields: (keyof DailyActivity)[] = [
           'fasting',
           'qiyam',
@@ -188,7 +188,7 @@ export const useRamadanStore = create<RamadanState>()(
           100,
         );
 
-        // Dhikr progress (2 sessions × 30 days = 60)
+        
         const morningDhikrDays = activities.filter(
           (day) => day.dhikrMorning !== '0' && day.dhikrMorning !== '',
         ).length;
@@ -200,7 +200,7 @@ export const useRamadanStore = create<RamadanState>()(
           100,
         );
 
-        // Good deeds progress (4 types × 30 days = 120)
+        
         const goodDeedFields: (keyof DailyActivity)[] = [
           'charity',
           'familyVisit',
@@ -217,7 +217,7 @@ export const useRamadanStore = create<RamadanState>()(
           100,
         );
 
-        // Overall average
+        
         const overallPercentage = Math.round(
           (quranPercentage +
             prayerPercentage +
@@ -243,5 +243,5 @@ export const useRamadanStore = create<RamadanState>()(
   ),
 );
 
-// Re-export types
+
 export type { DailyActivity, StatsType, RamadanState } from './types';

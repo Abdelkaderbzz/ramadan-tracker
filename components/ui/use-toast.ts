@@ -1,6 +1,6 @@
 "use client"
 
-// Adapted from https://github.com/shadcn-ui/ui/blob/main/packages/ui/src/use-toast.tsx
+
 import * as React from "react"
 
 import type { ToastActionElement, ToastProps } from "@/components/ui/toast"
@@ -72,8 +72,8 @@ const reducer = (state: State, action: Action): State => {
     case actionTypes.DISMISS_TOAST: {
       const { toastId } = action
 
-      // ! Side effects ! - This could be extracted into a dismissToast() action,
-      // but I'll keep it here for simplicity
+      
+      
       if (toastId) {
         toastTimeouts.set(
           toastId,
@@ -166,7 +166,7 @@ function useToast() {
         listeners.splice(index, 1)
       }
     }
-  }, []) // Removed unnecessary dependency: [state]
+  }, []) 
 
   return {
     ...state,

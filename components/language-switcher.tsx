@@ -21,9 +21,9 @@ export default function LanguageSwitcher() {
   const onSelectChange = (value: string) => {
     const nextLocale = value;
     startTransition(() => {
-      // Construct the new path by replacing the locale segment
-      // This is a simplified approach assuming the locale is always the first segment
-      // A more robust way would depend on how next-intl is configured to strip the locale
+      
+      
+      
 
       const segments = pathname.split('/');
       segments[1] = nextLocale;

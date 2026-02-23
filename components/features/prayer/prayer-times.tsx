@@ -24,7 +24,7 @@ export default function PrayerTimes() {
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
-    // Update current time every minute
+    
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 60000);
@@ -37,12 +37,12 @@ export default function PrayerTimes() {
       try {
         setLoading(true);
 
-        // Get user's location (or use default)
-        let latitude = 21.3891; // Default to Mecca
+        
+        let latitude = 21.3891; 
         let longitude = 39.8579;
 
         try {
-          // Use a promise with a timeout to prevent hanging
+          
           const position = await Promise.race([
             new Promise<GeolocationPosition>((resolve, reject) => {
               navigator.geolocation.getCurrentPosition(resolve, reject, {
@@ -67,13 +67,13 @@ export default function PrayerTimes() {
           );
         }
 
-        // Get current date
+        
         const date = new Date();
         const month = date.getMonth() + 1;
         const day = date.getDate();
         const year = date.getFullYear();
 
-        // Fetch prayer times from API
+        
         const response = await fetch(
           `https://api.aladhan.com/v1/timings/${day}-${month}-${year}?latitude=${latitude}&longitude=${longitude}&method=2`,
         );
@@ -85,7 +85,7 @@ export default function PrayerTimes() {
         const data = await response.json();
         const timings = data.data.timings;
 
-        // Format prayer times
+        
         const formattedTimes: PrayerTime[] = [
           {
             name: 'Fajr',
@@ -126,7 +126,7 @@ export default function PrayerTimes() {
         setError(t('error'));
         setLoading(false);
 
-        // Fallback to default times
+        
         setPrayerTimes([
           {
             name: 'Fajr',
@@ -165,7 +165,7 @@ export default function PrayerTimes() {
     fetchPrayerTimes();
   }, [t]);
 
-  // Check if a prayer time is the next upcoming prayer
+  
   const isNextPrayer = (prayerTime: string): boolean => {
     const now = currentTime;
     const [hours, minutes] = prayerTime.split(':').map(Number);
@@ -175,7 +175,7 @@ export default function PrayerTimes() {
     return (
       prayerDate > now &&
       prayerDate.getTime() - now.getTime() < 5 * 60 * 60 * 1000
-    ); // Within next 5 hours
+    ); 
   };
 
   return (
