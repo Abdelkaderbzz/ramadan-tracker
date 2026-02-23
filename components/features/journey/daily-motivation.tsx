@@ -12,7 +12,7 @@ export function DailyMotivation({ day }: { day: number }) {
   const locale = useLocale();
   const isRtl = locale === 'ar';
 
-  // Deterministically select a motivation based on the day of Ramadan
+  
   const motivation = useMemo(() => {
     const index = (day - 1) % RAMADAN_MOTIVATIONS.length;
     return RAMADAN_MOTIVATIONS[index];

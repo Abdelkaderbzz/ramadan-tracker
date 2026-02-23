@@ -22,7 +22,7 @@ export default function WorshipStats() {
     overall: 0,
   });
 
-  // Animate stats when they change
+  
   useEffect(() => {
     const timer = setTimeout(() => {
       setAnimatedStats(stats);

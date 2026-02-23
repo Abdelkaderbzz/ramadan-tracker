@@ -12,7 +12,7 @@ export function RamadanJourney() {
   const locale = useLocale();
   const isRtl = locale === 'ar';
 
-  // Determine current Ramadan day
+  
   const currentDay = useMemo(() => {
     return getRamadanDay();
   }, []);
@@ -25,7 +25,7 @@ export function RamadanJourney() {
       className='space-y-8 animate-in fade-in duration-700'
       dir={isRtl ? 'rtl' : 'ltr'}
     >
-      {/* Day Selector or Pre-Ramadan Banner */}
+      {}
       {isPreRamadan ? (
         <div className='bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl p-6 shadow-lg text-white relative overflow-hidden'>
           <div className='relative z-10'>
@@ -82,13 +82,13 @@ export function RamadanJourney() {
       )}
 
       <div className='grid grid-cols-1 md:grid-cols-12 gap-6'>
-        {/* Left Column: Motivation & Goals */}
+        {}
         <div className='md:col-span-12 lg:col-span-5 space-y-6'>
           <DailyMotivation day={selectedDay} />
           <RamadanGoals />
         </div>
 
-        {/* Right Column: Journal & Tracker */}
+        {}
         <div className='md:col-span-12 lg:col-span-7'>
           <DailyJournal
             day={selectedDay}

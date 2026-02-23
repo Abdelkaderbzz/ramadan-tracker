@@ -14,7 +14,7 @@ import { useTranslations, useLocale } from 'next-intl';
 
 export default function DailyTrackingTable() {
   const t = useTranslations('Dashboard');
-  const tIndex = useTranslations('Index'); // For 'days' label if needed, or use Dashboard.table.day
+  const tIndex = useTranslations('Index'); 
   const locale = useLocale();
   const isRtl = locale === 'ar';
   const {
@@ -28,10 +28,10 @@ export default function DailyTrackingTable() {
   const itemsPerPage = 10;
   const { toast } = useToast();
 
-  // Calculate total pages
+  
   const totalPages = Math.ceil(activities.length / itemsPerPage);
 
-  // Get current page items
+  
   const currentItems = activities.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage,
@@ -43,7 +43,7 @@ export default function DailyTrackingTable() {
       const newValue = !activity[field];
       updateActivity(day, field, newValue);
 
-      // Show toast notification
+      
       if (newValue) {
         toast({
           title: t('activity_updated'),
@@ -84,11 +84,11 @@ export default function DailyTrackingTable() {
   };
 
   const resetDay = () => {
-    // Get current Hijri day
+    
     const today = new Date();
     const dayOfMonth = today.getDate();
 
-    // Reset today's activities
+    
     if (activities[dayOfMonth - 1]) {
       const day = activities[dayOfMonth - 1].day;
 
@@ -325,7 +325,7 @@ export default function DailyTrackingTable() {
             </table>
           </div>
 
-          {/* Pagination */}
+          {}
           {totalPages > 1 && (
             <div className='flex justify-center items-center gap-2 p-4'>
               <Button

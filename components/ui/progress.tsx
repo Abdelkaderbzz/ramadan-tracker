@@ -19,7 +19,7 @@ const Progress = React.forwardRef<
     setMounted(true);
   }, []);
 
-  // Extract color name without the shade
+  
   const colorName = color.split('-')[0] || 'orange';
 
   const translateX = isRtl

@@ -22,7 +22,7 @@ export function CircularProgressBar({
 }: CircularProgressBarProps) {
   const [progress, setProgress] = useState(0)
 
-  // Colors based on the provided color prop
+  
   const getColors = (colorName: string) => {
     const colorMap: Record<string, { main: string; light: string; dark: string }> = {
       purple: { main: "#8b5cf6", light: "#c4b5fd", dark: "#6d28d9" },
@@ -54,7 +54,7 @@ export function CircularProgressBar({
 
   return (
     <div className="relative" style={{ width: size, height: size }}>
-      {/* Background circle */}
+      {}
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="rotate-[-90deg]">
         <circle
           cx={size / 2}
@@ -66,7 +66,7 @@ export function CircularProgressBar({
           className="text-gray-200 dark:text-gray-800"
         />
 
-        {/* Milestone markers */}
+        {}
         {milestones.map((milestone, index) => {
           const milestoneAngle = (milestone / 100) * 360 - 90
           const milestoneX = size / 2 + radius * Math.cos((milestoneAngle * Math.PI) / 180)
@@ -84,7 +84,7 @@ export function CircularProgressBar({
           )
         })}
 
-        {/* Progress arc */}
+        {}
         <motion.circle
           cx={size / 2}
           cy={size / 2}
@@ -99,7 +99,7 @@ export function CircularProgressBar({
           transition={{ duration: 1, ease: "easeOut" }}
         />
 
-        {/* Gradient overlay */}
+        {}
         <defs>
           <linearGradient id={`gradient-${color}`} x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor={colors.light} />
@@ -122,7 +122,7 @@ export function CircularProgressBar({
         />
       </svg>
 
-      {/* Animated dot at the end of progress */}
+      {}
       {progress > 0 && (
         <motion.div
           className="absolute"
@@ -144,7 +144,7 @@ export function CircularProgressBar({
         />
       )}
 
-      {/* Percentage text in the middle */}
+      {}
       <div
         className="absolute inset-0 flex items-center justify-center text-lg font-bold"
         style={{ color: colors.main }}

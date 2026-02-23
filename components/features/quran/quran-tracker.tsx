@@ -60,8 +60,8 @@ export default function QuranTracker() {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
 
-  // Calculate total read verses based on marked surahs
-  const totalVerses = 6236; // Total verses in Quran
+  
+  const totalVerses = 6236; 
   const readVersesCount = useMemo(() => {
     return quranSurahsData
       .filter((s) => readSurahs.includes(s.number))
@@ -72,7 +72,7 @@ export default function QuranTracker() {
     (readVersesCount / totalVerses) * 100,
   );
 
-  // Calculate total read juzs
+  
   const totalJuzs = 30;
   const readJuzsCount = readJuzs.length;
   const juzProgressPercentage = Math.round((readJuzsCount / totalJuzs) * 100);
@@ -82,9 +82,9 @@ export default function QuranTracker() {
 
   const itemsPerPage = 10;
 
-  // Quran data processing
+  
   useEffect(() => {
-    // Process Surahs
+    
     const processedSurahs = quranSurahsData.map((s) => ({
       ...s,
       isRead: readSurahs.includes(s.number),
@@ -92,7 +92,7 @@ export default function QuranTracker() {
     }));
     setSurahs(processedSurahs);
 
-    // Process Juzs
+    
     const processedJuzs = quranJuzsData.map((j) => ({
       ...j,
       isRead: readJuzs.includes(j.number),
@@ -112,7 +112,7 @@ export default function QuranTracker() {
     let result: (SurahWithProgress | JuzWithProgress)[] =
       viewMode === 'surah' ? [...surahs] : [...juzs];
 
-    // Filter by search query
+    
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       if (viewMode === 'surah') {
@@ -133,7 +133,7 @@ export default function QuranTracker() {
       }
     }
 
-    // Sort order
+    
     if (sortOrder === 'desc') {
       result.reverse();
     }
@@ -141,7 +141,7 @@ export default function QuranTracker() {
     return result;
   }, [surahs, juzs, searchQuery, sortOrder, tSurahs, viewMode, t]);
 
-  // Reset pagination when view mode or search changes
+  
   useEffect(() => {
     setCurrentPage(1);
   }, [viewMode, searchQuery]);
@@ -244,7 +244,7 @@ export default function QuranTracker() {
           <AnimatePresence mode='wait'>
             {currentItems.map((item) => {
               const isSurah = viewMode === 'surah';
-              // Type guards or casting
+              
               const surahItem = isSurah ? (item as SurahWithProgress) : null;
               const juzItem = !isSurah ? (item as JuzWithProgress) : null;
 
@@ -324,7 +324,7 @@ export default function QuranTracker() {
           </AnimatePresence>
         </div>
 
-        {/* Pagination controls */}
+        {}
         {totalPages > 1 && (
           <div className='flex justify-center mt-8 gap-2'>
             <Button
