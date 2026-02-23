@@ -10,7 +10,7 @@ import { getMessages } from 'next-intl/server';
 import { PwaInstallPrompt } from '@/components/pwa-install-prompt';
 import { Footer } from '@/components/layout/footer';
 
-// Load Tajawal font - great for Arabic text
+
 const tajawal = Tajawal({
   subsets: ['arabic', 'latin'],
   weight: ['400', '500', '700'],
@@ -128,7 +128,7 @@ export default async function RootLayout({
         <meta name='application-name' content='Ramadan Tracker' />
       </head>
       <body className={`${tajawal.variable} font-sans`}>
-        {/* Google Analytics */}
+        {}
         <Script
           src='https://www.googletagmanager.com/gtag/js?id=G-WR56K4TNMK'
           strategy='afterInteractive'
