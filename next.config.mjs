@@ -2,7 +2,7 @@ let userConfig = undefined;
 try {
   userConfig = await import('./v0-user-next.config');
 } catch (e) {
-  // ignore error
+  
 }
 
 import createNextIntlPlugin from 'next-intl/plugin';
@@ -23,7 +23,7 @@ const withPWA = withPWAInit({
   },
 });
 
-/** @type {import('next').NextConfig} */
+
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
