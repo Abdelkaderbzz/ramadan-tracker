@@ -1,4 +1,4 @@
-// Store types
+
 export interface DailyActivity {
   day: number;
   fasting: boolean;
@@ -63,10 +63,10 @@ export interface RamadanState {
   addDua: (dua: string) => void;
   removeDua: (index: number) => void;
   calculateStats: () => void;
-  // Goals actions
+  
   addGoal: (text: string, category: RamadanGoal['category']) => void;
   toggleGoal: (id: string) => void;
   removeGoal: (id: string) => void;
-  // Journal actions
+  
   updateJournalEntry: (day: number, entry: Partial<JournalEntry>) => void;
 }
