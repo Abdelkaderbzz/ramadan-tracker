@@ -407,6 +407,7 @@
   },
   "Footer": {
     "author": "Author",
+    "made_by": "Made by",
     "contribution": "Contribution",
     "buy_me_coffee": "Buy me a coffee",
     "developed_by": "Developed with",
