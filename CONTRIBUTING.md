@@ -6,8 +6,8 @@ Thank you for your interest in contributing to Ramadan Tracker! This is a websit
 
 ### Prerequisites
 
-- Node.js 20+
-- pnpm 8+
+- [Bun](https://bun.sh/) v1.0+
+- Git
 
 ### Setup
 
@@ -19,12 +19,13 @@ Thank you for your interest in contributing to Ramadan Tracker! This is a websit
    ```
 3. Install dependencies:
    ```bash
-   pnpm install
+   bun install
    ```
 4. Start the development server:
    ```bash
-   pnpm run dev
+   bun run dev
    ```
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Development Workflow
 
@@ -52,17 +53,27 @@ refactor: simplify state management
 
 - Use TypeScript for all new files
 - Follow the existing code style
-- Run `pnpm run lint` before submitting
+- Run `bun run lint` before submitting
+
+### Available Scripts
+
+| Command              | Description                  |
+| -------------------- | ---------------------------- |
+| `bun run dev`        | Start the development server |
+| `bun run build`      | Build the production bundle  |
+| `bun run start`      | Start the production server  |
+| `bun run lint`       | Run ESLint                   |
+| `bun run type-check` | Run TypeScript type checking |
 
 ## Pull Request Process
 
 1. Create a new branch from `master`
 2. Make your changes
-3. Run tests and linting:
+3. Run linting and type checks:
    ```bash
-   pnpm run lint
-   pnpm run type-check
-   pnpm run build
+   bun run lint
+   bun run type-check
+   bun run build
    ```
 4. Commit your changes with a descriptive message
 5. Push to your fork and open a Pull Request
