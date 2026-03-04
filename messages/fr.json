@@ -419,6 +419,7 @@
     "hadith": "\"Celui qui guide vers le bien est comme celui qui le fait\"",
     "hadith_source": "Rapporté par Tirmidhi",
     "share_text": "🌙 Ramadan Tracker - Suivez vos prières, la lecture du Coran et vos bonnes actions pendant le Ramadan. Essayez-le maintenant !",
-    "copy": "Copier"
+    "copy": "Copier",
+    "copied_toast": "Lien copié dans le presse-papiers !"
   }
 }
