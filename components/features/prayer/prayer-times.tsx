@@ -24,7 +24,6 @@ export default function PrayerTimes() {
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
-    
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 60000);
@@ -37,12 +36,10 @@ export default function PrayerTimes() {
       try {
         setLoading(true);
 
-        
-        let latitude = 21.3891; 
+        let latitude = 21.3891;
         let longitude = 39.8579;
 
         try {
-          
           const position = await Promise.race([
             new Promise<GeolocationPosition>((resolve, reject) => {
               navigator.geolocation.getCurrentPosition(resolve, reject, {
@@ -67,15 +64,13 @@ export default function PrayerTimes() {
           );
         }
 
-        
         const date = new Date();
         const month = date.getMonth() + 1;
         const day = date.getDate();
         const year = date.getFullYear();
 
-        
         const response = await fetch(
-          `https://api.aladhan.com/v1/timings/${day}-${month}-${year}?latitude=${latitude}&longitude=${longitude}&method=2`,
+          `https://api.aladhan.com/v1/timings/${day}-${month}-${year}?latitude=${latitude}&longitude=${longitude}&method=3`,
         );
 
         if (!response.ok) {
@@ -85,7 +80,6 @@ export default function PrayerTimes() {
         const data = await response.json();
         const timings = data.data.timings;
 
-        
         const formattedTimes: PrayerTime[] = [
           {
             name: 'Fajr',
@@ -126,7 +120,6 @@ export default function PrayerTimes() {
         setError(t('error'));
         setLoading(false);
 
-        
         setPrayerTimes([
           {
             name: 'Fajr',
@@ -165,7 +158,6 @@ export default function PrayerTimes() {
     fetchPrayerTimes();
   }, [t]);
 
-  
   const isNextPrayer = (prayerTime: string): boolean => {
     const now = currentTime;
     const [hours, minutes] = prayerTime.split(':').map(Number);
@@ -175,7 +167,7 @@ export default function PrayerTimes() {
     return (
       prayerDate > now &&
       prayerDate.getTime() - now.getTime() < 5 * 60 * 60 * 1000
-    ); 
+    );
   };
 
   return (
