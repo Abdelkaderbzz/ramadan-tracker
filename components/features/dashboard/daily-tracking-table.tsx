@@ -134,7 +134,7 @@ export default function DailyTrackingTable() {
             {t('reset')}
           </Button>
         </CardHeader>
-        <CardContent className='p-0 dark:bg-gray-900'>
+        <CardContent className='p-0'>
           <div className='overflow-x-auto'>
             <table className='w-full border-collapse'>
               <thead>
