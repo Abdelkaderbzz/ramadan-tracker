@@ -130,8 +130,8 @@ export default async function RootLayout({
         <meta name='mobile-web-app-capable' content='yes' />
         <meta name='application-name' content='Ramadan Tracker' />
       </head>
-      {/* Added dark mode background classes to body */}
-      <body className={`${tajawal.variable} font-sans bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100`}>
+      {/* Use theme token-based background and text colors on body */}
+      <body className={`${tajawal.variable} font-sans bg-background text-foreground`}>
         {}
         <Script
           src='https://www.googletagmanager.com/gtag/js?id=G-WR56K4TNMK'
