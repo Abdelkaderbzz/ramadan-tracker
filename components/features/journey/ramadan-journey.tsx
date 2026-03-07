@@ -44,10 +44,10 @@ export function RamadanJourney() {
           </div>
         </div>
       ) : (
-        <div className='bg-white/50 backdrop-blur-sm rounded-2xl p-4 shadow-sm border border-purple-50'>
-          <h3 className='text-sm font-semibold text-purple-800 mb-3 px-2 flex items-center justify-between'>
+        <div className='bg-white/50 backdrop-blur-sm rounded-2xl p-4 shadow-sm border border-purple-50 dark:bg-gray-900 dark:border-gray-700'>
+          <h3 className='text-sm font-semibold text-purple-800 dark:text-purple-300 mb-3 px-2 flex items-center justify-between'>
             <span>{isRtl ? 'اختر اليوم' : 'Select Day'}</span>
-            <span className='text-[10px] bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full'>
+            <span className='text-[10px] bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300 px-2 py-0.5 rounded-full'>
               {isRtl
                 ? `اليوم الحالي: ${currentDay}`
                 : `Today: Day ${currentDay}`}
@@ -63,7 +63,7 @@ export function RamadanJourney() {
                     'flex flex-col items-center justify-center min-w-[50px] h-[60px] rounded-xl transition-all border',
                     selectedDay === day
                       ? 'bg-purple-600 text-white border-purple-600 shadow-md transform scale-105'
-                      : 'bg-white text-purple-600 border-purple-100 hover:bg-purple-50 hover:border-purple-200',
+                      : 'bg-white text-purple-600 border-purple-100 hover:bg-purple-50 hover:border-purple-200 dark:bg-gray-800 dark:text-purple-300 dark:border-gray-700 dark:hover:bg-gray-700 dark:hover:border-purple-600',
                     day > currentDay &&
                       'opacity-50 cursor-not-allowed grayscale',
                   )}

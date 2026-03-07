@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card';
 import { InstallAppButton } from '@/components/install-app-button';
 import LanguageSwitcher from '@/components/language-switcher';
 import { ShareButton } from '@/components/share-button';
+import ModeToggle from '@/components/ModeToggle';
 
 interface HeaderProps {
   title: string;
@@ -32,6 +33,7 @@ export function Header({
         </div>
         <div className='flex items-center gap-2'>
           <ShareButton />
+          <ModeToggle />
           <LanguageSwitcher />
         </div>
       </div>

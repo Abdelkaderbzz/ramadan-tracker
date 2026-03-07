@@ -84,11 +84,11 @@ export default function WorshipStats() {
           transition={{ delay: index * 0.1 }}
         >
           <Card
-            className={`p-4 flex flex-col items-center ${locale === 'ar' ? 'rtl' : 'ltr'} hover:shadow-md transition-all duration-300 border-2 hover:border-purple-200`}
+            className={`p-4 flex flex-col items-center ${locale === 'ar' ? 'rtl' : 'ltr'} hover:shadow-md transition-all duration-300 border-2 hover:border-purple-200 dark:bg-gray-900 dark:border-gray-700 dark:hover:border-purple-700`}
           >
             <div className='flex justify-between w-full mb-2'>
               <span
-                className={`text-sm font-medium ${locale === 'ar' ? 'rtl' : ''}`}
+                className={`text-sm font-medium dark:text-white ${locale === 'ar' ? 'rtl' : ''}`}
               >
                 {stat.name}
               </span>

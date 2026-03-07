@@ -144,22 +144,22 @@ export default function DailyTrackingTable() {
                   >
                     {t('table.day')}
                   </th>
-                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px]'>
+                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px] dark:text-white'>
                     {t('table.fard')}
                   </th>
-                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px]'>
+                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px] dark:text-white'>
                     {t('table.qiyam')}
                   </th>
-                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px]'>
+                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px] dark:text-white'>
                     {t('table.duha')}
                   </th>
-                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px]'>
+                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px] dark:text-white'>
                     {t('table.rawatib')}
                   </th>
-                  <th className='p-2 text-center text-xs md:text-sm min-w-[80px]'>
+                  <th className='p-2 text-center text-xs md:text-sm min-w-[80px] dark:text-white'>
                     {t('table.quran')}
                   </th>
-                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px]'>
+                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px] dark:text-white'>
                     <span className='md:hidden'>
                       {t('table.dhikr_morning').slice(0, 4)}..
                     </span>
@@ -167,7 +167,7 @@ export default function DailyTrackingTable() {
                       {t('table.dhikr_morning')}
                     </span>
                   </th>
-                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px]'>
+                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px] dark:text-white'>
                     <span className='md:hidden'>
                       {t('table.dhikr_evening').slice(0, 4)}..
                     </span>
@@ -175,16 +175,16 @@ export default function DailyTrackingTable() {
                       {t('table.dhikr_evening')}
                     </span>
                   </th>
-                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px]'>
+                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px] dark:text-white'>
                     {t('table.charity')}
                   </th>
-                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px]'>
+                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px] dark:text-white'>
                     {t('table.family')}
                   </th>
-                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px]'>
+                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px] dark:text-white'>
                     {t('table.happiness')}
                   </th>
-                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px]'>
+                  <th className='p-2 text-center text-xs md:text-sm min-w-[60px] dark:text-white'>
                     {t('table.feeding')}
                   </th>
                 </tr>
@@ -248,7 +248,7 @@ export default function DailyTrackingTable() {
                             e.target.value,
                           )
                         }
-                        className='max-w-20 mx-auto text-center border-purple-200 focus:border-purple-400'
+                        className='max-w-20 mx-auto text-center border-purple-200 focus:border-purple-400 dark:bg-gray-800 dark:text-white dark:border-purple-700 dark:focus:border-purple-500'
                       />
                     </td>
                     <td className='p-3 text-center'>
@@ -333,12 +333,12 @@ export default function DailyTrackingTable() {
                 size='sm'
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
-                className='border-purple-200 hover:bg-purple-50 hover:text-purple-700'
+                className='border-purple-200 hover:bg-purple-50 hover:text-purple-700 dark:border-purple-800 dark:text-white dark:hover:bg-purple-900 dark:hover:text-purple-300'
               >
                 {t('previous')}
               </Button>
 
-              <span className='mx-2'>
+              <span className='mx-2 dark:text-white'>
                 {t('page_info', { current: currentPage, total: totalPages })}
               </span>
 
@@ -349,7 +349,7 @@ export default function DailyTrackingTable() {
                   setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                 }
                 disabled={currentPage === totalPages}
-                className='border-purple-200 hover:bg-purple-50 hover:text-purple-700'
+                className='border-purple-200 hover:bg-purple-50 hover:text-purple-700 dark:border-purple-800 dark:text-white dark:hover:bg-purple-900 dark:hover:text-purple-300'
               >
                 {t('next')}
               </Button>

@@ -85,31 +85,37 @@ export default function PrayerTimes() {
             name: 'Fajr',
             nameAr: t('fajr'),
             time: timings.Fajr,
-            colorClass: 'bg-orange-50 text-orange-600 border-orange-200',
+            // ✅ أضفنا dark: لكل لون
+            colorClass:
+              'bg-orange-50 dark:bg-orange-950 text-orange-600 dark:text-orange-300 border-orange-200 dark:border-orange-800',
           },
           {
             name: 'Dhuhr',
             nameAr: t('dhuhr'),
             time: timings.Dhuhr,
-            colorClass: 'bg-blue-50 text-blue-600 border-blue-200',
+            colorClass:
+              'bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-300 border-blue-200 dark:border-blue-800',
           },
           {
             name: 'Asr',
             nameAr: t('asr'),
             time: timings.Asr,
-            colorClass: 'bg-teal-50 text-teal-600 border-teal-200',
+            colorClass:
+              'bg-teal-50 dark:bg-teal-950 text-teal-600 dark:text-teal-300 border-teal-200 dark:border-teal-800',
           },
           {
             name: 'Maghrib',
             nameAr: t('maghrib'),
             time: timings.Maghrib,
-            colorClass: 'bg-amber-50 text-amber-600 border-amber-200',
+            colorClass:
+              'bg-amber-50 dark:bg-amber-950 text-amber-600 dark:text-amber-300 border-amber-200 dark:border-amber-800',
           },
           {
             name: 'Isha',
             nameAr: t('isha'),
             time: timings.Isha,
-            colorClass: 'bg-indigo-50 text-indigo-600 border-indigo-200',
+            colorClass:
+              'bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800',
           },
         ];
 
@@ -125,31 +131,36 @@ export default function PrayerTimes() {
             name: 'Fajr',
             nameAr: t('fajr'),
             time: '04:30',
-            colorClass: 'bg-orange-50 text-orange-600 border-orange-200',
+            colorClass:
+              'bg-orange-50 dark:bg-orange-950 text-orange-600 dark:text-orange-300 border-orange-200 dark:border-orange-800',
           },
           {
             name: 'Dhuhr',
             nameAr: t('dhuhr'),
             time: '12:15',
-            colorClass: 'bg-blue-50 text-blue-600 border-blue-200',
+            colorClass:
+              'bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-300 border-blue-200 dark:border-blue-800',
           },
           {
             name: 'Asr',
             nameAr: t('asr'),
             time: '15:45',
-            colorClass: 'bg-teal-50 text-teal-600 border-teal-200',
+            colorClass:
+              'bg-teal-50 dark:bg-teal-950 text-teal-600 dark:text-teal-300 border-teal-200 dark:border-teal-800',
           },
           {
             name: 'Maghrib',
             nameAr: t('maghrib'),
             time: '18:45',
-            colorClass: 'bg-amber-50 text-amber-600 border-amber-200',
+            colorClass:
+              'bg-amber-50 dark:bg-amber-950 text-amber-600 dark:text-amber-300 border-amber-200 dark:border-amber-800',
           },
           {
             name: 'Isha',
             nameAr: t('isha'),
             time: '20:15',
-            colorClass: 'bg-indigo-50 text-indigo-600 border-indigo-200',
+            colorClass:
+              'bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800',
           },
         ]);
       }
@@ -214,7 +225,7 @@ export default function PrayerTimes() {
                 <div className='font-medium'>{prayer.nameAr}</div>
                 <div className='text-lg font-bold'>{prayer.time}</div>
                 {isNextPrayer(prayer.time) && (
-                  <div className='text-xs mt-1 text-purple-600 font-medium'>
+                  <div className='text-xs mt-1 text-purple-600 dark:text-purple-400 font-medium'>
                     {t('next_prayer')}
                   </div>
                 )}

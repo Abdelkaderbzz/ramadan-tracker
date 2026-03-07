@@ -18,7 +18,10 @@ const tajawal = Tajawal({
 });
 
 export const viewport: Viewport = {
-  themeColor: '#ffffff',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0f0f0f' },
+  ],
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
@@ -127,7 +130,7 @@ export default async function RootLayout({
         <meta name='mobile-web-app-capable' content='yes' />
         <meta name='application-name' content='Ramadan Tracker' />
       </head>
-      <body className={`${tajawal.variable} font-sans`}>
+      <body className={`${tajawal.variable} font-sans bg-background text-foreground`}>
         {}
         <Script
           src='https://www.googletagmanager.com/gtag/js?id=G-WR56K4TNMK'
@@ -161,7 +164,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
             attribute='class'
-            defaultTheme='light'
+            defaultTheme='system'
             enableSystem
             disableTransitionOnChange
           >

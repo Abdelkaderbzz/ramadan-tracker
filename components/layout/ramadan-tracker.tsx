@@ -81,11 +81,17 @@ export default function RamadanTracker() {
         className='w-full'
         onValueChange={handleTabChange}
       >
-        <div className='sticky top-0 z-20 bg-background/80 backdrop-blur-md mb-6 py-2 -mx-4 px-4 border-b md:relative md:top-auto md:bg-transparent md:backdrop-blur-none md:border-none md:p-0 md:m-0'>
-          <TabsList className='grid grid-cols-4 md:grid-cols-4 h-auto bg-transparent md:bg-muted p-0 md:p-1 gap-1 md:gap-2'>
+        {/* Sticky tab bar: dark background in dark mode */}
+        <div className='sticky top-0 z-20 bg-background/80 dark:bg-gray-950/80 backdrop-blur-md mb-6 py-2 -mx-4 px-4 border-b dark:border-gray-800 md:relative md:top-auto md:bg-transparent md:dark:bg-transparent md:backdrop-blur-none md:border-none md:p-0 md:m-0'>
+          <TabsList className='grid grid-cols-4 md:grid-cols-4 h-auto bg-transparent md:bg-muted dark:md:bg-gray-800 p-0 md:p-1 gap-1 md:gap-2'>
             <TabsTrigger
               value='dashboard'
-              className='flex-col md:flex-row gap-1 py-3 md:py-1.5 data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 md:data-[state=active]:bg-background md:data-[state=active]:text-foreground'
+              className='flex-col md:flex-row gap-1 py-3 md:py-1.5
+                text-gray-600 dark:text-gray-400
+                data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700
+                dark:data-[state=active]:bg-purple-900/40 dark:data-[state=active]:text-purple-300
+                md:data-[state=active]:bg-background md:data-[state=active]:text-foreground
+                dark:md:data-[state=active]:bg-gray-700 dark:md:data-[state=active]:text-gray-100'
             >
               <BarChart3 className='h-5 w-5 md:h-4 md:w-4' />
               <span className='text-[10px] sm:text-xs md:text-sm'>
@@ -94,7 +100,12 @@ export default function RamadanTracker() {
             </TabsTrigger>
             <TabsTrigger
               value='quran'
-              className='flex-col md:flex-row gap-1 py-3 md:py-1.5 data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 md:data-[state=active]:bg-background md:data-[state=active]:text-foreground'
+              className='flex-col md:flex-row gap-1 py-3 md:py-1.5
+                text-gray-600 dark:text-gray-400
+                data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700
+                dark:data-[state=active]:bg-purple-900/40 dark:data-[state=active]:text-purple-300
+                md:data-[state=active]:bg-background md:data-[state=active]:text-foreground
+                dark:md:data-[state=active]:bg-gray-700 dark:md:data-[state=active]:text-gray-100'
             >
               <BookOpen className='h-5 w-5 md:h-4 md:w-4' />
               <span className='text-[10px] sm:text-xs md:text-sm'>
@@ -103,7 +114,12 @@ export default function RamadanTracker() {
             </TabsTrigger>
             <TabsTrigger
               value='journey'
-              className='flex-col md:flex-row gap-1 py-3 md:py-1.5 data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 md:data-[state=active]:bg-background md:data-[state=active]:text-foreground'
+              className='flex-col md:flex-row gap-1 py-3 md:py-1.5
+                text-gray-600 dark:text-gray-400
+                data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700
+                dark:data-[state=active]:bg-purple-900/40 dark:data-[state=active]:text-purple-300
+                md:data-[state=active]:bg-background md:data-[state=active]:text-foreground
+                dark:md:data-[state=active]:bg-gray-700 dark:md:data-[state=active]:text-gray-100'
             >
               <Calendar className='h-5 w-5 md:h-4 md:w-4' />
               <span className='text-[10px] sm:text-xs md:text-sm'>
@@ -112,7 +128,12 @@ export default function RamadanTracker() {
             </TabsTrigger>
             <TabsTrigger
               value='achievements'
-              className='flex-col md:flex-row gap-1 py-3 md:py-1.5 data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700 md:data-[state=active]:bg-background md:data-[state=active]:text-foreground'
+              className='flex-col md:flex-row gap-1 py-3 md:py-1.5
+                text-gray-600 dark:text-gray-400
+                data-[state=active]:bg-purple-100 data-[state=active]:text-purple-700
+                dark:data-[state=active]:bg-purple-900/40 dark:data-[state=active]:text-purple-300
+                md:data-[state=active]:bg-background md:data-[state=active]:text-foreground
+                dark:md:data-[state=active]:bg-gray-700 dark:md:data-[state=active]:text-gray-100'
             >
               <Award className='h-5 w-5 md:h-4 md:w-4' />
               <span className='text-[10px] sm:text-xs md:text-sm'>
@@ -122,6 +143,7 @@ export default function RamadanTracker() {
           </TabsList>
         </div>
 
+        {/* Tab content panels: ensure dark backgrounds */}
         <TabsContent value='dashboard' className='space-y-8'>
           <WorshipStats />
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
@@ -135,8 +157,11 @@ export default function RamadanTracker() {
           <QuranTracker />
         </TabsContent>
 
+        {/* Journey tab: wrap in dark-aware container to fix white background issue */}
         <TabsContent value='journey'>
-          <RamadanJourney />
+          <div className='bg-white dark:bg-gray-900 rounded-lg'>
+            <RamadanJourney />
+          </div>
         </TabsContent>
 
         <TabsContent value='achievements'>
