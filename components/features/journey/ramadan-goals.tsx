@@ -98,7 +98,7 @@ export function RamadanGoals() {
                     {t(`categories.${cat}`)}
                   </span>
                 </Button>
-              ),
+              )
             )}
           </div>
         </form>
@@ -134,7 +134,11 @@ export function RamadanGoals() {
                   </button>
                   <div className='flex flex-col'>
                     <span
-                      className={`text-sm md:text-base ${goal.completed ? 'line-through text-gray-400' : 'text-gray-700 font-medium'}`}
+                      className={`text-sm md:text-base ${
+                        goal.completed
+                          ? 'line-through text-gray-400'
+                          : 'text-gray-700 font-medium'
+                      }`}
                     >
                       {goal.text}
                     </span>

@@ -169,7 +169,7 @@ export default function DailyTrackingTable() {
       transition={{ delay: 0.5 }}
     >
       <Card
-        className={`mt-10 overflow-x-auto ${isRtl ? 'rtl' : 'ltr'} shadow-lg border-purple-100 dark:border-purple-900`}
+        className={`mt-10 overflow-x-auto no-print ${isRtl ? 'rtl' : 'ltr'} shadow-lg border-purple-100 dark:border-purple-900`}
       >
         <CardHeader className='bg-purple-700 text-white flex flex-row items-center justify-between py-4'>
           <CardTitle className='text-lg'>{t('title')}</CardTitle>
@@ -406,6 +406,7 @@ export default function DailyTrackingTable() {
           )}
         </CardContent>
       </Card>
+
     </motion.div>
   );
 }

@@ -1,12 +1,13 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar } from 'lucide-react';
+import { Calendar, Printer } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { InstallAppButton } from '@/components/install-app-button';
 import LanguageSwitcher from '@/components/language-switcher';
 import { ShareButton } from '@/components/share-button';
 import ModeToggle from '@/components/ModeToggle';
+import { useLocale } from 'next-intl';
 
 interface HeaderProps {
   title: string;
@@ -15,6 +16,7 @@ interface HeaderProps {
   hijriDate: string;
   currentDua: string;
   currentDuaIndex: number;
+  handlePrintDashboard: () => void;
 }
 
 export function Header({
@@ -24,12 +26,26 @@ export function Header({
   hijriDate,
   currentDua,
   currentDuaIndex,
+  handlePrintDashboard,
 }: HeaderProps) {
+  const locale = useLocale();
   return (
-    <header className='mb-8 relative'>
-      <div className='flex justify-between items-center mb-6'>
+    <header className='container w-full flex-col justify-between items-center mb-6'>
+      <div
+        className={`flex p-4 px-8 flex-col gap-3 md:flex-row md:items-center md:justify-between mb-6 ${
+          locale === 'ar' ? 'md:flex-row-reverse' : ''
+        }`}
+      >
         <div className='flex items-center gap-2'>
           <InstallAppButton />
+          <button
+            type='button'
+            onClick={handlePrintDashboard}
+            className='hidden md:inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-purple-100 text-purple-700 bg-white hover:bg-purple-50 text-xs font-medium shadow-sm'
+          >
+            <Printer className='h-4 w-4' />
+            <span>{locale === 'ar' ? 'طباعة اللوحة' : 'Print Dashboard'}</span>
+          </button>
         </div>
         <div className='flex items-center gap-2'>
           <ShareButton />
