@@ -36,7 +36,9 @@
         "charity": "Charity",
         "personal": "Personal",
         "other": "Other"
-      }
+      },
+      "toast_goal_completed_title": "Goal achieved",
+      "toast_goal_completed_desc": "✅ Goal achieved: {goal}"
     },
     "Journal": {
       "title": "Day {day} Reflections",
@@ -72,6 +74,8 @@
     "reset_desc": "All activities for day {day} of Ramadan have been reset",
     "activity_updated": "Activity Updated",
     "activity_desc": "{activity} for day {day} of Ramadan has been recorded",
+    "daily_complete_title": "MashaAllah! Day completed",
+    "daily_complete_desc": "You completed all activities for day {day} of Ramadan",
     "next": "Next",
     "previous": "Previous",
     "page_info": "Page {current} of {total}",
@@ -218,8 +222,22 @@
       "ramadan_champion": {
         "title": "Ramadan Champion",
         "description": "Complete Ramadan with 80% progress"
+      },
+      "first_week": {
+        "title": "First Week Consistency",
+        "description": "Complete all activities for 7 days"
+      },
+      "ten_day_streak": {
+        "title": "10-Day Streak",
+        "description": "Complete all activities for 10 days"
+      },
+      "quran_khatm": {
+        "title": "Quran Completion",
+        "description": "Complete a full recitation (khatm) of the Quran"
       }
-    }
+    },
+    "toast_new_badge_title": "🏆 New achievement unlocked!",
+    "toast_new_badge_desc": "You earned: {badge}"
   },
   "Quran": {
     "title": "Quran Tracker",

@@ -20,6 +20,7 @@ import { useRamadanStore } from '@/lib/store';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import type { RamadanGoal } from '@/lib/store/types';
+import { useToast } from '@/components/ui/use-toast';
 
 const categoryIcons = {
   quran: <Book className='h-4 w-4' />,
@@ -34,12 +35,25 @@ export function RamadanGoals() {
   const { goals, addGoal, toggleGoal, removeGoal } = useRamadanStore();
   const [newGoalText, setNewGoalText] = useState('');
   const [category, setCategory] = useState<RamadanGoal['category']>('personal');
+  const { toast } = useToast();
 
   const handleAddGoal = (e: React.FormEvent) => {
     e.preventDefault();
     if (newGoalText.trim()) {
       addGoal(newGoalText.trim(), category);
       setNewGoalText('');
+    }
+  };
+
+  const handleToggleGoal = (goal: RamadanGoal) => {
+    const willComplete = !goal.completed;
+    toggleGoal(goal.id);
+
+    if (willComplete) {
+      toast({
+        title: t('toast_goal_completed_title'),
+        description: t('toast_goal_completed_desc', { goal: goal.text }),
+      });
     }
   };
 
@@ -105,7 +119,7 @@ export function RamadanGoals() {
               >
                 <div className='flex items-center gap-3'>
                   <button
-                    onClick={() => toggleGoal(goal.id)}
+                    onClick={() => handleToggleGoal(goal)}
                     className={`transition-colors ${
                       goal.completed
                         ? 'text-green-500'

@@ -37,13 +37,45 @@ export default function DailyTrackingTable() {
     currentPage * itemsPerPage,
   );
 
+  const isDayComplete = (activity: DailyActivity) =>
+    activity.fasting &&
+    activity.qiyam &&
+    activity.duha &&
+    activity.rawatib &&
+    activity.charity &&
+    activity.familyVisit &&
+    activity.happiness &&
+    activity.feeding &&
+    activity.dhikrMorning !== '0' &&
+    activity.dhikrMorning !== '' &&
+    activity.dhikrEvening !== '0' &&
+    activity.dhikrEvening !== '';
+
+  const maybeShowDailyCompleteToast = (day: number) => {
+    if (typeof window === 'undefined') return;
+    const key = `rt_daily_complete_${day}`;
+    if (window.localStorage.getItem(key) === '1') return;
+
+    const activity = activities.find((a: DailyActivity) => a.day === day);
+    if (!activity || !isDayComplete(activity)) return;
+
+    toast({
+      title: t('daily_complete_title'),
+      description: t('daily_complete_desc', { day }),
+    });
+    try {
+      window.localStorage.setItem(key, '1');
+    } catch {
+      
+    }
+  };
+
   const handleCheckboxChange = (day: number, field: keyof DailyActivity) => {
     const activity = activities.find((a: DailyActivity) => a.day === day);
     if (activity) {
       const newValue = !activity[field];
       updateActivity(day, field, newValue);
 
-      
       if (newValue) {
         toast({
           title: t('activity_updated'),
@@ -52,6 +84,7 @@ export default function DailyTrackingTable() {
             day,
           }),
         });
+        maybeShowDailyCompleteToast(day);
       }
     }
   };
@@ -94,6 +127,7 @@ export default function DailyTrackingTable() {
             day,
           }),
         });
+        maybeShowDailyCompleteToast(day);
       }
     }
   };
