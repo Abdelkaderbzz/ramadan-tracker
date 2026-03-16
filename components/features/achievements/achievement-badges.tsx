@@ -3,20 +3,14 @@
 import type React from 'react';
 import { useState, useEffect, useMemo } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import {
-  BookOpen,
-  Clock,
-  Heart,
-  AlignJustify,
-  Star,
-  Trophy,
-} from 'lucide-react';
+import { BookOpen, Clock, Heart, AlignJustify, Star, Trophy } from 'lucide-react';
 import { useRamadanStore } from '@/lib/store';
 import type { DailyActivity } from '@/lib/store';
 import { motion } from 'framer-motion';
 import { Progress } from '@/components/ui/progress';
 import { formatNumber } from '@/lib/arabic-numerals';
 import { useTranslations, useLocale } from 'next-intl';
+import { useToast } from '@/components/ui/use-toast';
 
 interface Achievement {
   id: string;
@@ -35,6 +29,20 @@ export default function AchievementBadges() {
   const t = useTranslations('Achievements');
   const locale = useLocale();
   const { activities, stats } = useRamadanStore();
+  const { toast } = useToast();
+  const [notifiedIds, setNotifiedIds] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      const stored = window.localStorage.getItem('rt_notified_achievements');
+      if (stored) {
+        setNotifiedIds(JSON.parse(stored));
+      }
+    } catch {
+      
+    }
+  }, []);
 
   const achievements = useMemo(() => {
     const quranPages = activities.reduce(
@@ -52,6 +60,21 @@ export default function AchievementBadges() {
     const goodDeedsDays = activities.filter(
       (day: DailyActivity) =>
         day.charity || day.familyVisit || day.happiness || day.feeding,
+    ).length;
+    const fullyTrackedDays = activities.filter(
+      (day: DailyActivity) =>
+        day.fasting &&
+        day.qiyam &&
+        day.duha &&
+        day.rawatib &&
+        day.charity &&
+        day.familyVisit &&
+        day.happiness &&
+        day.feeding &&
+        day.dhikrMorning !== '0' &&
+        day.dhikrMorning !== '' &&
+        day.dhikrEvening !== '0' &&
+        day.dhikrEvening !== '',
     ).length;
 
     return [
@@ -125,8 +148,68 @@ export default function AchievementBadges() {
         progress: Math.min(stats.overall, 80),
         target: 80,
       },
+      {
+        id: 'first-week-tracking',
+        title: t('badges.first_week.title'),
+        description: t('badges.first_week.description'),
+        icon: <Clock className='h-6 w-6' />,
+        color: 'teal-500',
+        unlocked: fullyTrackedDays >= 7,
+        progress: Math.min(fullyTrackedDays, 7),
+        target: 7,
+      },
+      {
+        id: 'ten-day-streak',
+        title: t('badges.ten_day_streak.title'),
+        description: t('badges.ten_day_streak.description'),
+        icon: <Star className='h-6 w-6' />,
+        color: 'cyan-500',
+        unlocked: fullyTrackedDays >= 10,
+        progress: Math.min(fullyTrackedDays, 10),
+        target: 10,
+      },
+      {
+        id: 'quran-khatm',
+        title: t('badges.quran_khatm.title'),
+        description: t('badges.quran_khatm.description'),
+        icon: <BookOpen className='h-6 w-6' />,
+        color: 'emerald-600',
+        unlocked: stats.quran >= 100,
+        progress: Math.min(stats.quran, 100),
+        target: 100,
+      },
     ];
   }, [activities, stats, t]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const newlyUnlocked = achievements.filter(
+      (a) => a.unlocked && !notifiedIds.includes(a.id),
+    );
+
+    if (!newlyUnlocked.length) return;
+
+    newlyUnlocked.forEach((achievement) => {
+      toast({
+        title: t('toast_new_badge_title'),
+        description: t('toast_new_badge_desc', { badge: achievement.title }),
+      });
+    });
+
+    const updatedIds = [
+      ...new Set([...notifiedIds, ...newlyUnlocked.map((a) => a.id)]),
+    ];
+    setNotifiedIds(updatedIds);
+    try {
+      window.localStorage.setItem(
+        'rt_notified_achievements',
+        JSON.stringify(updatedIds),
+      );
+    } catch {
+      
+    }
+  }, [achievements, notifiedIds, t, toast]);
 
   return (
     <div className={locale === 'ar' ? 'rtl' : 'ltr'}>

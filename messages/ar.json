@@ -36,7 +36,9 @@
         "charity": "الصدقة",
         "personal": "شخصي",
         "other": "أخرى"
-      }
+      },
+      "toast_goal_completed_title": "تم إنجاز الهدف",
+      "toast_goal_completed_desc": "✅ تم تحقيق الهدف: {goal}"
     },
     "Journal": {
       "title": "تأملات اليوم {day}",
@@ -72,6 +74,8 @@
     "reset_desc": "تم إعادة تعيين جميع الأنشطة ليوم {day} من رمضان",
     "activity_updated": "تم تحديث النشاط",
     "activity_desc": "تم تسجيل {activity} ليوم {day} من رمضان",
+    "daily_complete_title": "ما شاء الله! يوم مكتمل",
+    "daily_complete_desc": "لقد أكملت جميع الأنشطة ليوم {day} من رمضان",
     "next": "التالي",
     "previous": "السابق",
     "page_info": "صفحة {current} من {total}",
@@ -215,8 +219,22 @@
       "ramadan_champion": {
         "title": "بطل رمضان",
         "description": "إكمال شهر رمضان بنسبة إنجاز 80%"
+      },
+      "first_week": {
+        "title": "أول أسبوع من الانضباط",
+        "description": "إكمال جميع الأنشطة لمدة 7 أيام"
+      },
+      "ten_day_streak": {
+        "title": "سلسلة 10 أيام",
+        "description": "إكمال جميع الأنشطة لمدة 10 أيام"
+      },
+      "quran_khatm": {
+        "title": "ختم القرآن",
+        "description": "إكمال ختم كامل للقرآن الكريم"
       }
-    }
+    },
+    "toast_new_badge_title": "🏆 تم فتح إنجاز جديد!",
+    "toast_new_badge_desc": "لقد حصلت على: {badge}"
   },
   "Quran": {
     "title": "متابع القرآن",
