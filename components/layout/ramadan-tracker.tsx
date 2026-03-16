@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useTranslations } from 'next-intl';
-import { Calendar, BookOpen, BarChart3, Award } from 'lucide-react';
+import { Calendar, BookOpen, BarChart3, Award, Printer } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   WorshipStats,
@@ -20,6 +20,7 @@ import { useLocale } from 'next-intl';
 
 export default function RamadanTracker() {
   const t = useTranslations('Index');
+  const tDash = useTranslations('Dashboard');
   const tDuas = useTranslations('HeaderDuas');
   const locale = useLocale();
   const [date, setDate] = useState('');
@@ -62,26 +63,31 @@ export default function RamadanTracker() {
     setActiveTab(value);
   }, []);
 
-  return (
-    <div
-      className='container mx-auto px-4 py-8 max-w-6xl'
-      dir={locale === 'ar' ? 'rtl' : 'ltr'}
-    >
-      <Header
-        title={t('my_day')}
-        subtitle={t('track_worship')}
-        date={date}
-        hijriDate={hijriDate}
-        currentDua={currentDua}
-        currentDuaIndex={currentDuaIndex}
-      />
+  const handlePrintDashboard = () => {
+    if (typeof window === 'undefined') return;
+    window.print();
+  };
 
-      <Tabs
+  return (
+    <div dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+      <div className='flex w-screen max-w-none no-print'>
+        <Header
+          title={t('my_day')}
+          subtitle={t('track_worship')}
+          date={date}
+          hijriDate={hijriDate}
+          currentDua={currentDua}
+          currentDuaIndex={currentDuaIndex}
+          handlePrintDashboard={handlePrintDashboard}
+        />
+      </div>
+
+      <div className='container mx-auto px-4 py-8 max-w-6xl'>
+        <Tabs
         defaultValue='dashboard'
-        className='w-full'
+        className='w-full no-print'
         onValueChange={handleTabChange}
       >
-        {/* Sticky tab bar: dark background in dark mode */}
         <div className='sticky top-0 z-20 bg-background/80 dark:bg-gray-950/80 backdrop-blur-md mb-6 py-2 -mx-4 px-4 border-b dark:border-gray-800 md:relative md:top-auto md:bg-transparent md:dark:bg-transparent md:backdrop-blur-none md:border-none md:p-0 md:m-0'>
           <TabsList className='grid grid-cols-4 md:grid-cols-4 h-auto bg-transparent md:bg-muted dark:md:bg-gray-800 p-0 md:p-1 gap-1 md:gap-2'>
             <TabsTrigger
@@ -143,7 +149,6 @@ export default function RamadanTracker() {
           </TabsList>
         </div>
 
-        {/* Tab content panels: ensure dark backgrounds */}
         <TabsContent value='dashboard' className='space-y-8'>
           <WorshipStats />
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
@@ -157,17 +162,98 @@ export default function RamadanTracker() {
           <QuranTracker />
         </TabsContent>
 
-        {/* Journey tab: wrap in dark-aware container to fix white background issue */}
         <TabsContent value='journey'>
           <div className='bg-white dark:bg-gray-900 rounded-lg'>
             <RamadanJourney />
           </div>
         </TabsContent>
 
-        <TabsContent value='achievements'>
-          <AchievementBadges />
-        </TabsContent>
-      </Tabs>
+          <TabsContent value='achievements'>
+            <AchievementBadges />
+          </TabsContent>
+        </Tabs>
+
+        <div
+          className={`print-only ${locale === 'ar' ? 'rtl' : 'ltr'}`}
+          dir={locale === 'ar' ? 'rtl' : 'ltr'}
+        >
+        {[
+          { startDay: 1, endDay: 15, isLast: false },
+          { startDay: 16, endDay: 30, isLast: true },
+        ].map(({ startDay, endDay, isLast }, pageIndex) => {
+          const duas = [
+            locale === 'ar'
+              ? 'اللهم إنك عفو تحب العفو فاعف عني'
+              : 'O Allah, You are Forgiving and love forgiveness, so forgive me',
+            locale === 'ar'
+              ? 'اللهم بارك لنا في رمضان وبلغنا ليلة القدر'
+              : 'O Allah, bless us in Ramadan and let us reach Laylat al-Qadr',
+          ];
+          return (
+            <div key={pageIndex} className={!isLast ? 'print-page-break' : ''}>
+              <div className='print-header'>
+                <div className='print-title'>
+                  {locale === 'ar'
+                    ? '🌙 يومي في رمضان 🌙'
+                    : '🌙 My Day in Ramadan 🌙'}
+                </div>
+                <div className='print-dua'>{duas[pageIndex]}</div>
+              </div>
+
+              <div className='print-page-label'>
+                {locale === 'ar'
+                  ? `الأيام ${startDay} – ${endDay}`
+                  : `Days ${startDay} – ${endDay}`}
+              </div>
+
+              <table className='print-table'>
+                <thead>
+                  <tr>
+                    <th>{tDash('table.day')}</th>
+                    <th>{tDash('table.fard')}</th>
+                    <th>{tDash('table.qiyam')}</th>
+                    <th>{tDash('table.duha')}</th>
+                    <th>{tDash('table.rawatib')}</th>
+                    <th>{tDash('table.quran')}</th>
+                    <th>{tDash('table.dhikr_morning')}</th>
+                    <th>{tDash('table.dhikr_evening')}</th>
+                    <th>{tDash('table.charity')}</th>
+                    <th>{tDash('table.family')}</th>
+                    <th>{tDash('table.happiness')}</th>
+                    <th>{tDash('table.feeding')}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Array.from(
+                    { length: endDay - startDay + 1 },
+                    (_, i) => startDay + i
+                  ).map((day) => (
+                    <tr key={day}>
+                      <td style={{ fontWeight: 600 }}>
+                        {tDash('table.day')} {day}
+                      </td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              <div className='print-footer'>ramadantracker.tech</div>
+            </div>
+          );
+        })}
+        </div>
+      </div>
     </div>
   );
 }

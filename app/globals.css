@@ -196,6 +196,121 @@
   background-size: 200px;
   opacity: 0.05;
 }
+
+.print-only {
+  display: none;
+}
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .print-page-break {
+    page-break-after: always;
+  }
+
+  .print-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10px;
+  }
+
+  .print-table th {
+    background-color: #7c3aed !important;
+    color: white !important;
+    padding: 6px 4px;
+    border: 1px solid #6d28d9;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .print-table td {
+    border: 1px solid #d4d4d8;
+    padding: 8px 4px;
+    text-align: center;
+    height: 28px;
+  }
+
+  .print-table tbody tr:nth-child(even) td {
+    background-color: #f5f3ff !important;
+  }
+
+  .print-table tbody tr:nth-child(odd) td {
+    background-color: #ffffff !important;
+  }
+
+  .print-header {
+    text-align: center;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #7c3aed;
+  }
+
+  .print-header .print-site {
+    font-size: 9px;
+    color: #7c3aed;
+    letter-spacing: 1px;
+  }
+
+  .print-header .print-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #7c3aed;
+    margin: 4px 0;
+  }
+
+  .print-header .print-dua {
+    font-size: 11px;
+    color: #6b7280;
+    font-style: italic;
+    max-width: 80%;
+    margin: 0 auto;
+  }
+
+  .print-page-label {
+    font-size: 9px;
+    color: #a78bfa;
+    text-align: center;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+
+  .print-footer {
+    text-align: center;
+    margin-top: 12px;
+    padding-top: 8px;
+    border-top: 1px solid #e5e7eb;
+    font-size: 9px;
+    color: #7c3aed;
+    letter-spacing: 0.5px;
+  }
+
+  footer {
+    display: none !important;
+  }
+
+  @page {
+    margin: 0.6cm 1cm;
+    size: A4 landscape;
+  }
+}
 /* Hide scrollbar for Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
   display: none;

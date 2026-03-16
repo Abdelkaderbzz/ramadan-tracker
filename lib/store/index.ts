@@ -43,7 +43,7 @@ export const useRamadanStore = create<RamadanState>()(
         if (activities.length === 0) {
           const initialActivities: DailyActivity[] = Array.from(
             { length: 30 },
-            (_, i) => createInitialActivity(i + 1),
+            (_, i) => createInitialActivity(i + 1)
           );
           set({ activities: initialActivities });
         }
@@ -52,7 +52,7 @@ export const useRamadanStore = create<RamadanState>()(
       updateActivity: (day, field, value) => {
         set((state) => ({
           activities: state.activities.map((activity) =>
-            activity.day === day ? { ...activity, [field]: value } : activity,
+            activity.day === day ? { ...activity, [field]: value } : activity
           ),
         }));
         get().calculateStats();
@@ -61,7 +61,7 @@ export const useRamadanStore = create<RamadanState>()(
       updateQuranCount: (day, value) => {
         set((state) => ({
           activities: state.activities.map((activity) =>
-            activity.day === day ? { ...activity, quran: value } : activity,
+            activity.day === day ? { ...activity, quran: value } : activity
           ),
         }));
         get().calculateStats();
@@ -70,7 +70,7 @@ export const useRamadanStore = create<RamadanState>()(
       updateDhikr: (day, field, value) => {
         set((state) => ({
           activities: state.activities.map((activity) =>
-            activity.day === day ? { ...activity, [field]: value } : activity,
+            activity.day === day ? { ...activity, [field]: value } : activity
           ),
         }));
         get().calculateStats();
@@ -130,7 +130,7 @@ export const useRamadanStore = create<RamadanState>()(
       toggleGoal: (id) => {
         set((state) => ({
           goals: state.goals.map((goal) =>
-            goal.id === id ? { ...goal, completed: !goal.completed } : goal,
+            goal.id === id ? { ...goal, completed: !goal.completed } : goal
           ),
         }));
       },
@@ -161,17 +161,15 @@ export const useRamadanStore = create<RamadanState>()(
       calculateStats: () => {
         const { activities } = get();
 
-        
         const totalQuranVerses = activities.reduce(
           (sum, day) => sum + (Number.parseInt(day.quran) || 0),
-          0,
+          0
         );
         const quranPercentage = Math.min(
           Math.round((totalQuranVerses / 6236) * 100),
-          100,
+          100
         );
 
-        
         const prayerFields: (keyof DailyActivity)[] = [
           'fasting',
           'qiyam',
@@ -181,26 +179,24 @@ export const useRamadanStore = create<RamadanState>()(
         const totalPrayerChecks = activities.reduce(
           (sum, day) =>
             sum + prayerFields.filter((field) => day[field] === true).length,
-          0,
+          0
         );
         const prayerPercentage = Math.min(
           Math.round((totalPrayerChecks / 120) * 100),
-          100,
+          100
         );
 
-        
         const morningDhikrDays = activities.filter(
-          (day) => day.dhikrMorning !== '0' && day.dhikrMorning !== '',
+          (day) => day.dhikrMorning !== '0' && day.dhikrMorning !== ''
         ).length;
         const eveningDhikrDays = activities.filter(
-          (day) => day.dhikrEvening !== '0' && day.dhikrEvening !== '',
+          (day) => day.dhikrEvening !== '0' && day.dhikrEvening !== ''
         ).length;
         const dhikrPercentage = Math.min(
           Math.round(((morningDhikrDays + eveningDhikrDays) / 60) * 100),
-          100,
+          100
         );
 
-        
         const goodDeedFields: (keyof DailyActivity)[] = [
           'charity',
           'familyVisit',
@@ -210,20 +206,19 @@ export const useRamadanStore = create<RamadanState>()(
         const totalGoodDeedChecks = activities.reduce(
           (sum, day) =>
             sum + goodDeedFields.filter((field) => day[field] === true).length,
-          0,
+          0
         );
         const goodDeedsPercentage = Math.min(
           Math.round((totalGoodDeedChecks / 120) * 100),
-          100,
+          100
         );
 
-        
         const overallPercentage = Math.round(
           (quranPercentage +
             prayerPercentage +
             dhikrPercentage +
             goodDeedsPercentage) /
-            4,
+            4
         );
 
         set({
@@ -239,9 +234,8 @@ export const useRamadanStore = create<RamadanState>()(
     }),
     {
       name: 'ramadan-tracker-storage',
-    },
-  ),
+    }
+  )
 );
-
 
 export type { DailyActivity, StatsType, RamadanState } from './types';

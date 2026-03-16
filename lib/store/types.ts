@@ -27,6 +27,7 @@ export interface RamadanGoal {
   text: string;
   completed: boolean;
   category: 'quran' | 'prayer' | 'charity' | 'personal' | 'other';
+  notes?: string;
 }
 
 export interface JournalEntry {

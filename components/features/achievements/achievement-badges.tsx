@@ -31,6 +31,7 @@ export default function AchievementBadges() {
   const { activities, stats } = useRamadanStore();
   const { toast } = useToast();
   const [notifiedIds, setNotifiedIds] = useState<string[]>([]);
+  const [storageLoaded, setStorageLoaded] = useState(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -39,8 +40,9 @@ export default function AchievementBadges() {
       if (stored) {
         setNotifiedIds(JSON.parse(stored));
       }
+      setStorageLoaded(true);
     } catch {
-      
+      setStorageLoaded(true);
     }
   }, []);
 
@@ -183,6 +185,7 @@ export default function AchievementBadges() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
+    if (!storageLoaded) return;
 
     const newlyUnlocked = achievements.filter(
       (a) => a.unlocked && !notifiedIds.includes(a.id),
@@ -209,7 +212,7 @@ export default function AchievementBadges() {
     } catch {
       
     }
-  }, [achievements, notifiedIds, t, toast]);
+  }, [achievements, notifiedIds, storageLoaded, t, toast]);
 
   return (
     <div className={locale === 'ar' ? 'rtl' : 'ltr'}>
