@@ -80,6 +80,21 @@ export default function DailyTrackingTable() {
       updateQuranCount(day, value);
     } else {
       updateDhikr(day, field, value);
+
+      if (value === '1') {
+        const activityLabel =
+          field === 'dhikrMorning'
+            ? t('table.dhikr_morning')
+            : t('table.dhikr_evening');
+
+        toast({
+          title: t('activity_updated'),
+          description: t('activity_desc', {
+            activity: activityLabel,
+            day,
+          }),
+        });
+      }
     }
   };
 
