@@ -15,7 +15,7 @@ export function Footer() {
               © {new Date().getFullYear()} {t('made_by')}
             </span>
             <a
-              href='https://www.abdelkader.pro/'
+              href='https://www.abdelkader.work/'
               target='_blank'
               rel='noopener noreferrer'
               className='hover:underline hover:text-gray-600 dark:hover:text-gray-300'
